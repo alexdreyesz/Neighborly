@@ -1,0 +1,276 @@
+{
+  "posts_for_classification": [
+    {
+      "post_id": 1,
+      "title": "Request for technology",
+      "description": "Offering technology support to neighbors",
+      "category": "technology",
+      "actual_urgency": "This week",
+      "timestamp": "2025-09-27T04:03:35.666670"
+    },
+    {
+      "post_id": 2,
+      "title": "Rides to appointments",
+      "description": "Looking to help with transportation needs in the community",
+      "category": "transportation",
+      "actual_urgency": "This week",
+      "timestamp": "2025-09-27T04:03:37.710581"
+    },
+    {
+      "post_id": 3,
+      "title": "Offer for pet_care",
+      "description": "Offering pet_care support to neighbors",
+      "category": "pet_care",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:03:37.710629"
+    },
+    {
+      "post_id": 4,
+      "title": "Offer for furniture",
+      "description": "Looking to help with furniture needs in the community",
+      "category": "furniture",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:03:40.761585"
+    },
+    {
+      "post_id": 5,
+      "title": "Moving help",
+      "description": "Offering transportation support to neighbors",
+      "category": "transportation",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:03:42.816873"
+    },
+    {
+      "post_id": 6,
+      "title": "Request for pet_care",
+      "description": "Looking to help with pet_care needs in the community",
+      "category": "pet_care",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:03:44.871656"
+    },
+    {
+      "post_id": 7,
+      "title": "Weekend childcare",
+      "description": "Urgently need help with childcare situation",
+      "category": "childcare",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:03:44.871693"
+    },
+    {
+      "post_id": 8,
+      "title": "Offer for technology",
+      "description": "Can provide technology assistance to those in need Wire money immediately",
+      "category": "technology",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:03:46.926280"
+    },
+    {
+      "post_id": 9,
+      "title": "Offer for medical",
+      "description": "Offering medical support to neighbors",
+      "category": "medical",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:03:46.926354"
+    },
+    {
+      "post_id": 10,
+      "title": "Request for transportation",
+      "description": "Looking to help with transportation needs in the community",
+      "category": "transportation",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:03:48.985193"
+    },
+    {
+      "post_id": 11,
+      "title": "Offer for elderly_care",
+      "description": "Offering elderly_care support to neighbors",
+      "category": "elderly_care",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:03:51.043734"
+    },
+    {
+      "post_id": 12,
+      "title": "Housing assistance",
+      "description": "Offering housing support to neighbors",
+      "category": "housing",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:03:53.101617"
+    },
+    {
+      "post_id": 13,
+      "title": "Request for education",
+      "description": "Looking to help with education needs in the community Click this link for amazing deals",
+      "category": "education",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:03:57.222696"
+    },
+    {
+      "post_id": 14,
+      "title": "Offer for housing",
+      "description": "Urgently need help with housing situation",
+      "category": "housing",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:03:57.222760"
+    },
+    {
+      "post_id": 15,
+      "title": "Offer for medical",
+      "description": "Looking to help with medical needs in the community",
+      "category": "medical",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:03:57.222788"
+    },
+    {
+      "post_id": 16,
+      "title": "Offer for mental_health",
+      "description": "Urgently need help with mental_health situation",
+      "category": "mental_health",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:03:57.222815"
+    },
+    {
+      "post_id": 17,
+      "title": "Need temporary shelter",
+      "description": "Urgently need help with housing situation",
+      "category": "housing",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:04:01.339677"
+    },
+    {
+      "post_id": 18,
+      "title": "Offer for education",
+      "description": "Urgently need help with education situation",
+      "category": "education",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:04:03.398130"
+    },
+    {
+      "post_id": 19,
+      "title": "Winter coats for kids",
+      "description": "Urgently need help with clothing situation",
+      "category": "clothing",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:04:03.398182"
+    },
+    {
+      "post_id": 20,
+      "title": "Job search help",
+      "description": "Looking to help with employment needs in the community",
+      "category": "employment",
+      "actual_urgency": "This week",
+      "timestamp": "2025-09-27T04:04:07.522168"
+    },
+    {
+      "post_id": 21,
+      "title": "Offer for emergency",
+      "description": "Looking to help with emergency needs in the community Wire money immediately",
+      "category": "emergency",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:04:07.522221"
+    },
+    {
+      "post_id": 22,
+      "title": "Offer for elderly_care",
+      "description": "Can provide elderly_care assistance to those in need",
+      "category": "elderly_care",
+      "actual_urgency": "This week",
+      "timestamp": "2025-09-27T04:04:11.636050"
+    },
+    {
+      "post_id": 23,
+      "title": "Request for elderly_care",
+      "description": "Offering elderly_care support to neighbors",
+      "category": "elderly_care",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:04:11.636105"
+    },
+    {
+      "post_id": 24,
+      "title": "After school care",
+      "description": "Offering childcare support to neighbors",
+      "category": "childcare",
+      "actual_urgency": "This week",
+      "timestamp": "2025-09-27T04:04:11.636134"
+    },
+    {
+      "post_id": 25,
+      "title": "Offer for employment",
+      "description": "Can provide employment assistance to those in need",
+      "category": "employment",
+      "actual_urgency": "This week",
+      "timestamp": "2025-09-27T04:04:15.750589"
+    },
+    {
+      "post_id": 26,
+      "title": "Need temporary shelter",
+      "description": "Offering housing support to neighbors Meet me in private location",
+      "category": "housing",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:04:18.820110"
+    },
+    {
+      "post_id": 27,
+      "title": "Offer for education",
+      "description": "Can provide education assistance to those in need",
+      "category": "education",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:04:18.820154"
+    },
+    {
+      "post_id": 28,
+      "title": "Looking for apartment",
+      "description": "Offering housing support to neighbors",
+      "category": "housing",
+      "actual_urgency": "This week",
+      "timestamp": "2025-09-27T04:04:18.820171"
+    },
+    {
+      "post_id": 29,
+      "title": "Request for utilities",
+      "description": "Offering utilities support to neighbors",
+      "category": "utilities",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:04:20.874651"
+    },
+    {
+      "post_id": 30,
+      "title": "After school care",
+      "description": "Looking to help with childcare needs in the community",
+      "category": "childcare",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:04:20.874703"
+    },
+    {
+      "post_id": 31,
+      "title": "Airport pickup",
+      "description": "Looking to help with transportation needs in the community",
+      "category": "transportation",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:04:24.988749"
+    },
+    {
+      "post_id": 32,
+      "title": "Winter coats for kids",
+      "description": "Can provide clothing assistance to those in need",
+      "category": "clothing",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:04:32.206157"
+    },
+    {
+      "post_id": 33,
+      "title": "Free groceries available",
+      "description": "Can provide food assistance to those in need",
+      "category": "food",
+      "actual_urgency": "Anytime",
+      "timestamp": "2025-09-27T04:04:34.263133"
+    },
+    {
+      "post_id": 34,
+      "title": "Prescription help",
+      "description": "Urgently need help with medical situation",
+      "category": "medical",
+      "actual_urgency": "Immediate",
+      "timestamp": "2025-09-27T04:04:36.321801"
+    }
+  ]
+}

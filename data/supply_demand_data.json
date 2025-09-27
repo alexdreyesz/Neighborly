@@ -1,0 +1,505 @@
+{
+  "supply_demand_analysis": [
+    {
+      "category": "food",
+      "offers": 0,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200801",
+      "location_clusters": []
+    },
+    {
+      "category": "clothing",
+      "offers": 1,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200863",
+      "location_clusters": [
+        [
+          1018.2403080364905,
+          164.7853954756597
+        ]
+      ]
+    },
+    {
+      "category": "housing",
+      "offers": 1,
+      "requests": 2,
+      "shortage_level": 0.5,
+      "timestamp": "2025-09-27T04:04:05.200875",
+      "location_clusters": [
+        [
+          804.8538211665923,
+          112.0623496571241
+        ],
+        [
+          829.4935453471542,
+          680.087050029995
+        ],
+        [
+          262.86298585730646,
+          486.439237082936
+        ]
+      ]
+    },
+    {
+      "category": "transportation",
+      "offers": 2,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200885",
+      "location_clusters": [
+        [
+          370.91919308433626,
+          272.27798483339126
+        ],
+        [
+          823.9950230278579,
+          120.70318782973654
+        ],
+        [
+          1012.8126826852924,
+          588.7906160722224
+        ]
+      ]
+    },
+    {
+      "category": "childcare",
+      "offers": 1,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200894",
+      "location_clusters": [
+        [
+          705.4795957399971,
+          255.331095352498
+        ]
+      ]
+    },
+    {
+      "category": "medical",
+      "offers": 2,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200903",
+      "location_clusters": [
+        [
+          716.4941988971053,
+          435.1991529807182
+        ],
+        [
+          1058.011964740715,
+          134.68282476186917
+        ]
+      ]
+    },
+    {
+      "category": "education",
+      "offers": 1,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200912",
+      "location_clusters": [
+        [
+          1072.2142125398,
+          62.510255739761654
+        ],
+        [
+          173.09133982577094,
+          374.9570660049406
+        ]
+      ]
+    },
+    {
+      "category": "employment",
+      "offers": 0,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200921",
+      "location_clusters": []
+    },
+    {
+      "category": "furniture",
+      "offers": 1,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200929",
+      "location_clusters": [
+        [
+          365.6066165882635,
+          380.99255045413423
+        ]
+      ]
+    },
+    {
+      "category": "technology",
+      "offers": 1,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200938",
+      "location_clusters": [
+        [
+          507.6711851881848,
+          362.3223767024311
+        ],
+        [
+          857.8801684717318,
+          533.0002830131582
+        ]
+      ]
+    },
+    {
+      "category": "emergency",
+      "offers": 0,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200946",
+      "location_clusters": []
+    },
+    {
+      "category": "mental_health",
+      "offers": 1,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200954",
+      "location_clusters": [
+        [
+          674.5818272894869,
+          516.0259103952526
+        ]
+      ]
+    },
+    {
+      "category": "elderly_care",
+      "offers": 1,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200962",
+      "location_clusters": [
+        [
+          948.8918300472815,
+          688.3185398241684
+        ]
+      ]
+    },
+    {
+      "category": "pet_care",
+      "offers": 1,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200971",
+      "location_clusters": [
+        [
+          1073.2416699086289,
+          265.7858714217756
+        ],
+        [
+          87.75594385997255,
+          160.5506559792341
+        ]
+      ]
+    },
+    {
+      "category": "utilities",
+      "offers": 0,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:05.200979",
+      "location_clusters": []
+    },
+    {
+      "category": "food",
+      "offers": 1,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869456",
+      "location_clusters": [
+        [
+          416.0676555046535,
+          191.60302149316828
+        ]
+      ]
+    },
+    {
+      "category": "clothing",
+      "offers": 2,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869524",
+      "location_clusters": [
+        [
+          1018.2403080364905,
+          164.7853954756597
+        ],
+        [
+          681.4720933795036,
+          125.6037356971817
+        ]
+      ]
+    },
+    {
+      "category": "housing",
+      "offers": 1,
+      "requests": 4,
+      "shortage_level": 0.75,
+      "timestamp": "2025-09-27T04:04:37.869538",
+      "location_clusters": [
+        [
+          804.8538211665923,
+          112.0623496571241
+        ],
+        [
+          829.4935453471542,
+          680.087050029995
+        ],
+        [
+          262.86298585730646,
+          486.439237082936
+        ],
+        [
+          850.4571489591938,
+          343.3258404961712
+        ],
+        [
+          490.09312250544997,
+          210.9936232077638
+        ]
+      ]
+    },
+    {
+      "category": "transportation",
+      "offers": 3,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869549",
+      "location_clusters": [
+        [
+          370.91919308433626,
+          272.27798483339126
+        ],
+        [
+          823.9950230278579,
+          120.70318782973654
+        ],
+        [
+          1012.8126826852924,
+          588.7906160722224
+        ],
+        [
+          719.1231424951626,
+          651.483808383727
+        ]
+      ]
+    },
+    {
+      "category": "childcare",
+      "offers": 3,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869560",
+      "location_clusters": [
+        [
+          705.4795957399971,
+          255.331095352498
+        ],
+        [
+          1070.1789363214016,
+          337.3395054350936
+        ],
+        [
+          719.8843250322693,
+          660.5278890980528
+        ]
+      ]
+    },
+    {
+      "category": "medical",
+      "offers": 2,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869572",
+      "location_clusters": [
+        [
+          716.4941988971053,
+          435.1991529807182
+        ],
+        [
+          1058.011964740715,
+          134.68282476186917
+        ],
+        [
+          804.8538211665923,
+          112.0623496571241
+        ]
+      ]
+    },
+    {
+      "category": "education",
+      "offers": 2,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869583",
+      "location_clusters": [
+        [
+          1072.2142125398,
+          62.510255739761654
+        ],
+        [
+          173.09133982577094,
+          374.9570660049406
+        ],
+        [
+          1002.0742465328746,
+          151.57240543293776
+        ]
+      ]
+    },
+    {
+      "category": "employment",
+      "offers": 1,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869593",
+      "location_clusters": [
+        [
+          171.8137647855349,
+          259.5388002038448
+        ],
+        [
+          394.842012062078,
+          412.11529956727327
+        ]
+      ]
+    },
+    {
+      "category": "furniture",
+      "offers": 1,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869603",
+      "location_clusters": [
+        [
+          365.6066165882635,
+          380.99255045413423
+        ]
+      ]
+    },
+    {
+      "category": "technology",
+      "offers": 1,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869613",
+      "location_clusters": [
+        [
+          507.6711851881848,
+          362.3223767024311
+        ],
+        [
+          857.8801684717318,
+          533.0002830131582
+        ]
+      ]
+    },
+    {
+      "category": "emergency",
+      "offers": 1,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869624",
+      "location_clusters": [
+        [
+          972.7893006772235,
+          417.46710133418713
+        ]
+      ]
+    },
+    {
+      "category": "mental_health",
+      "offers": 1,
+      "requests": 0,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869633",
+      "location_clusters": [
+        [
+          674.5818272894869,
+          516.0259103952526
+        ]
+      ]
+    },
+    {
+      "category": "elderly_care",
+      "offers": 2,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869643",
+      "location_clusters": [
+        [
+          948.8918300472815,
+          688.3185398241684
+        ],
+        [
+          829.4935453471542,
+          680.087050029995
+        ],
+        [
+          792.1924712148092,
+          178.03379084153852
+        ]
+      ]
+    },
+    {
+      "category": "pet_care",
+      "offers": 1,
+      "requests": 1,
+      "shortage_level": 0,
+      "timestamp": "2025-09-27T04:04:37.869652",
+      "location_clusters": [
+        [
+          1073.2416699086289,
+          265.7858714217756
+        ],
+        [
+          87.75594385997255,
+          160.5506559792341
+        ]
+      ]
+    },
+    {
+      "category": "utilities",
+      "offers": 0,
+      "requests": 1,
+      "shortage_level": 1.0,
+      "timestamp": "2025-09-27T04:04:37.869663",
+      "location_clusters": [
+        [
+          664.9760693440647,
+          375.8767483607402
+        ]
+      ]
+    }
+  ],
+  "shortage_alerts": [
+    {
+      "category": "housing",
+      "shortage_level": 0.5,
+      "requests": 2,
+      "offers": 1,
+      "alert_level": "MEDIUM"
+    },
+    {
+      "category": "housing",
+      "shortage_level": 0.75,
+      "requests": 4,
+      "offers": 1,
+      "alert_level": "HIGH"
+    },
+    {
+      "category": "utilities",
+      "shortage_level": 1.0,
+      "requests": 1,
+      "offers": 0,
+      "alert_level": "HIGH"
+    }
+  ]
+}
