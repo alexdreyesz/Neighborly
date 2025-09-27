@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import topNeedsData from "./TopNeeds";
 import PagesURL from "../../router/routes";
 import { Link } from 'react-router-dom'
+=======
+import topNeedsData from "./TopNeedsData";
+>>>>>>> origin/main
 
 export default function TopNeeds() {
   return (
