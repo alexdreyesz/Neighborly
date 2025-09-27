@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
 import Header from '../../components/Header.tsx'
 import Footer from '../../components/Footer.tsx'
 import TopNeeds from '../../components/TopNeeds/TopNeeds.tsx'
 import MapView from '../../components/MapView'
 import EventsFeed from '../../components/EventsFeed'
+import PagesURL from '../../router/routes'
 
 import communityArt from '../../assets/art/community.png'
 
@@ -28,13 +30,19 @@ function Landing() {
                         </p>
 
                         <div className="flex justify-around relative right-6">
-                            <button className="text-black hover:bg-gray-200 px-6 py-3 rounded-md text-lg font-medium transition-colors cursor-pointer">
+                            <Link 
+                                to={PagesURL.SignUp}
+                                className="text-black hover:bg-gray-200 px-6 py-3 rounded-md text-lg font-medium transition-colors cursor-pointer"
+                            >
                                 Ready to Help?
-                            </button>
+                            </Link>
 
-                            <button className="primary-bg text-white px-6 py-3 rounded-md text-lg font-medium transition-colors cursor-pointer">
+                            <Link 
+                                to={PagesURL.SignUp}
+                                className="primary-bg text-white px-6 py-3 rounded-md text-lg font-medium transition-colors cursor-pointer"
+                            >
                                 Need Help?
-                            </button>
+                            </Link>
                         </div>
                     </div>
                     

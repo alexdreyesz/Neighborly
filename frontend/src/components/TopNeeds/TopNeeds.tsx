@@ -1,4 +1,4 @@
-import topNeedsData from "./TopNeeds";
+import topNeedsData from "./TopNeedsData";
 
 export default function TopNeeds() {
   return (
