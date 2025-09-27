@@ -10,8 +10,8 @@ from enum import Enum
 
 pygame.init()
 
-WINDOW_WIDTH = 1200
-WINDOW_HEIGHT = 800
+WINDOW_WIDTH = 600
+WINDOW_HEIGHT = 400
 FPS = 60
 
 WHITE = (255, 255, 255)
@@ -92,7 +92,7 @@ class TownSimulation:
         self.clock = pygame.time.Clock()
         self.running = True
         
-        self.num_people = 200
+        self.num_people = 300
         self.num_organizations = 15
 
         self.people = []
@@ -149,7 +149,7 @@ class TownSimulation:
             self.org_id_counter += 1
             
         for i in range(self.num_people): 
-            person_type = random.choices(list(PersonType), weights=[60, 20, 5, 15] )[0]
+            person_type = random.choices(list(PersonType), weights=[100, 35, 5, 15] )[0] #num of people there
             
             person = Person(
                 id=self.person_id_counter,
@@ -205,7 +205,7 @@ class TownSimulation:
         
         title = random.choice(titles.get(category, [f"{post_type.title()} for {category}"]))
         
-        # Generate description with potential safety issues
+        # potential safety issues
         base_descriptions = [
             f"Looking to help with {category} needs in the community",
             f"Can provide {category} assistance to those in need",
@@ -215,7 +215,7 @@ class TownSimulation:
         
         description = random.choice(base_descriptions)
         
-        # Add suspicious content occasionally
+
         if random.random() < 0.1:  # 10% chance
             suspicious_additions = [
                 " Send cash payment first!", 
@@ -263,7 +263,6 @@ class TownSimulation:
             
             shortage_level = max(0, (requests - offers) / max(requests, 1))
             
-            # Find location clusters
             category_posts = [post for post in self.posts if post.category == category]
             location_clusters = [(post.location[0], post.location[1]) for post in category_posts[:5]]
             
@@ -283,19 +282,16 @@ class TownSimulation:
         request_posts = [p for p in self.posts if p.post_type == "request"]
         
         matches = []
-        for post in request_posts[:20]:  # Limit to recent posts
+        for post in request_posts[:50]:
             poster = next((p for p in self.people if p.id == post.user_id), None)
             if not poster:
                 continue
                 
-            # Find volunteers with matching skills
             relevant_volunteers = []
             for volunteer in volunteers:
-                skill_match = any(skill in post.description.lower() or skill in post.category.lower() 
-                                for skill in volunteer.skills)
+                skill_match = any(skill in post.description.lower() or skill in post.category.lower() for skill in volunteer.skills)
                 if skill_match:
-                    distance = math.sqrt((volunteer.x - post.location[0])**2 + 
-                                       (volunteer.y - post.location[1])**2)
+                    distance = math.sqrt((volunteer.x - post.location[0])**2 + (volunteer.y - post.location[1])**2)
                     relevant_volunteers.append({
                         "volunteer_id": volunteer.id,
                         "volunteer_name": volunteer.name,
@@ -305,7 +301,6 @@ class TownSimulation:
                     })
             
             if relevant_volunteers:
-                # Sort by distance and reputation
                 relevant_volunteers.sort(key=lambda x: (x["distance"], -x["reputation"]))
                 
                 match = {
@@ -313,7 +308,7 @@ class TownSimulation:
                     "seeker_id": post.user_id,
                     "category": post.category,
                     "urgency": post.urgency,
-                    "matched_volunteers": relevant_volunteers[:3],  # Top 3 matches
+                    "matched_volunteers": relevant_volunteers[:3], 
                     "match_score": random.uniform(0.6, 1.0),
                     "timestamp": datetime.now().isoformat()
                 }
@@ -323,11 +318,10 @@ class TownSimulation:
     
     def update_organizations(self):
         for org in self.organizations:
-            # Update capacity usage
+
             org.current_usage += random.randint(-5, 8)
             org.current_usage = max(0, min(org.current_usage, org.capacity))
             
-            # Update shortages
             if random.random() < 0.3:  # 30% chance to change shortages
                 if org.current_shortages and random.random() < 0.5:
                     org.current_shortages.remove(random.choice(org.current_shortages))
@@ -366,7 +360,7 @@ class TownSimulation:
             
             pygame.draw.circle(self.screen, color, (int(person.x), int(person.y)), 3)
         
-        # Draw recent posts as small indicators
+
         recent_posts = self.posts[-50:] if len(self.posts) > 50 else self.posts
         for post in recent_posts:
             color = RED if post.post_type == "request" else GREEN
@@ -374,7 +368,6 @@ class TownSimulation:
                 color = ORANGE
             pygame.draw.circle(self.screen, color, (int(post.location[0]), int(post.location[1])), 2)
         
-        # Draw legend
         legend_y = 10
         font = pygame.font.Font(None, 24)
         
@@ -404,7 +397,6 @@ class TownSimulation:
             self.screen.blit(text_surface, (x_offset, legend_y))
             legend_y += 25
         
-        # Show simulation stats
         stats_y = WINDOW_HEIGHT - 100
         stats = [
             f"People: {len(self.people)}",
@@ -420,7 +412,7 @@ class TownSimulation:
         pygame.display.flip()
     
     def save_simulation_data(self):
-        os.makedirs("data/sim_data", exist_ok=True)
+        os.makedirs("data/", exist_ok=True)
         
         simulation_data = {
             "people": [asdict(person) for person in self.people],
@@ -439,7 +431,7 @@ class TownSimulation:
         }
         
         # Save complete dataset
-        with open("data/sim_data/complete_simulation.json", "w") as f:
+        with open("data/complete_simulation.json", "w") as f:
             json.dump(simulation_data, f, indent=2, default=str)
         
         # Save agent-specific data files
@@ -459,7 +451,7 @@ class TownSimulation:
             ]
         }
         
-        with open("data/sim_data/urgency_classifier_data.json", "w") as f:
+        with open("data/urgency_classifier_data.json", "w") as f:
             json.dump(urgency_data, f, indent=2)
         
         # 2. Supply-Demand Balancer Agent Data  
@@ -477,7 +469,7 @@ class TownSimulation:
             ]
         }
         
-        with open("data/sim_data/supply_demand_data.json", "w") as f:
+        with open("data/supply_demand_data.json", "w") as f:
             json.dump(supply_demand_export, f, indent=2)
         
         # 3. Safety & Trust Agent Data
@@ -505,7 +497,7 @@ class TownSimulation:
             ]
         }
         
-        with open("data/sim_data/safety_trust_data.json", "w") as f:
+        with open("data/safety_trust_data.json", "w") as f:
             json.dump(safety_data, f, indent=2)
         
         # 4. Org Sync Agent Data
@@ -546,7 +538,7 @@ class TownSimulation:
             ]
         }
         
-        with open("data/sim_data/org_sync_data.json", "w") as f:
+        with open("data/org_sync_data.json", "w") as f:
             json.dump(org_sync_data, f, indent=2)
         
         # 5. Volunteer Match Agent Data
@@ -577,10 +569,10 @@ class TownSimulation:
             ]
         }
         
-        with open("data/sim_data/volunteer_match_data.json", "w") as f:
+        with open("data/volunteer_match_data.json", "w") as f:
             json.dump(volunteer_match_export, f, indent=2)
         
-        print(f"Simulation data saved to data/sim_data/")
+        print(f"Simulation data saved to data/")
         print(f"Generated {len(self.posts)} posts from {len(self.people)} people and {len(self.organizations)} organizations")
         print(f"Found {len(self.volunteer_matches)} volunteer matches")
         print(f"Detected {len([p for p in self.posts if p.safety_flags])} posts with safety flags")
@@ -594,15 +586,13 @@ class TownSimulation:
                 if event.type == pygame.QUIT:
                     self.running = False
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_s:  # Press 's' to save data
+                    if event.key == pygame.K_s:
                         self.generate_supply_demand_data()
                         self.generate_volunteer_matches() 
                         self.save_simulation_data()
             
-            # Generate new posts periodically (every 2 seconds)
-            if frame_count - last_post_generation > FPS * 2:
-                # Generate 3-5 new posts
-                for _ in range(random.randint(3, 5)):
+            if frame_count - last_post_generation > FPS // 2:
+                for _ in range(random.randint(10, 30)):
                     person = random.choice(self.people)
                     if random.random() < 0.3:  # 30% chance any person posts
                         post = self.generate_post(person)
@@ -610,24 +600,21 @@ class TownSimulation:
                 
                 last_post_generation = frame_count
                 
-                # Update organizations
                 self.update_organizations()
                 
-                # Keep only recent posts to prevent memory issues
-                if len(self.posts) > 1000:
-                    self.posts = self.posts[-800:]  # Keep most recent 800 posts
+
+                # if len(self.posts) > 2000:
+                #     self.posts = self.posts[-800:]  # Keep most recent 800 posts
             
             self.draw()
             self.clock.tick(FPS)
             frame_count += 1
             
-            # Auto-save every 30 seconds
-            if frame_count % (FPS * 30) == 0:
+            if frame_count % (FPS * 10) == 0:
                 self.generate_supply_demand_data()
                 self.generate_volunteer_matches()
                 self.save_simulation_data()
         
-        # Final save when closing
         self.generate_supply_demand_data()
         self.generate_volunteer_matches()
         self.save_simulation_data()
