@@ -32,7 +32,7 @@ function Landing() {
 
                         <div className="flex justify-around relative right-6">
                             <Link 
-                                to={PagesURL.SignUp}
+                                to={PagesURL.UserProfile}
                                 className="text-black hover:bg-gray-200 px-6 py-3 rounded-md text-lg font-medium transition-colors cursor-pointer"
                             >
                                 Ready to Help?
