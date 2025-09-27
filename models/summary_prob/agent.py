@@ -1,6 +1,5 @@
 from google.adk.agents import Agent
 from google.adk.tools import google_search
-from pydantic import BaseModel, Field
 
 
 root_agent = Agent(name='summary_prob', 

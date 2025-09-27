@@ -20,8 +20,6 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 import warnings
 warnings.filterwarnings('ignore')
 
-torch.manual_seed(42)
-np.random.seed(42)
 
 safety_data = json.load(open('data/sim_data/safety_trust_data.json'))
 posts = safety_data['posts_for_safety_check']
