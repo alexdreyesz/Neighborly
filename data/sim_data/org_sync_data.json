@@ -1,0 +1,870 @@
+{
+  "organizations": [
+    {
+      "org_id": 1,
+      "name": "Food Bank 1",
+      "type": "food_bank",
+      "capacity": 23,
+      "current_usage": 23,
+      "capacity_percentage": 100.0,
+      "operating_hours": "6AM-8PM",
+      "current_shortages": [
+        "pet_care",
+        "utilities",
+        "clothing"
+      ],
+      "services": [
+        "food",
+        "emergency",
+        "nutrition_education"
+      ],
+      "location": {
+        "x": 824.8962141178431,
+        "y": 499.9135348360383
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 2,
+      "name": "Food Bank 2",
+      "type": "food_bank",
+      "capacity": 147,
+      "current_usage": 142,
+      "capacity_percentage": 96.5986394557823,
+      "operating_hours": "8AM-5PM",
+      "current_shortages": [
+        "food",
+        "housing",
+        "medical",
+        "childcare"
+      ],
+      "services": [
+        "food",
+        "emergency",
+        "nutrition_education"
+      ],
+      "location": {
+        "x": 248.91737138750594,
+        "y": 112.71909724722983
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 3,
+      "name": "School 3",
+      "type": "school",
+      "capacity": 61,
+      "current_usage": 53,
+      "capacity_percentage": 86.88524590163934,
+      "operating_hours": "9AM-8PM",
+      "current_shortages": [
+        "technology",
+        "elderly_care",
+        "pet_care",
+        "mental_health"
+      ],
+      "services": [
+        "education",
+        "childcare",
+        "food",
+        "technology"
+      ],
+      "location": {
+        "x": 331.2883343562812,
+        "y": 339.24985293779844
+      },
+      "status": "AVAILABLE"
+    },
+    {
+      "org_id": 4,
+      "name": "Clinic 4",
+      "type": "clinic",
+      "capacity": 123,
+      "current_usage": 123,
+      "capacity_percentage": 100.0,
+      "operating_hours": "7AM-5PM",
+      "current_shortages": [
+        "utilities",
+        "transportation"
+      ],
+      "services": [
+        "medical",
+        "mental_health",
+        "emergency"
+      ],
+      "location": {
+        "x": 330.1177277518951,
+        "y": 405.09395862769287
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 5,
+      "name": "Clinic 5",
+      "type": "clinic",
+      "capacity": 41,
+      "current_usage": 41,
+      "capacity_percentage": 100.0,
+      "operating_hours": "6AM-5PM",
+      "current_shortages": [
+        "mental_health",
+        "childcare",
+        "clothing",
+        "employment",
+        "pet_care",
+        "elderly_care"
+      ],
+      "services": [
+        "medical",
+        "mental_health",
+        "emergency"
+      ],
+      "location": {
+        "x": 750.1477556328235,
+        "y": 52.36335319716162
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 6,
+      "name": "Clinic 6",
+      "type": "clinic",
+      "capacity": 148,
+      "current_usage": 148,
+      "capacity_percentage": 100.0,
+      "operating_hours": "6AM-6PM",
+      "current_shortages": [
+        "clothing",
+        "furniture"
+      ],
+      "services": [
+        "medical",
+        "mental_health",
+        "emergency"
+      ],
+      "location": {
+        "x": 720.5220894622314,
+        "y": 577.475621391654
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 7,
+      "name": "School 7",
+      "type": "school",
+      "capacity": 68,
+      "current_usage": 68,
+      "capacity_percentage": 100.0,
+      "operating_hours": "6AM-4PM",
+      "current_shortages": [],
+      "services": [
+        "education",
+        "childcare",
+        "food",
+        "technology"
+      ],
+      "location": {
+        "x": 1058.7452372430855,
+        "y": 345.03057753714853
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 8,
+      "name": "Clinic 8",
+      "type": "clinic",
+      "capacity": 145,
+      "current_usage": 144,
+      "capacity_percentage": 99.3103448275862,
+      "operating_hours": "7AM-5PM",
+      "current_shortages": [
+        "education"
+      ],
+      "services": [
+        "medical",
+        "mental_health",
+        "emergency"
+      ],
+      "location": {
+        "x": 137.18854937562793,
+        "y": 328.4152892237119
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 9,
+      "name": "Food Bank 9",
+      "type": "food_bank",
+      "capacity": 137,
+      "current_usage": 129,
+      "capacity_percentage": 94.16058394160584,
+      "operating_hours": "6AM-8PM",
+      "current_shortages": [],
+      "services": [
+        "food",
+        "emergency",
+        "nutrition_education"
+      ],
+      "location": {
+        "x": 1016.0154991766592,
+        "y": 607.6616820102553
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 10,
+      "name": "Shelter 10",
+      "type": "shelter",
+      "capacity": 108,
+      "current_usage": 106,
+      "capacity_percentage": 98.14814814814815,
+      "operating_hours": "6AM-7PM",
+      "current_shortages": [
+        "elderly_care",
+        "mental_health",
+        "technology"
+      ],
+      "services": [
+        "housing",
+        "emergency",
+        "clothing",
+        "mental_health"
+      ],
+      "location": {
+        "x": 1088.9348837724183,
+        "y": 577.4609381507669
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 11,
+      "name": "Clinic 11",
+      "type": "clinic",
+      "capacity": 170,
+      "current_usage": 163,
+      "capacity_percentage": 95.88235294117648,
+      "operating_hours": "6AM-4PM",
+      "current_shortages": [
+        "pet_care",
+        "clothing",
+        "food",
+        "utilities"
+      ],
+      "services": [
+        "medical",
+        "mental_health",
+        "emergency"
+      ],
+      "location": {
+        "x": 350.3500612709601,
+        "y": 555.8771023299162
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 12,
+      "name": "School 12",
+      "type": "school",
+      "capacity": 138,
+      "current_usage": 136,
+      "capacity_percentage": 98.55072463768117,
+      "operating_hours": "7AM-6PM",
+      "current_shortages": [
+        "childcare",
+        "emergency"
+      ],
+      "services": [
+        "education",
+        "childcare",
+        "food",
+        "technology"
+      ],
+      "location": {
+        "x": 709.3311151906865,
+        "y": 77.98323071796332
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 13,
+      "name": "Clinic 13",
+      "type": "clinic",
+      "capacity": 147,
+      "current_usage": 147,
+      "capacity_percentage": 100.0,
+      "operating_hours": "9AM-7PM",
+      "current_shortages": [
+        "emergency",
+        "transportation",
+        "technology",
+        "education"
+      ],
+      "services": [
+        "medical",
+        "mental_health",
+        "emergency"
+      ],
+      "location": {
+        "x": 153.8375195016941,
+        "y": 623.5843064173606
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 14,
+      "name": "Clinic 14",
+      "type": "clinic",
+      "capacity": 153,
+      "current_usage": 151,
+      "capacity_percentage": 98.69281045751634,
+      "operating_hours": "6AM-7PM",
+      "current_shortages": [
+        "employment",
+        "food",
+        "medical"
+      ],
+      "services": [
+        "medical",
+        "mental_health",
+        "emergency"
+      ],
+      "location": {
+        "x": 916.1998688877158,
+        "y": 240.9743359957154
+      },
+      "status": "FULL"
+    },
+    {
+      "org_id": 15,
+      "name": "Shelter 15",
+      "type": "shelter",
+      "capacity": 196,
+      "current_usage": 191,
+      "capacity_percentage": 97.44897959183673,
+      "operating_hours": "8AM-6PM",
+      "current_shortages": [
+        "emergency"
+      ],
+      "services": [
+        "housing",
+        "emergency",
+        "clothing",
+        "mental_health"
+      ],
+      "location": {
+        "x": 576.8559041003575,
+        "y": 114.08875604848551
+      },
+      "status": "FULL"
+    }
+  ],
+  "urgent_needs_from_orgs": [
+    {
+      "org_id": 1,
+      "org_name": "Food Bank 1",
+      "shortages": [
+        "pet_care",
+        "utilities",
+        "clothing"
+      ],
+      "capacity_strain": 1.0,
+      "auto_generated_requests": [
+        {
+          "category": "pet_care",
+          "urgency": "Immediate",
+          "quantity_needed": 15,
+          "location": {
+            "x": 824.8962141178431,
+            "y": 499.9135348360383
+          }
+        },
+        {
+          "category": "utilities",
+          "urgency": "Immediate",
+          "quantity_needed": 29,
+          "location": {
+            "x": 824.8962141178431,
+            "y": 499.9135348360383
+          }
+        },
+        {
+          "category": "clothing",
+          "urgency": "Immediate",
+          "quantity_needed": 38,
+          "location": {
+            "x": 824.8962141178431,
+            "y": 499.9135348360383
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 2,
+      "org_name": "Food Bank 2",
+      "shortages": [
+        "food",
+        "housing",
+        "medical",
+        "childcare"
+      ],
+      "capacity_strain": 0.9659863945578231,
+      "auto_generated_requests": [
+        {
+          "category": "food",
+          "urgency": "Immediate",
+          "quantity_needed": 28,
+          "location": {
+            "x": 248.91737138750594,
+            "y": 112.71909724722983
+          }
+        },
+        {
+          "category": "housing",
+          "urgency": "Immediate",
+          "quantity_needed": 49,
+          "location": {
+            "x": 248.91737138750594,
+            "y": 112.71909724722983
+          }
+        },
+        {
+          "category": "medical",
+          "urgency": "Immediate",
+          "quantity_needed": 33,
+          "location": {
+            "x": 248.91737138750594,
+            "y": 112.71909724722983
+          }
+        },
+        {
+          "category": "childcare",
+          "urgency": "Immediate",
+          "quantity_needed": 15,
+          "location": {
+            "x": 248.91737138750594,
+            "y": 112.71909724722983
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 3,
+      "org_name": "School 3",
+      "shortages": [
+        "technology",
+        "elderly_care",
+        "pet_care",
+        "mental_health"
+      ],
+      "capacity_strain": 0.8688524590163934,
+      "auto_generated_requests": [
+        {
+          "category": "technology",
+          "urgency": "Immediate",
+          "quantity_needed": 45,
+          "location": {
+            "x": 331.2883343562812,
+            "y": 339.24985293779844
+          }
+        },
+        {
+          "category": "elderly_care",
+          "urgency": "Immediate",
+          "quantity_needed": 36,
+          "location": {
+            "x": 331.2883343562812,
+            "y": 339.24985293779844
+          }
+        },
+        {
+          "category": "pet_care",
+          "urgency": "Immediate",
+          "quantity_needed": 25,
+          "location": {
+            "x": 331.2883343562812,
+            "y": 339.24985293779844
+          }
+        },
+        {
+          "category": "mental_health",
+          "urgency": "Immediate",
+          "quantity_needed": 49,
+          "location": {
+            "x": 331.2883343562812,
+            "y": 339.24985293779844
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 4,
+      "org_name": "Clinic 4",
+      "shortages": [
+        "utilities",
+        "transportation"
+      ],
+      "capacity_strain": 1.0,
+      "auto_generated_requests": [
+        {
+          "category": "utilities",
+          "urgency": "Immediate",
+          "quantity_needed": 12,
+          "location": {
+            "x": 330.1177277518951,
+            "y": 405.09395862769287
+          }
+        },
+        {
+          "category": "transportation",
+          "urgency": "Immediate",
+          "quantity_needed": 34,
+          "location": {
+            "x": 330.1177277518951,
+            "y": 405.09395862769287
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 5,
+      "org_name": "Clinic 5",
+      "shortages": [
+        "mental_health",
+        "childcare",
+        "clothing",
+        "employment",
+        "pet_care",
+        "elderly_care"
+      ],
+      "capacity_strain": 1.0,
+      "auto_generated_requests": [
+        {
+          "category": "mental_health",
+          "urgency": "Immediate",
+          "quantity_needed": 38,
+          "location": {
+            "x": 750.1477556328235,
+            "y": 52.36335319716162
+          }
+        },
+        {
+          "category": "childcare",
+          "urgency": "Immediate",
+          "quantity_needed": 45,
+          "location": {
+            "x": 750.1477556328235,
+            "y": 52.36335319716162
+          }
+        },
+        {
+          "category": "clothing",
+          "urgency": "Immediate",
+          "quantity_needed": 29,
+          "location": {
+            "x": 750.1477556328235,
+            "y": 52.36335319716162
+          }
+        },
+        {
+          "category": "employment",
+          "urgency": "Immediate",
+          "quantity_needed": 13,
+          "location": {
+            "x": 750.1477556328235,
+            "y": 52.36335319716162
+          }
+        },
+        {
+          "category": "pet_care",
+          "urgency": "Immediate",
+          "quantity_needed": 46,
+          "location": {
+            "x": 750.1477556328235,
+            "y": 52.36335319716162
+          }
+        },
+        {
+          "category": "elderly_care",
+          "urgency": "Immediate",
+          "quantity_needed": 26,
+          "location": {
+            "x": 750.1477556328235,
+            "y": 52.36335319716162
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 6,
+      "org_name": "Clinic 6",
+      "shortages": [
+        "clothing",
+        "furniture"
+      ],
+      "capacity_strain": 1.0,
+      "auto_generated_requests": [
+        {
+          "category": "clothing",
+          "urgency": "Immediate",
+          "quantity_needed": 21,
+          "location": {
+            "x": 720.5220894622314,
+            "y": 577.475621391654
+          }
+        },
+        {
+          "category": "furniture",
+          "urgency": "Immediate",
+          "quantity_needed": 41,
+          "location": {
+            "x": 720.5220894622314,
+            "y": 577.475621391654
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 8,
+      "org_name": "Clinic 8",
+      "shortages": [
+        "education"
+      ],
+      "capacity_strain": 0.993103448275862,
+      "auto_generated_requests": [
+        {
+          "category": "education",
+          "urgency": "Immediate",
+          "quantity_needed": 37,
+          "location": {
+            "x": 137.18854937562793,
+            "y": 328.4152892237119
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 10,
+      "org_name": "Shelter 10",
+      "shortages": [
+        "elderly_care",
+        "mental_health",
+        "technology"
+      ],
+      "capacity_strain": 0.9814814814814815,
+      "auto_generated_requests": [
+        {
+          "category": "elderly_care",
+          "urgency": "Immediate",
+          "quantity_needed": 19,
+          "location": {
+            "x": 1088.9348837724183,
+            "y": 577.4609381507669
+          }
+        },
+        {
+          "category": "mental_health",
+          "urgency": "Immediate",
+          "quantity_needed": 49,
+          "location": {
+            "x": 1088.9348837724183,
+            "y": 577.4609381507669
+          }
+        },
+        {
+          "category": "technology",
+          "urgency": "Immediate",
+          "quantity_needed": 21,
+          "location": {
+            "x": 1088.9348837724183,
+            "y": 577.4609381507669
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 11,
+      "org_name": "Clinic 11",
+      "shortages": [
+        "pet_care",
+        "clothing",
+        "food",
+        "utilities"
+      ],
+      "capacity_strain": 0.9588235294117647,
+      "auto_generated_requests": [
+        {
+          "category": "pet_care",
+          "urgency": "Immediate",
+          "quantity_needed": 44,
+          "location": {
+            "x": 350.3500612709601,
+            "y": 555.8771023299162
+          }
+        },
+        {
+          "category": "clothing",
+          "urgency": "Immediate",
+          "quantity_needed": 17,
+          "location": {
+            "x": 350.3500612709601,
+            "y": 555.8771023299162
+          }
+        },
+        {
+          "category": "food",
+          "urgency": "Immediate",
+          "quantity_needed": 49,
+          "location": {
+            "x": 350.3500612709601,
+            "y": 555.8771023299162
+          }
+        },
+        {
+          "category": "utilities",
+          "urgency": "Immediate",
+          "quantity_needed": 50,
+          "location": {
+            "x": 350.3500612709601,
+            "y": 555.8771023299162
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 12,
+      "org_name": "School 12",
+      "shortages": [
+        "childcare",
+        "emergency"
+      ],
+      "capacity_strain": 0.9855072463768116,
+      "auto_generated_requests": [
+        {
+          "category": "childcare",
+          "urgency": "Immediate",
+          "quantity_needed": 30,
+          "location": {
+            "x": 709.3311151906865,
+            "y": 77.98323071796332
+          }
+        },
+        {
+          "category": "emergency",
+          "urgency": "Immediate",
+          "quantity_needed": 38,
+          "location": {
+            "x": 709.3311151906865,
+            "y": 77.98323071796332
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 13,
+      "org_name": "Clinic 13",
+      "shortages": [
+        "emergency",
+        "transportation",
+        "technology",
+        "education"
+      ],
+      "capacity_strain": 1.0,
+      "auto_generated_requests": [
+        {
+          "category": "emergency",
+          "urgency": "Immediate",
+          "quantity_needed": 12,
+          "location": {
+            "x": 153.8375195016941,
+            "y": 623.5843064173606
+          }
+        },
+        {
+          "category": "transportation",
+          "urgency": "Immediate",
+          "quantity_needed": 37,
+          "location": {
+            "x": 153.8375195016941,
+            "y": 623.5843064173606
+          }
+        },
+        {
+          "category": "technology",
+          "urgency": "Immediate",
+          "quantity_needed": 49,
+          "location": {
+            "x": 153.8375195016941,
+            "y": 623.5843064173606
+          }
+        },
+        {
+          "category": "education",
+          "urgency": "Immediate",
+          "quantity_needed": 12,
+          "location": {
+            "x": 153.8375195016941,
+            "y": 623.5843064173606
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 14,
+      "org_name": "Clinic 14",
+      "shortages": [
+        "employment",
+        "food",
+        "medical"
+      ],
+      "capacity_strain": 0.9869281045751634,
+      "auto_generated_requests": [
+        {
+          "category": "employment",
+          "urgency": "Immediate",
+          "quantity_needed": 31,
+          "location": {
+            "x": 916.1998688877158,
+            "y": 240.9743359957154
+          }
+        },
+        {
+          "category": "food",
+          "urgency": "Immediate",
+          "quantity_needed": 33,
+          "location": {
+            "x": 916.1998688877158,
+            "y": 240.9743359957154
+          }
+        },
+        {
+          "category": "medical",
+          "urgency": "Immediate",
+          "quantity_needed": 12,
+          "location": {
+            "x": 916.1998688877158,
+            "y": 240.9743359957154
+          }
+        }
+      ]
+    },
+    {
+      "org_id": 15,
+      "org_name": "Shelter 15",
+      "shortages": [
+        "emergency"
+      ],
+      "capacity_strain": 0.9744897959183674,
+      "auto_generated_requests": [
+        {
+          "category": "emergency",
+          "urgency": "Immediate",
+          "quantity_needed": 14,
+          "location": {
+            "x": 576.8559041003575,
+            "y": 114.08875604848551
+          }
+        }
+      ]
+    }
+  ]
+}
