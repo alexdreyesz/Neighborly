@@ -2,7 +2,7 @@ import topNeedsData from "./TopNeedsData";
 
 export default function TopNeeds() {
   return (
-    <div className="h-[70vh] w-full overflow-scroll">
+    <div className="h-[90vh] w-full">
       <div className="primary-bg rounded-lg p-6 text-white flex flex-col">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold relative left-120">Top Community Needs</h2>
@@ -11,7 +11,7 @@ export default function TopNeeds() {
           </span>
         </div>
 
-        <div className="flex flex-row flex-wrap gap-10 justify-center items-center">
+        <div className="h-[550px] flex flex-row flex-wrap gap-10 pt-4 justify-center items-center overflow-auto scrollbar-hidden custom-scrollbar-hidden">
           {topNeedsData.map((need, idx) => (
             <div key={idx} className="w-[40vh] h-[40vh] bg-white bg-opacity-20 rounded-lg p-3 flex justify-center items-center">
               <div className="flex flex-col items-center relative top-5">

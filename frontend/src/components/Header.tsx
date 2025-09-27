@@ -1,5 +1,5 @@
 import logo from '../assets/icons/logo.png'
-import logoText from '../assets/icons/logo-text.png'
+import logoText from '../assets/icons/logo-text-black.png'
 import { useState } from 'react'
 
 export default function Header() {
@@ -73,7 +73,7 @@ export default function Header() {
                         <div className="relative">
                             <input
                                 type="text"
-                                placeholder="Pembroke Pines, FL"
+                                placeholder="Miami, FL"
                                 className="block w-48 px-3 py-2 border-t border-b border-r border-gray-300 leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-green-800 focus:border-green-500 text-sm"
                             />
                         </div>
