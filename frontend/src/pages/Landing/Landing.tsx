@@ -1,18 +1,80 @@
 import Header from '../../components/Header.tsx'
 import Footer from '../../components/Footer.tsx'
+import TopNeeds from '../../components/TopNeeds'
+import MapView from '../../components/MapView'
+import EventsFeed from '../../components/EventsFeed'
+
+import communityArt from '../../assets/art/community.png'
 
 function Landing() {
 
   return (
-    <div className="h-screen w-screen flex flex-col overflow-auto">
-      <Header />
+    <div className="min-h-screen bg-gray-50">
+        <Header />
 
-      <div className="h-600 bg-amber-200 flex flex-col justify-center items-center space-y-4">
-        <h1 className="text-4xl font-bold text-white">Welcome to Neighborly!</h1>
-        <p className="text-lg text-white">Your friendly neighborhood app.</p>
-      </div>
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">    
+            
+            {/* Main Hero Section */}
+            <div className="h-[85vh] w-viewport flex justify-center items-center relative bottom-5">
+                <div className="flex items-center justify-between space-x-15 px-8 py-12 relative left-10">
+                    {/* Left Content */}
+                    <div className="flex-1 max-w-xl">
+                        <h1 className="text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                            The neighbor network—where offers meet needs and help becomes action
+                        </h1>
+                        <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                            Need help or ready to help? Post, claim, and coordinate around the specific challenges in your area, from pantry shortages to school supplies and safe rides. With real-time Top Needs, every effort hits where it counts.
+                        </p>
 
-      <Footer />
+                        <div className="flex justify-around relative right-6">
+                            <button className="text-black hover:bg-gray-200 px-6 py-3 rounded-md text-lg font-medium transition-colors cursor-pointer">
+                                Ready to Help?
+                            </button>
+
+                            <button className="primary-bg text-white px-6 py-3 rounded-md text-lg font-medium transition-colors cursor-pointer">
+                                Need Help?
+                            </button>
+                        </div>
+                    </div>
+                    
+                    {/* Right Illustration */}
+                    <div className="flex-1 flex justify-center items-center">
+                        <img src={communityArt} className="h-80 w-100"/>
+                    </div>
+                </div>
+            </div>
+            
+            
+            {/* Welcome Section */}
+            <div className="flex w-full gap-6 mb-8">
+                {/* Welcome Text - Left Side (70%) */}
+                <div className="w-[70%]">
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                    Welcome, Community Member 👋
+                </h1>
+                <p className="text-lg text-gray-600">
+                    Connect, help, and strengthen your community
+                </p>
+                </div>  
+            </div>
+
+
+            {/* Top Needs Section - Right Side (30%) */}
+            <TopNeeds />
+
+            {/* Main Content - Map Centered with Right Sidebar */}
+            <div className="flex gap-6 h-[calc(100vh-200px)]">
+                {/* Center Map */}
+                <MapView />
+
+                {/* Right Sidebar - Events Feed */}
+                <EventsFeed />
+
+            </div>
+        </div>
+
+        <Footer />
     </div>
   )
 }
