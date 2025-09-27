@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom'
+import PagesURL from '../router/routes'
+import { useState } from 'react'
+
 import logo from '../assets/icons/logo.png'
 import logoText from '../assets/icons/logo-text-black.png'
-import { useState } from 'react'
 
 export default function Header() {
     const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false)
@@ -42,8 +45,10 @@ export default function Header() {
                     {/* Logo */}
                     <div className="flex items-center relative bottom-0.5">
                         <img src={logo} className="h-10 w-10 pr-1 pt-1"/>
-                        <img src={logoText} className="h-35 w-35 pt-3"/>
                         
+                        <Link to={PagesURL.Landing}>
+                            <img src={logoText} className="h-35 w-35 pt-3 cursor-pointer"/>
+                        </Link>
                         {/*
                         <div className="flex-shrink-0">
                             <h1 className="text-2xl font-bold primary-text">
@@ -96,13 +101,17 @@ export default function Header() {
                             <span className="font-medium text-black">{selectedLanguage}</span>
                         </button>
                         
-                        <button className=" text-black hover:bg-gray-200 px-6 py-2 rounded-lg text-sm font-medium">
-                            Log In
-                        </button>
-                        
-                        <button className="primary-bg text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                            Sign Up
-                        </button>
+                        <Link to={PagesURL.Login}>
+                            <button className=" text-black hover:bg-gray-200 px-6 py-2 rounded-lg text-sm font-medium">
+                                Log In
+                            </button>
+                        </Link>
+
+                        <Link to={PagesURL.SignUp}>
+                            <button className="primary-bg text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                Sign Up
+                            </button>
+                        </Link>
                     </div>
 
                     {/* Language Selection Modal */}
@@ -144,10 +153,12 @@ export default function Header() {
                                     >
                                         Cancel
                                     </button>
+
+              
                                     <button 
                                         onClick={() => setIsLanguageModalOpen(false)}
                                         className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600"
-                                    >
+                                        >
                                         Save
                                     </button>
                                 </div>
