@@ -51,13 +51,12 @@ function Landing() {
             <br/> <br/><br/><br/><br/><br/><br/>
 
             {/* Main Content - Map Centered with Right Sidebar */}
-            <div className="flex gap-6 h-[calc(100vh-200px)]">
+            <div className="h-[100vh] primary-bg rounded-lg p-6 flex gap-6]">
                 {/* Center Map */}
                 <MapView />
 
                 {/* Right Sidebar - Events Feed */}
                 <EventsFeed />
-
             </div>
         </div>
 
