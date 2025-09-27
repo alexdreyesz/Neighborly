@@ -1,0 +1,27 @@
+import topNeedsData from "./TopNeeds";
+
+export default function TopNeeds() {
+  return (
+    <div className="h-[70vh] w-full overflow-scroll">
+      <div className="primary-bg rounded-lg p-6 text-white flex flex-col">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold relative left-120">Top Community Needs</h2>
+          <span className="bg-white text-black bg-opacity-20 px-2 py-1 rounded-full text-xs font-medium">
+            Updated 2 min ago
+          </span>
+        </div>
+
+        <div className="flex flex-row flex-wrap gap-10 justify-center items-center">
+          {topNeedsData.map((need, idx) => (
+            <div key={idx} className="w-[40vh] h-[40vh] bg-white bg-opacity-20 rounded-lg p-3 flex justify-center items-center">
+              <div className="flex flex-col items-center relative top-5">
+                <span className="font-semibold text-sm text-black mb-5">{need.title}</span>
+                <span className="text-lg mr-2">{need.emoji}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
