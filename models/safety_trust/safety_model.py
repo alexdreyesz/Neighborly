@@ -195,14 +195,12 @@ train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
 test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 
-optimizer = AdamW(model.parameters(), lr=0.001, weight_decay=1e-4, betas=(0.9, 0.999))
-scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=10, T_mult=2, eta_min=1e-6)
-
 class_weights = compute_class_weight('balanced', classes=np.unique(y_train), y=y_train)
 class_weights_tensor = torch.tensor(class_weights, dtype=torch.float32)
 print(f"Class weights: {dict(zip(le.classes_[np.unique(y_train)], class_weights))}")
 
-
+optimizer = AdamW(model.parameters(), lr=0.001, weight_decay=1e-4, betas=(0.9, 0.999))
+scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=10, T_mult=2, eta_min=1e-6)
 loss_func = nn.CrossEntropyLoss(weight=class_weights_tensor)
 
 EPOCHS = 100
@@ -217,7 +215,6 @@ patience_counter = 0
 print("Starting training...\n")
 
 for epoch in range(EPOCHS):
-    # Training phase
     model.train()
     total_train_loss = 0.0
     train_predictions = []
