@@ -1,1 +1,1 @@
-from . import agent
+from . import org_sync_agent

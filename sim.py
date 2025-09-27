@@ -10,8 +10,8 @@ from enum import Enum
 
 pygame.init()
 
-WINDOW_WIDTH = 600
-WINDOW_HEIGHT = 400
+WINDOW_WIDTH = 1200
+WINDOW_HEIGHT = 800
 FPS = 60
 
 WHITE = (255, 255, 255)
@@ -189,39 +189,297 @@ class TownSimulation:
         
         if post_type == "offer":
             titles = {
-                "food": ["Free groceries available", "Home-cooked meals", "Fresh vegetables from garden"],
-                "clothing": ["Winter coats for kids", "Professional attire", "Gently used shoes"],
-                "transportation": ["Rides to appointments", "Moving help", "Airport pickup"],
-                "childcare": ["Babysitting services", "After school care", "Weekend childcare"],
-                "tutoring": ["Math tutoring", "English lessons", "Computer skills help"]
+                "food": [
+                    "Free groceries available", "Home-cooked meals ready", "Fresh vegetables from garden",
+                    "Leftover catering food", "Baby formula available", "Free bread from bakery",
+                    "Community soup kitchen", "Fresh fruit pickup", "Pantry cleanout items",
+                    "Restaurant surplus food", "Holiday meal preparation", "Bulk rice and beans",
+                    "Free lunch for kids", "Farmers market extras", "Meal prep containers",
+                    "Homemade preserves", "Free coffee and pastries", "Community potluck leftovers"
+                ],
+                "clothing": [
+                    "Winter coats for kids", "Professional attire donation", "Gently used shoes",
+                    "Back to school clothes", "Baby clothes 0-2T", "Plus size women's clothing",
+                    "Men's work boots size 10-12", "Formal wear for interviews", "Maternity clothes",
+                    "Halloween costumes", "Sports uniforms", "Rain gear available",
+                    "Designer clothes donation", "Warm blankets and linens", "Undergarments new with tags",
+                    "School uniforms", "Vintage clothing lot", "Athletic wear and sneakers"
+                ],
+                "transportation": [
+                    "Rides to appointments", "Moving help with truck", "Airport pickup service",
+                    "Daily commute carpool", "Grocery store runs", "School pickup/dropoff",
+                    "Medical transport", "Job interview rides", "Bus pass donations",
+                    "Car repair help", "Jump start service", "Furniture delivery",
+                    "Senior citizen rides", "Emergency transportation", "Weekend taxi service",
+                    "Bike repair and tune-up", "Moving boxes and supplies", "Gas money assistance"
+                ],
+                "childcare": [
+                    "Babysitting services", "After school care", "Weekend childcare",
+                    "Date night babysitting", "Emergency childcare", "Summer camp alternative",
+                    "Tutoring and homework help", "Newborn care assistance", "Special needs support",
+                    "Playdates and activities", "School holiday coverage", "Evening childcare",
+                    "Birthday party supervision", "Sick child care", "Single parent support",
+                    "Toddler activities", "Teen mentorship", "Art and craft sessions"
+                ],
+                "medical": [
+                    "Free health screenings", "Prescription delivery", "Medical equipment loan",
+                    "First aid training", "Blood pressure checks", "Mental health counseling",
+                    "Dental cleaning vouchers", "Eye exam assistance", "Physical therapy help",
+                    "Medical appointment rides", "Health insurance navigation", "Medication management",
+                    "Wellness workshops", "Vaccine clinic", "Senior health checks",
+                    "Nutrition counseling", "Support group meetings", "Medical bill assistance"
+                ],
+                "education": [
+                    "Math tutoring available", "English lessons", "Computer skills help",
+                    "SAT prep sessions", "Adult literacy classes", "Job skills training",
+                    "Resume writing help", "College application aid", "Language exchange",
+                    "Art lessons for kids", "Music instrument lessons", "Science fair help",
+                    "Homework club", "Study group formation", "Public speaking practice",
+                    "Financial literacy class", "Digital literacy training", "Career counseling"
+                ],
+                "employment": [
+                    "Job referral network", "Interview practice", "Professional networking",
+                    "Skills training workshop", "Resume review service", "LinkedIn profile help",
+                    "Career change guidance", "Freelance opportunities", "Part-time positions",
+                    "Work from home jobs", "Apprenticeship programs", "Job fair information",
+                    "Professional references", "Industry connections", "Salary negotiation tips",
+                    "Portfolio development", "Business startup help", "Professional mentorship"
+                ],
+                "furniture": [
+                    "Moving sale everything", "Free dining table", "Kids bedroom set",
+                    "Office furniture donation", "Couch and chairs", "Kitchen appliances",
+                    "Mattress and box spring", "Bookshelves and storage", "Patio furniture set",
+                    "Baby furniture and gear", "Electronics and TV", "Home decor items",
+                    "Exercise equipment", "Garden furniture", "Craft supplies lot",
+                    "Holiday decorations", "Board games and toys", "Household essentials"
+                ],
+                "technology": [
+                    "Free laptop repair", "Phone setup help", "WiFi troubleshooting",
+                    "Computer donations", "Tech support for seniors", "Software installation",
+                    "Online safety training", "Digital device lessons", "Internet access sharing",
+                    "Smartphone tutorials", "Social media setup", "Online banking help",
+                    "Video call assistance", "Email account creation", "Password management",
+                    "Device data transfer", "App recommendations", "Digital photo organizing"
+                ],
+                "emergency": [
+                    "Emergency shelter space", "Crisis support available", "Food bank emergency",
+                    "Utility bill assistance", "Rent payment help", "Emergency childcare",
+                    "Medical emergency aid", "Transportation to hospital", "Temporary housing",
+                    "Storm damage cleanup", "Emergency supplies kit", "Pet emergency care",
+                    "Legal emergency help", "Family crisis support", "Disaster relief aid",
+                    "Safety planning help", "Emergency contact service", "Crisis intervention"
+                ],
+                "mental_health": [
+                    "Peer support meetings", "Anxiety management group", "Grief counseling",
+                    "Stress relief workshop", "Meditation sessions", "Support group hosting",
+                    "Crisis intervention training", "Wellness check-ins", "Mindfulness practice",
+                    "Art therapy sessions", "Music therapy group", "Recovery support",
+                    "Teen counseling", "Family therapy", "Trauma support group",
+                    "Suicide prevention training", "Mental health first aid", "Self-care workshops"
+                ],
+                "elderly_care": [
+                    "Senior companion visits", "Grocery shopping help", "Technology assistance",
+                    "Light housekeeping", "Medication reminders", "Doctor appointment rides",
+                    "Social activities planning", "Meal preparation", "Pet care for seniors",
+                    "Home safety checks", "Bill paying assistance", "Library book delivery",
+                    "Garden maintenance", "Letter writing help", "Phone call check-ins",
+                    "Exercise programs", "Memory care activities", "Holiday celebration help"
+                ],
+                "pet_care": [
+                    "Dog walking service", "Pet sitting available", "Free pet supplies",
+                    "Veterinary care vouchers", "Pet grooming help", "Emergency pet care",
+                    "Pet training classes", "Animal foster care", "Pet food donations",
+                    "Spay/neuter assistance", "Pet adoption events", "Lost pet search help",
+                    "Senior pet care", "Special needs pets", "Pet therapy visits",
+                    "Animal rescue transport", "Pet photography", "Pet memorial services"
+                ],
+                "utilities": [
+                    "Utility bill assistance", "Energy audit help", "Weatherization supplies",
+                    "Generator sharing", "Internet access sharing", "Phone service help",
+                    "Heating bill relief", "Solar panel information", "Energy saving tips",
+                    "Appliance repair", "HVAC maintenance", "Plumbing assistance",
+                    "Electrical work help", "Home insulation", "Water conservation tips",
+                    "Emergency power backup", "Utility payment plans", "Energy assistance programs"
+                ],
+                "housing": [
+                    "Temporary housing", "Room rental offer", "House-sitting available",
+                    "Moving assistance", "Home repairs help", "Painting services",
+                    "Cleaning services", "Landscaping help", "Security deposit loan",
+                    "Roommate matching", "Housing search help", "Lease negotiation",
+                    "Home maintenance", "Pest control assistance", "Storage space offer",
+                    "Garage cleanout help", "Home organizing", "Furniture assembly"
+                ]
             }
-        else:
+        else:  # requests
             titles = {
-                "food": ["Need groceries urgently", "Looking for baby formula", "Food for family"],
-                "housing": ["Need temporary shelter", "Looking for apartment", "Housing assistance"],
-                "medical": ["Need doctor appointment", "Prescription help", "Medical transportation"],
-                "employment": ["Job search help", "Resume assistance", "Interview preparation"]
+                "food": [
+                    "Need groceries urgently", "Looking for baby formula", "Food for family of 5",
+                    "Emergency food assistance", "School lunch money needed", "Food allergies - need help",
+                    "Diabetic meals needed", "Fresh produce wanted", "Thanksgiving meal help",
+                    "Baby food and supplies", "Gluten-free options needed", "Halal food sources",
+                    "Food stamps application", "Community garden space", "Cooking lessons needed",
+                    "Kitchen equipment loan", "Meal delivery help", "Food bank referral"
+                ],
+                "housing": [
+                    "Need temporary shelter", "Looking for apartment", "Housing assistance needed",
+                    "Eviction prevention help", "Security deposit loan", "Room rental search",
+                    "Homeless shelter info", "Moving help needed", "Storage unit rental",
+                    "Roommate wanted", "Pet-friendly housing", "Accessible housing search",
+                    "Rent payment assistance", "Housing voucher help", "Landlord references",
+                    "Lease cosigner needed", "Home repairs urgent", "Utility setup help"
+                ],
+                "medical": [
+                    "Need doctor appointment", "Prescription help needed", "Medical transportation",
+                    "Health insurance enrollment", "Dental care urgent", "Vision care needed",
+                    "Mental health counseling", "Physical therapy access", "Medical equipment needed",
+                    "Hospital bill assistance", "Specialist referral needed", "Medical records help",
+                    "Wheelchair rental", "Home health aide", "Medication management",
+                    "Blood test assistance", "Surgery support needed", "Recovery care help"
+                ],
+                "employment": [
+                    "Job search help needed", "Resume assistance urgent", "Interview preparation",
+                    "Work clothes needed", "Transportation to work", "Childcare for work",
+                    "Job training programs", "Career counseling", "Professional references",
+                    "Skills certification help", "Job placement assistance", "Workplace accommodation",
+                    "Part-time opportunities", "Remote work setup", "Professional networking",
+                    "Business license help", "Freelance guidance", "Unemployment assistance"
+                ],
+                "transportation": [
+                    "Need ride to work daily", "Car repair assistance", "Bus pass needed",
+                    "Medical appointment ride", "Moving truck rental", "Airport ride needed",
+                    "Kids school transport", "Grocery shopping rides", "Job interview transport",
+                    "Car insurance help", "Driver's license renewal", "Vehicle registration help",
+                    "Gas money assistance", "Parking permit help", "Public transit info",
+                    "Bicycle repair needed", "Car seat installation", "Emergency towing"
+                ],
+                "childcare": [
+                    "Babysitter needed ASAP", "After school care", "Weekend childcare help",
+                    "Special needs childcare", "Newborn help needed", "Summer camp scholarship",
+                    "Tutoring for child", "Daycare scholarship", "Emergency babysitting",
+                    "Playdate coordination", "Child transportation", "Birthday party help",
+                    "Homework assistance", "Bedtime routine help", "Sick child care",
+                    "School pickup help", "Teen supervision", "Child activity transport"
+                ],
+                "clothing": [
+                    "Winter coats for kids", "Professional attire needed", "School uniforms",
+                    "Maternity clothes size L", "Work boots size 11", "Formal dress rental",
+                    "Baby clothes 6-12 months", "Plus size clothing", "Rain gear needed",
+                    "Athletic wear for teens", "Graduation outfit", "Interview clothes",
+                    "Halloween costume help", "Warm blankets needed", "Undergarments needed",
+                    "Shoes for growing kids", "Costume for play", "Uniform alterations"
+                ],
+                "furniture": [
+                    "Bed and mattress needed", "Kitchen table wanted", "Kids furniture needed",
+                    "Moving boxes required", "Refrigerator needed", "Washing machine help",
+                    "Couch and chairs", "Office desk needed", "Storage solutions",
+                    "Baby crib and supplies", "Wheelchair accessible", "Dining room set",
+                    "Bedroom furniture", "Kitchen appliances", "Entertainment center",
+                    "Patio furniture", "Exercise equipment", "Home office setup"
+                ],
+                "technology": [
+                    "Computer for school", "Internet access needed", "Phone repair help",
+                    "Laptop for job search", "WiFi setup assistance", "Tech support needed",
+                    "Online learning tools", "Digital literacy help", "Smartphone needed",
+                    "Printer for documents", "Software assistance", "Data recovery help",
+                    "Video conferencing setup", "Email account help", "Social media guidance",
+                    "Online banking setup", "Digital photo help", "App installation"
+                ],
+                "emergency": [
+                    "Immediate shelter needed", "Emergency food now", "Crisis intervention",
+                    "Utility shutoff help", "Rent due tomorrow", "Medical emergency",
+                    "Domestic violence help", "Homeless tonight", "Emergency childcare",
+                    "Pet emergency care", "Transportation crisis", "Legal emergency",
+                    "Mental health crisis", "Family emergency", "Natural disaster aid",
+                    "Safety planning help", "Emergency supplies", "Immediate cash help"
+                ],
+                "mental_health": [
+                    "Counseling services needed", "Support group access", "Crisis intervention",
+                    "Anxiety help urgent", "Depression support", "Trauma counseling",
+                    "Addiction recovery", "Family therapy needed", "Teen counseling",
+                    "Grief support group", "Stress management", "Anger management",
+                    "Eating disorder help", "PTSD treatment", "Bipolar support",
+                    "Suicide prevention help", "Self-harm support", "Mental health advocate"
+                ],
+                "elderly_care": [
+                    "Senior care needed", "Companion for elderly", "Medical rides for senior",
+                    "Grocery shopping help", "Medication management", "Home safety check",
+                    "Social visits needed", "Technology help for senior", "Meal preparation",
+                    "Light housekeeping", "Pet care for elderly", "Bill paying help",
+                    "Garden maintenance", "Transportation to activities", "Health monitoring",
+                    "Emergency contact needed", "Memory care support", "Exercise companion"
+                ],
+                "pet_care": [
+                    "Dog walker needed", "Pet sitting urgent", "Veterinary care help",
+                    "Pet food assistance", "Emergency pet care", "Pet grooming help",
+                    "Animal foster needed", "Lost pet search", "Pet supplies needed",
+                    "Spay/neuter assistance", "Pet training help", "Senior pet care",
+                    "Special needs pet", "Pet medication help", "Animal transport",
+                    "Pet boarding needed", "Vet bill assistance", "Pet behavioral help"
+                ],
+                "utilities": [
+                    "Electric bill help", "Heat shutoff notice", "Internet service needed",
+                    "Phone service help", "Water bill assistance", "Gas bill overdue",
+                    "Energy assistance needed", "Utility deposit help", "Service restoration",
+                    "Weatherization help", "Appliance repair", "HVAC assistance",
+                    "Plumbing emergency", "Electrical work needed", "Home insulation",
+                    "Energy audit needed", "Solar information", "Generator rental"
+                ],
+                "education": [
+                    "Tutoring needed", "School supplies help", "College application aid",
+                    "Adult education classes", "GED preparation", "Language learning",
+                    "Computer literacy", "Job skills training", "Scholarship information",
+                    "School lunch assistance", "Transportation to school", "Homework help",
+                    "Study group needed", "Test preparation", "Career counseling",
+                    "Library card help", "Educational supplies", "Learning disability support"
+                ]
             }
+
         
         title = random.choice(titles.get(category, [f"{post_type.title()} for {category}"]))
         
         # potential safety issues
-        base_descriptions = [
-            f"Looking to help with {category} needs in the community",
-            f"Can provide {category} assistance to those in need",
-            f"Urgently need help with {category} situation",
-            f"Offering {category} support to neighbors"
-        ]
+        base_descriptions = {
+            "offer": [
+                f"Available to help with {category} in our community",
+                f"Happy to provide {category} support to neighbors in need",
+                f"Offering {category} assistance - please reach out",
+                f"Community member willing to help with {category}",
+                f"Local {category} support available",
+                f"Sharing resources for {category} needs",
+                f"Volunteer help available for {category}",
+                f"No cost {category} assistance offered"
+            ],
+            "request": [
+                f"Seeking help with {category} situation",
+                f"Family needs assistance with {category}",
+                f"Looking for {category} support in our area",
+                f"Could use community help with {category}",
+                f"Requesting {category} assistance",
+                f"In need of {category} help",
+                f"Struggling with {category} - need support",
+                f"Emergency {category} assistance needed"
+            ]
+        }
         
-        description = random.choice(base_descriptions)
+        post_type = random.choice(["offer", "request"])
+        description = random.choice(base_descriptions[post_type])
+
         
 
         if random.random() < 0.1:  # 10% chance
             suspicious_additions = [
-                " Send cash payment first!", 
-                " Meet me in private location",
-                " Click this link for amazing deals",
-                " Wire money immediately"
+                " Send cash payment upfront! No questions asked!",
+                " Meet me alone in parking lot after dark",
+                " Click this suspicious link for amazing deals!!!",
+                " Wire money immediately or offer expires",
+                " Must have your social security number first",
+                " Bring all your personal documents to meet",
+                " Only contact through encrypted messaging app",
+                " No phone calls, cash only transactions",
+                " Delete this message after reading",
+                " Urgent - government assistance available (fake)",
+                " Collect personal information for verification",
+                " Request bank account details for payment"
             ]
             description += random.choice(suspicious_additions)
         
@@ -412,7 +670,7 @@ class TownSimulation:
         pygame.display.flip()
     
     def save_simulation_data(self):
-        os.makedirs("data/", exist_ok=True)
+        os.makedirs("data/sim_data/", exist_ok=True)
         
         simulation_data = {
             "people": [asdict(person) for person in self.people],
@@ -430,14 +688,12 @@ class TownSimulation:
             }
         }
         
-        # Save complete dataset
-        with open("data/complete_simulation.json", "w") as f:
+        with open("data/sim_data/complete_simulation.json", "w") as f:
             json.dump(simulation_data, f, indent=2, default=str)
         
-        # Save agent-specific data files
         
-        # 1. Urgency Classifier Agent Data
-        urgency_data = {
+        # 1. Urgency Classifier Agent Data (NOT USING ❌)
+        urgency_data = { 
             "posts_for_classification": [
                 {
                     "post_id": post.id,
@@ -451,7 +707,7 @@ class TownSimulation:
             ]
         }
         
-        with open("data/urgency_classifier_data.json", "w") as f:
+        with open("data/sim_data/urgency_classifier_data.json", "w") as f:
             json.dump(urgency_data, f, indent=2)
         
         # 2. Supply-Demand Balancer Agent Data  
@@ -469,7 +725,7 @@ class TownSimulation:
             ]
         }
         
-        with open("data/supply_demand_data.json", "w") as f:
+        with open("data/sim_data/supply_demand_data.json", "w") as f:
             json.dump(supply_demand_export, f, indent=2)
         
         # 3. Safety & Trust Agent Data
@@ -497,7 +753,7 @@ class TownSimulation:
             ]
         }
         
-        with open("data/safety_trust_data.json", "w") as f:
+        with open("data/sim_data/safety_trust_data.json", "w") as f:
             json.dump(safety_data, f, indent=2)
         
         # 4. Org Sync Agent Data
@@ -538,7 +794,7 @@ class TownSimulation:
             ]
         }
         
-        with open("data/org_sync_data.json", "w") as f:
+        with open("data/sim_data/org_sync_data.json", "w") as f:
             json.dump(org_sync_data, f, indent=2)
         
         # 5. Volunteer Match Agent Data
@@ -569,10 +825,10 @@ class TownSimulation:
             ]
         }
         
-        with open("data/volunteer_match_data.json", "w") as f:
+        with open("data/sim_data/volunteer_match_data.json", "w") as f:
             json.dump(volunteer_match_export, f, indent=2)
         
-        print(f"Simulation data saved to data/")
+        print(f"Simulation data saved to data/sim_data/")
         print(f"Generated {len(self.posts)} posts from {len(self.people)} people and {len(self.organizations)} organizations")
         print(f"Found {len(self.volunteer_matches)} volunteer matches")
         print(f"Detected {len([p for p in self.posts if p.safety_flags])} posts with safety flags")
