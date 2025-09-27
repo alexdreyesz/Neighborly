@@ -25,7 +25,7 @@ function SignUp() {
       setLoading(false)
       return
     }
-
+    console.log('First try to sign up')
     try {
       const { error } = await supabase.auth.signUp({
         email,
