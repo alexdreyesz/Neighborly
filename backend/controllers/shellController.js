@@ -7,7 +7,6 @@
  */
 
 const { spawn } = require('child_process');
-const { APIError } = require('../middleware/errorHandler');
 const os = require('os');
 const path = require('path');
 
@@ -86,13 +85,13 @@ const executeCommand = async (req, res) => {
   const { command, timeout = 10000, workingDirectory } = req.body;
 
   if (!command) {
-    throw new APIError('Command is required', 400);
+    throw new Error('Command is required', 400);
   }
 
   // Validate command safety
   const validation = validateCommandSafety(command);
   if (!validation.isValid) {
-    throw new APIError(`Command validation failed: ${validation.reason}`, 400);
+    throw new Error(`Command validation failed: ${validation.reason}`, 400);
   }
 
   // Set working directory (with safety checks)
@@ -208,7 +207,7 @@ const executeCommand = async (req, res) => {
     }, timeout);
 
   } catch (error) {
-    throw new APIError(`Command execution failed: ${error.message}`, 500);
+    throw new Error(`Command execution failed: ${error.message}`, 500);
   }
 };
 
@@ -262,13 +261,13 @@ const getCommandDetails = async (req, res) => {
   const commandId = parseInt(id);
 
   if (isNaN(commandId)) {
-    throw new APIError('Invalid command ID format', 400);
+    throw new Error('Invalid command ID format', 400);
   }
 
   const command = commandHistory.find(cmd => cmd.id === commandId);
   
   if (!command) {
-    throw new APIError('Command not found', 404);
+    throw new Error('Command not found', 404);
   }
 
   res.json({
@@ -284,13 +283,13 @@ const deleteCommandHistory = async (req, res) => {
   const commandId = parseInt(id);
 
   if (isNaN(commandId)) {
-    throw new APIError('Invalid command ID format', 400);
+    throw new Error('Invalid command ID format', 400);
   }
 
   const commandIndex = commandHistory.findIndex(cmd => cmd.id === commandId);
   
   if (commandIndex === -1) {
-    throw new APIError('Command not found', 404);
+    throw new Error('Command not found', 404);
   }
 
   const deletedCommand = commandHistory.splice(commandIndex, 1)[0];
@@ -342,7 +341,7 @@ const validateCommand = async (req, res) => {
   const { command } = req.body;
 
   if (!command) {
-    throw new APIError('Command is required', 400);
+    throw new Error('Command is required', 400);
   }
 
   const validation = validateCommandSafety(command);

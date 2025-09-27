@@ -15,7 +15,6 @@ const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 // Import custom middleware
-const errorHandler = require('./middleware/errorHandler');
 const requestLogger = require('./middleware/requestLogger');
 
 // Import routes
@@ -116,8 +115,6 @@ app.use('*', (req, res) => {
   });
 });
 
-// Error handling middleware - must be last
-app.use(errorHandler);
 
 // Start server
 const PORT = config.PORT || 3000;

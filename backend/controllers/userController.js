@@ -8,7 +8,6 @@
  * - Data transformation
  */
 
-const { APIError } = require('../middleware/errorHandler');
 
 // Mock data store (replace with actual database in production)
 let users = [
@@ -103,13 +102,13 @@ const getUserById = async (req, res) => {
   const userId = parseInt(id);
 
   if (isNaN(userId)) {
-    throw new APIError('Invalid user ID format', 400);
+    throw new Error('Invalid user ID format', 400);
   }
 
   const user = users.find(u => u.id === userId);
   
   if (!user) {
-    throw new APIError('User not found', 404);
+    throw new Error('User not found', 404);
   }
 
   res.json({
@@ -125,19 +124,19 @@ const createUser = async (req, res) => {
 
   // Validate required fields
   if (!name || !email) {
-    throw new APIError('Name and email are required', 400);
+    throw new Error('Name and email are required', 400);
   }
 
   // Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    throw new APIError('Invalid email format', 400);
+    throw new Error('Invalid email format', 400);
   }
 
   // Check if email already exists
   const existingUser = users.find(u => u.email.toLowerCase() === email.toLowerCase());
   if (existingUser) {
-    throw new APIError('Email already exists', 409);
+    throw new Error('Email already exists', 409);
   }
 
   // Create new user
@@ -166,26 +165,26 @@ const updateUser = async (req, res) => {
   const { name, email } = req.body;
 
   if (isNaN(userId)) {
-    throw new APIError('Invalid user ID format', 400);
+    throw new Error('Invalid user ID format', 400);
   }
 
   const userIndex = users.findIndex(u => u.id === userId);
   
   if (userIndex === -1) {
-    throw new APIError('User not found', 404);
+    throw new Error('User not found', 404);
   }
 
   // Validate email format if provided
   if (email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      throw new APIError('Invalid email format', 400);
+      throw new Error('Invalid email format', 400);
     }
 
     // Check if email already exists (excluding current user)
     const existingUser = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.id !== userId);
     if (existingUser) {
-      throw new APIError('Email already exists', 409);
+      throw new Error('Email already exists', 409);
     }
   }
 
@@ -213,13 +212,13 @@ const deleteUser = async (req, res) => {
   const userId = parseInt(id);
 
   if (isNaN(userId)) {
-    throw new APIError('Invalid user ID format', 400);
+    throw new Error('Invalid user ID format', 400);
   }
 
   const userIndex = users.findIndex(u => u.id === userId);
   
   if (userIndex === -1) {
-    throw new APIError('User not found', 404);
+    throw new Error('User not found', 404);
   }
 
   const deletedUser = users.splice(userIndex, 1)[0];
@@ -237,7 +236,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    throw new APIError('Email and password are required', 400);
+    throw new Error('Email and password are required', 400);
   }
 
   // Mock authentication - in production, you would:
@@ -247,7 +246,7 @@ const login = async (req, res) => {
   const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
   
   if (!user || password !== 'password123') { // Mock password check
-    throw new APIError('Invalid email or password', 401);
+    throw new Error('Invalid email or password', 401);
   }
 
   // Mock JWT token (in production, use jsonwebtoken library)
@@ -289,7 +288,7 @@ const getMyProfile = async (req, res) => {
   const user = users.find(u => u.id === userId);
   
   if (!user) {
-    throw new APIError('User not found', 404);
+    throw new Error('User not found', 404);
   }
 
   res.json({
@@ -307,7 +306,7 @@ const updateMyProfile = async (req, res) => {
   const userIndex = users.findIndex(u => u.id === userId);
   
   if (userIndex === -1) {
-    throw new APIError('User not found', 404);
+    throw new Error('User not found', 404);
   }
 
   const { name, email } = req.body;
@@ -316,13 +315,13 @@ const updateMyProfile = async (req, res) => {
   if (email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      throw new APIError('Invalid email format', 400);
+      throw new Error('Invalid email format', 400);
     }
 
     // Check if email already exists (excluding current user)
     const existingUser = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.id !== userId);
     if (existingUser) {
-      throw new APIError('Email already exists', 409);
+      throw new Error('Email already exists', 409);
     }
   }
 

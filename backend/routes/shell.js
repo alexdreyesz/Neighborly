@@ -8,7 +8,6 @@
 
 const express = require('express');
 const router = express.Router();
-const { catchAsync } = require('../middleware/errorHandler');
 
 // Import controllers
 const shellController = require('../controllers/shellController');
@@ -17,7 +16,7 @@ const shellController = require('../controllers/shellController');
  * GET /api/shell/commands
  * Get list of available shell commands (whitelisted safe commands)
  */
-router.get('/commands', catchAsync(shellController.getAvailableCommands));
+router.get('/commands', shellController.getAvailableCommands);
 
 /**
  * POST /api/shell/execute
@@ -33,7 +32,7 @@ router.get('/commands', catchAsync(shellController.getAvailableCommands));
  * IMPORTANT: This endpoint should be secured with authentication
  * and command validation in production!
  */
-router.post('/execute', catchAsync(shellController.executeCommand));
+router.post('/execute', shellController.executeCommand);
 
 /**
  * GET /api/shell/history
@@ -44,7 +43,7 @@ router.post('/execute', catchAsync(shellController.executeCommand));
  * - limit: Number of commands per page (default: 20)
  * - user: Filter by user ID (if authentication is implemented)
  */
-router.get('/history', catchAsync(shellController.getCommandHistory));
+router.get('/history', shellController.getCommandHistory);
 
 /**
  * GET /api/shell/history/:id
@@ -53,7 +52,7 @@ router.get('/history', catchAsync(shellController.getCommandHistory));
  * URL Parameters:
  * - id: Command execution ID
  */
-router.get('/history/:id', catchAsync(shellController.getCommandDetails));
+router.get('/history/:id', shellController.getCommandDetails);
 
 /**
  * DELETE /api/shell/history/:id
@@ -62,13 +61,13 @@ router.get('/history/:id', catchAsync(shellController.getCommandDetails));
  * URL Parameters:
  * - id: Command execution ID
  */
-router.delete('/history/:id', catchAsync(shellController.deleteCommandHistory));
+router.delete('/history/:id', shellController.deleteCommandHistory);
 
 /**
  * GET /api/shell/system-info
  * Get system information (safe system information only)
  */
-router.get('/system-info', catchAsync(shellController.getSystemInfo));
+router.get('/system-info', shellController.getSystemInfo);
 
 /**
  * POST /api/shell/validate-command
@@ -79,6 +78,6 @@ router.get('/system-info', catchAsync(shellController.getSystemInfo));
  *   "command": "ls -la"
  * }
  */
-router.post('/validate-command', catchAsync(shellController.validateCommand));
+router.post('/validate-command', shellController.validateCommand);
 
 module.exports = router;

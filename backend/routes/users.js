@@ -9,7 +9,6 @@
 
 const express = require('express');
 const router = express.Router();
-const { catchAsync } = require('../middleware/errorHandler');
 
 // Import controllers
 const userController = require('../controllers/userController');
@@ -25,7 +24,7 @@ const userController = require('../controllers/userController');
  * - sort: Sort field (default: 'createdAt')
  * - order: Sort order 'asc' or 'desc' (default: 'desc')
  */
-router.get('/', catchAsync(userController.getAllUsers));
+router.get('/', userController.getAllUsers);
 
 /**
  * GET /api/users/:id
@@ -34,7 +33,7 @@ router.get('/', catchAsync(userController.getAllUsers));
  * URL Parameters:
  * - id: User ID
  */
-router.get('/:id', catchAsync(userController.getUserById));
+router.get('/:id', userController.getUserById);
 
 /**
  * POST /api/users
@@ -47,7 +46,7 @@ router.get('/:id', catchAsync(userController.getUserById));
  *   "password": "securePassword123"
  * }
  */
-router.post('/', catchAsync(userController.createUser));
+router.post('/', userController.createUser);
 
 /**
  * PUT /api/users/:id
@@ -62,7 +61,7 @@ router.post('/', catchAsync(userController.createUser));
  *   "email": "updated@example.com"
  * }
  */
-router.put('/:id', catchAsync(userController.updateUser));
+router.put('/:id', userController.updateUser);
 
 /**
  * DELETE /api/users/:id
@@ -71,7 +70,7 @@ router.put('/:id', catchAsync(userController.updateUser));
  * URL Parameters:
  * - id: User ID
  */
-router.delete('/:id', catchAsync(userController.deleteUser));
+router.delete('/:id', userController.deleteUser);
 
 /**
  * POST /api/users/login
@@ -83,26 +82,26 @@ router.delete('/:id', catchAsync(userController.deleteUser));
  *   "password": "password123"
  * }
  */
-router.post('/login', catchAsync(userController.login));
+router.post('/login', userController.login);
 
 /**
  * POST /api/users/logout
  * User logout (if using sessions)
  */
-router.post('/logout', catchAsync(userController.logout));
+router.post('/logout', userController.logout);
 
 /**
  * GET /api/users/profile/me
  * Get current user's profile
  * Requires authentication middleware
  */
-router.get('/profile/me', catchAsync(userController.getMyProfile));
+router.get('/profile/me', userController.getMyProfile);
 
 /**
  * PUT /api/users/profile/me
  * Update current user's profile
  * Requires authentication middleware
  */
-router.put('/profile/me', catchAsync(userController.updateMyProfile));
+router.put('/profile/me', userController.updateMyProfile);
 
 module.exports = router;
