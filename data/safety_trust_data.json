@@ -1,0 +1,1522 @@
+{
+  "posts_for_safety_check": [
+    {
+      "post_id": 1,
+      "content": "Offering technology support to neighbors",
+      "user_id": 75,
+      "user_reputation": 0.4385847662655469,
+      "detected_flags": [
+        "duplicate"
+      ],
+      "is_duplicate": false,
+      "risk_level": "MEDIUM"
+    },
+    {
+      "post_id": 2,
+      "content": "Looking to help with transportation needs in the community",
+      "user_id": 95,
+      "user_reputation": 0.5071322336742444,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 3,
+      "content": "Offering pet_care support to neighbors",
+      "user_id": 84,
+      "user_reputation": 0.9387705610704468,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 4,
+      "content": "Looking to help with furniture needs in the community",
+      "user_id": 181,
+      "user_reputation": 0.7055327591711433,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 5,
+      "content": "Offering transportation support to neighbors",
+      "user_id": 149,
+      "user_reputation": 0.8361466876661605,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 6,
+      "content": "Looking to help with pet_care needs in the community",
+      "user_id": 79,
+      "user_reputation": 0.49872309186758124,
+      "detected_flags": [],
+      "is_duplicate": true,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 7,
+      "content": "Urgently need help with childcare situation",
+      "user_id": 93,
+      "user_reputation": 0.23102969190193415,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 8,
+      "content": "Can provide technology assistance to those in need Wire money immediately",
+      "user_id": 103,
+      "user_reputation": 0.7584779438366744,
+      "detected_flags": [
+        "scam"
+      ],
+      "is_duplicate": false,
+      "risk_level": "MEDIUM"
+    },
+    {
+      "post_id": 9,
+      "content": "Offering medical support to neighbors",
+      "user_id": 160,
+      "user_reputation": 0.5454576929893051,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 10,
+      "content": "Looking to help with transportation needs in the community",
+      "user_id": 185,
+      "user_reputation": 0.3059224972929291,
+      "detected_flags": [],
+      "is_duplicate": true,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 11,
+      "content": "Offering elderly_care support to neighbors",
+      "user_id": 106,
+      "user_reputation": 0.7329054938558199,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 12,
+      "content": "Offering housing support to neighbors",
+      "user_id": 53,
+      "user_reputation": 0.33639433295463966,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 13,
+      "content": "Looking to help with education needs in the community Click this link for amazing deals",
+      "user_id": 63,
+      "user_reputation": 0.839473700875418,
+      "detected_flags": [
+        "spam"
+      ],
+      "is_duplicate": false,
+      "risk_level": "MEDIUM"
+    },
+    {
+      "post_id": 14,
+      "content": "Urgently need help with housing situation",
+      "user_id": 52,
+      "user_reputation": 0.12536284175384502,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 15,
+      "content": "Looking to help with medical needs in the community",
+      "user_id": 83,
+      "user_reputation": 0.6653643034625573,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 16,
+      "content": "Urgently need help with mental_health situation",
+      "user_id": 30,
+      "user_reputation": 0.3613612972677859,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 17,
+      "content": "Urgently need help with housing situation",
+      "user_id": 99,
+      "user_reputation": 0.17527263500378276,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 18,
+      "content": "Urgently need help with education situation",
+      "user_id": 107,
+      "user_reputation": 0.8524663305211698,
+      "detected_flags": [],
+      "is_duplicate": true,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 19,
+      "content": "Urgently need help with clothing situation",
+      "user_id": 184,
+      "user_reputation": 0.32822910245242465,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 20,
+      "content": "Looking to help with employment needs in the community",
+      "user_id": 96,
+      "user_reputation": 0.3269669546628996,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 21,
+      "content": "Looking to help with emergency needs in the community Wire money immediately",
+      "user_id": 12,
+      "user_reputation": 0.10840718696805027,
+      "detected_flags": [
+        "scam"
+      ],
+      "is_duplicate": true,
+      "risk_level": "MEDIUM"
+    },
+    {
+      "post_id": 22,
+      "content": "Can provide elderly_care assistance to those in need",
+      "user_id": 52,
+      "user_reputation": 0.12536284175384502,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 23,
+      "content": "Offering elderly_care support to neighbors",
+      "user_id": 32,
+      "user_reputation": 0.24378055075743046,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 24,
+      "content": "Offering childcare support to neighbors",
+      "user_id": 111,
+      "user_reputation": 0.35430282352562004,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 25,
+      "content": "Can provide employment assistance to those in need",
+      "user_id": 55,
+      "user_reputation": 0.4507370650290502,
+      "detected_flags": [],
+      "is_duplicate": true,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 26,
+      "content": "Offering housing support to neighbors Meet me in private location",
+      "user_id": 118,
+      "user_reputation": 0.8662550575351252,
+      "detected_flags": [
+        "inappropriate"
+      ],
+      "is_duplicate": false,
+      "risk_level": "MEDIUM"
+    },
+    {
+      "post_id": 27,
+      "content": "Can provide education assistance to those in need",
+      "user_id": 191,
+      "user_reputation": 0.8494272288950138,
+      "detected_flags": [],
+      "is_duplicate": true,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 28,
+      "content": "Offering housing support to neighbors",
+      "user_id": 125,
+      "user_reputation": 0.9745734261235294,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 29,
+      "content": "Offering utilities support to neighbors",
+      "user_id": 49,
+      "user_reputation": 0.3995480443354096,
+      "detected_flags": [],
+      "is_duplicate": true,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 30,
+      "content": "Looking to help with childcare needs in the community",
+      "user_id": 162,
+      "user_reputation": 0.8762621956285063,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 31,
+      "content": "Looking to help with transportation needs in the community",
+      "user_id": 141,
+      "user_reputation": 0.9661244979145537,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 32,
+      "content": "Can provide clothing assistance to those in need",
+      "user_id": 92,
+      "user_reputation": 0.7817949584612155,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 33,
+      "content": "Can provide food assistance to those in need",
+      "user_id": 142,
+      "user_reputation": 0.7979635027981647,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    },
+    {
+      "post_id": 34,
+      "content": "Urgently need help with medical situation",
+      "user_id": 53,
+      "user_reputation": 0.33639433295463966,
+      "detected_flags": [],
+      "is_duplicate": false,
+      "risk_level": "LOW"
+    }
+  ],
+  "user_safety_scores": [
+    {
+      "user_id": 1,
+      "reputation": 0.48438564604597645,
+      "safety_score": 0.7731102989615228,
+      "posts_created": 0
+    },
+    {
+      "user_id": 2,
+      "reputation": 0.5703763278205707,
+      "safety_score": 0.9569663478797129,
+      "posts_created": 0
+    },
+    {
+      "user_id": 3,
+      "reputation": 0.37061073515168763,
+      "safety_score": 0.9734649132563853,
+      "posts_created": 0
+    },
+    {
+      "user_id": 4,
+      "reputation": 0.9007307991833584,
+      "safety_score": 0.7401529102783253,
+      "posts_created": 0
+    },
+    {
+      "user_id": 5,
+      "reputation": 0.9447129698278633,
+      "safety_score": 0.5773602627534984,
+      "posts_created": 0
+    },
+    {
+      "user_id": 6,
+      "reputation": 0.12121282671796996,
+      "safety_score": 0.6405939101985212,
+      "posts_created": 0
+    },
+    {
+      "user_id": 7,
+      "reputation": 0.2734190291835787,
+      "safety_score": 0.6993360152600265,
+      "posts_created": 0
+    },
+    {
+      "user_id": 8,
+      "reputation": 0.7690573070621266,
+      "safety_score": 0.728669994099445,
+      "posts_created": 0
+    },
+    {
+      "user_id": 9,
+      "reputation": 0.6244943250104937,
+      "safety_score": 0.5894800930446247,
+      "posts_created": 0
+    },
+    {
+      "user_id": 10,
+      "reputation": 0.24937069601807513,
+      "safety_score": 0.6325482600446372,
+      "posts_created": 0
+    },
+    {
+      "user_id": 11,
+      "reputation": 0.9598260555858602,
+      "safety_score": 0.5751788945481894,
+      "posts_created": 0
+    },
+    {
+      "user_id": 12,
+      "reputation": 0.10840718696805027,
+      "safety_score": 0.5492915664791547,
+      "posts_created": 1
+    },
+    {
+      "user_id": 13,
+      "reputation": 0.546411561808846,
+      "safety_score": 0.5208753749027859,
+      "posts_created": 0
+    },
+    {
+      "user_id": 14,
+      "reputation": 0.40732620731833236,
+      "safety_score": 0.9250185169480611,
+      "posts_created": 0
+    },
+    {
+      "user_id": 15,
+      "reputation": 0.3095503587580437,
+      "safety_score": 0.7267513396981038,
+      "posts_created": 0
+    },
+    {
+      "user_id": 16,
+      "reputation": 0.7843462274841209,
+      "safety_score": 0.5827809807205464,
+      "posts_created": 0
+    },
+    {
+      "user_id": 17,
+      "reputation": 0.7199072501647065,
+      "safety_score": 0.7535847727277961,
+      "posts_created": 0
+    },
+    {
+      "user_id": 18,
+      "reputation": 0.7624489726789688,
+      "safety_score": 0.5774206212778876,
+      "posts_created": 0
+    },
+    {
+      "user_id": 19,
+      "reputation": 0.5094228026986523,
+      "safety_score": 0.9344971807260706,
+      "posts_created": 0
+    },
+    {
+      "user_id": 20,
+      "reputation": 0.7603377956761357,
+      "safety_score": 0.8066680705367844,
+      "posts_created": 0
+    },
+    {
+      "user_id": 21,
+      "reputation": 0.4482769808000576,
+      "safety_score": 0.524546135709731,
+      "posts_created": 0
+    },
+    {
+      "user_id": 22,
+      "reputation": 0.8398671390971969,
+      "safety_score": 0.7356311266871994,
+      "posts_created": 0
+    },
+    {
+      "user_id": 23,
+      "reputation": 0.12303946351424544,
+      "safety_score": 0.8769439715281808,
+      "posts_created": 0
+    },
+    {
+      "user_id": 24,
+      "reputation": 0.6478518648371744,
+      "safety_score": 0.6228172491104346,
+      "posts_created": 0
+    },
+    {
+      "user_id": 25,
+      "reputation": 0.29493343877419126,
+      "safety_score": 0.6376733561450161,
+      "posts_created": 0
+    },
+    {
+      "user_id": 26,
+      "reputation": 0.9620337183931588,
+      "safety_score": 0.8389620059614891,
+      "posts_created": 0
+    },
+    {
+      "user_id": 27,
+      "reputation": 0.35915958474609466,
+      "safety_score": 0.6672787471772978,
+      "posts_created": 0
+    },
+    {
+      "user_id": 28,
+      "reputation": 0.8508034902940017,
+      "safety_score": 0.7435034274308332,
+      "posts_created": 0
+    },
+    {
+      "user_id": 29,
+      "reputation": 0.14211236626808027,
+      "safety_score": 0.9967096292300168,
+      "posts_created": 0
+    },
+    {
+      "user_id": 30,
+      "reputation": 0.3613612972677859,
+      "safety_score": 0.5995733217006965,
+      "posts_created": 1
+    },
+    {
+      "user_id": 31,
+      "reputation": 0.467961726490676,
+      "safety_score": 0.6245456255300545,
+      "posts_created": 0
+    },
+    {
+      "user_id": 32,
+      "reputation": 0.24378055075743046,
+      "safety_score": 0.770031926508767,
+      "posts_created": 1
+    },
+    {
+      "user_id": 33,
+      "reputation": 0.5753975591338221,
+      "safety_score": 0.5027475680909885,
+      "posts_created": 0
+    },
+    {
+      "user_id": 34,
+      "reputation": 0.4968652967497347,
+      "safety_score": 0.8058260336229035,
+      "posts_created": 0
+    },
+    {
+      "user_id": 35,
+      "reputation": 0.7743130243975044,
+      "safety_score": 0.5576067687626707,
+      "posts_created": 0
+    },
+    {
+      "user_id": 36,
+      "reputation": 0.3005112783208507,
+      "safety_score": 0.7837923344714255,
+      "posts_created": 0
+    },
+    {
+      "user_id": 37,
+      "reputation": 0.8009922560312713,
+      "safety_score": 0.753043910430105,
+      "posts_created": 0
+    },
+    {
+      "user_id": 38,
+      "reputation": 0.42875456856217087,
+      "safety_score": 0.5150915178428936,
+      "posts_created": 0
+    },
+    {
+      "user_id": 39,
+      "reputation": 0.20167023267889356,
+      "safety_score": 0.6191842212478869,
+      "posts_created": 0
+    },
+    {
+      "user_id": 40,
+      "reputation": 0.13163664739839973,
+      "safety_score": 0.5690757002481,
+      "posts_created": 0
+    },
+    {
+      "user_id": 41,
+      "reputation": 0.8574030637419636,
+      "safety_score": 0.7236585647297329,
+      "posts_created": 0
+    },
+    {
+      "user_id": 42,
+      "reputation": 0.928293333799568,
+      "safety_score": 0.5525849784224122,
+      "posts_created": 0
+    },
+    {
+      "user_id": 43,
+      "reputation": 0.19964802876193377,
+      "safety_score": 0.7205078893037113,
+      "posts_created": 0
+    },
+    {
+      "user_id": 44,
+      "reputation": 0.21278290806147127,
+      "safety_score": 0.9305558295740393,
+      "posts_created": 0
+    },
+    {
+      "user_id": 45,
+      "reputation": 0.21437811442978566,
+      "safety_score": 0.5477324030600825,
+      "posts_created": 0
+    },
+    {
+      "user_id": 46,
+      "reputation": 0.5461770898525763,
+      "safety_score": 0.7616873622320859,
+      "posts_created": 0
+    },
+    {
+      "user_id": 47,
+      "reputation": 0.23714772383052352,
+      "safety_score": 0.7993626583360415,
+      "posts_created": 0
+    },
+    {
+      "user_id": 48,
+      "reputation": 0.4517860504015566,
+      "safety_score": 0.8619363909855162,
+      "posts_created": 0
+    },
+    {
+      "user_id": 49,
+      "reputation": 0.3995480443354096,
+      "safety_score": 0.7982936973611847,
+      "posts_created": 1
+    },
+    {
+      "user_id": 50,
+      "reputation": 0.7452811428352684,
+      "safety_score": 0.6907304251132355,
+      "posts_created": 0
+    },
+    {
+      "user_id": 51,
+      "reputation": 0.28397885801255257,
+      "safety_score": 0.6212267145019231,
+      "posts_created": 0
+    },
+    {
+      "user_id": 52,
+      "reputation": 0.12536284175384502,
+      "safety_score": 0.6454859449328257,
+      "posts_created": 2
+    },
+    {
+      "user_id": 53,
+      "reputation": 0.33639433295463966,
+      "safety_score": 0.5252574771653312,
+      "posts_created": 2
+    },
+    {
+      "user_id": 54,
+      "reputation": 0.896523746624961,
+      "safety_score": 0.8991318249089579,
+      "posts_created": 0
+    },
+    {
+      "user_id": 55,
+      "reputation": 0.4507370650290502,
+      "safety_score": 0.7383979989522547,
+      "posts_created": 1
+    },
+    {
+      "user_id": 56,
+      "reputation": 0.5479874194160933,
+      "safety_score": 0.6072350930290382,
+      "posts_created": 0
+    },
+    {
+      "user_id": 57,
+      "reputation": 0.7655215588040652,
+      "safety_score": 0.9075224202326484,
+      "posts_created": 0
+    },
+    {
+      "user_id": 58,
+      "reputation": 0.9972969353010118,
+      "safety_score": 0.8399498460864305,
+      "posts_created": 0
+    },
+    {
+      "user_id": 59,
+      "reputation": 0.7360315483177762,
+      "safety_score": 0.7001711020559629,
+      "posts_created": 0
+    },
+    {
+      "user_id": 60,
+      "reputation": 0.15135139966257122,
+      "safety_score": 0.5818376547701114,
+      "posts_created": 0
+    },
+    {
+      "user_id": 61,
+      "reputation": 0.6813913193717692,
+      "safety_score": 0.7669486287966238,
+      "posts_created": 0
+    },
+    {
+      "user_id": 62,
+      "reputation": 0.15639552451795224,
+      "safety_score": 0.8269701759284018,
+      "posts_created": 0
+    },
+    {
+      "user_id": 63,
+      "reputation": 0.839473700875418,
+      "safety_score": 0.9191739672416465,
+      "posts_created": 1
+    },
+    {
+      "user_id": 64,
+      "reputation": 0.49138154502229203,
+      "safety_score": 0.9370274637253198,
+      "posts_created": 0
+    },
+    {
+      "user_id": 65,
+      "reputation": 0.8689314431474244,
+      "safety_score": 0.7211387372233276,
+      "posts_created": 0
+    },
+    {
+      "user_id": 66,
+      "reputation": 0.9064601484327363,
+      "safety_score": 0.98269634662531,
+      "posts_created": 0
+    },
+    {
+      "user_id": 67,
+      "reputation": 0.22761530348650974,
+      "safety_score": 0.8293159893805955,
+      "posts_created": 0
+    },
+    {
+      "user_id": 68,
+      "reputation": 0.2401644123824001,
+      "safety_score": 0.7436284022510402,
+      "posts_created": 0
+    },
+    {
+      "user_id": 69,
+      "reputation": 0.6308440640019037,
+      "safety_score": 0.6248117336597436,
+      "posts_created": 0
+    },
+    {
+      "user_id": 70,
+      "reputation": 0.2563350299867473,
+      "safety_score": 0.917154221796443,
+      "posts_created": 0
+    },
+    {
+      "user_id": 71,
+      "reputation": 0.2791038064536441,
+      "safety_score": 0.8159987700470145,
+      "posts_created": 0
+    },
+    {
+      "user_id": 72,
+      "reputation": 0.47074027056583634,
+      "safety_score": 0.7490559092538375,
+      "posts_created": 0
+    },
+    {
+      "user_id": 73,
+      "reputation": 0.5233777967232461,
+      "safety_score": 0.5728895608062401,
+      "posts_created": 0
+    },
+    {
+      "user_id": 74,
+      "reputation": 0.6487058084359867,
+      "safety_score": 0.7722824033346765,
+      "posts_created": 0
+    },
+    {
+      "user_id": 75,
+      "reputation": 0.4385847662655469,
+      "safety_score": 0.5173551190741177,
+      "posts_created": 1
+    },
+    {
+      "user_id": 76,
+      "reputation": 0.5194477439588503,
+      "safety_score": 0.7458194649636435,
+      "posts_created": 0
+    },
+    {
+      "user_id": 77,
+      "reputation": 0.40449156263212593,
+      "safety_score": 0.9258353580541985,
+      "posts_created": 0
+    },
+    {
+      "user_id": 78,
+      "reputation": 0.7049028805625214,
+      "safety_score": 0.925350835181256,
+      "posts_created": 0
+    },
+    {
+      "user_id": 79,
+      "reputation": 0.49872309186758124,
+      "safety_score": 0.9309742145507086,
+      "posts_created": 1
+    },
+    {
+      "user_id": 80,
+      "reputation": 0.8632738010140397,
+      "safety_score": 0.8494175083841506,
+      "posts_created": 0
+    },
+    {
+      "user_id": 81,
+      "reputation": 0.5727712219366338,
+      "safety_score": 0.9607464792339078,
+      "posts_created": 0
+    },
+    {
+      "user_id": 82,
+      "reputation": 0.5000002055971471,
+      "safety_score": 0.6878522448900091,
+      "posts_created": 0
+    },
+    {
+      "user_id": 83,
+      "reputation": 0.6653643034625573,
+      "safety_score": 0.8852463310494639,
+      "posts_created": 1
+    },
+    {
+      "user_id": 84,
+      "reputation": 0.9387705610704468,
+      "safety_score": 0.5588671385297668,
+      "posts_created": 1
+    },
+    {
+      "user_id": 85,
+      "reputation": 0.46822111779463516,
+      "safety_score": 0.7812698890657013,
+      "posts_created": 0
+    },
+    {
+      "user_id": 86,
+      "reputation": 0.7008384771237842,
+      "safety_score": 0.7728870812498252,
+      "posts_created": 0
+    },
+    {
+      "user_id": 87,
+      "reputation": 0.19996826908642498,
+      "safety_score": 0.6885596808629659,
+      "posts_created": 0
+    },
+    {
+      "user_id": 88,
+      "reputation": 0.6584896137701662,
+      "safety_score": 0.640193116075567,
+      "posts_created": 0
+    },
+    {
+      "user_id": 89,
+      "reputation": 0.6832334338339437,
+      "safety_score": 0.871665530600092,
+      "posts_created": 0
+    },
+    {
+      "user_id": 90,
+      "reputation": 0.9224948672619607,
+      "safety_score": 0.6105172305162934,
+      "posts_created": 0
+    },
+    {
+      "user_id": 91,
+      "reputation": 0.28693554847142744,
+      "safety_score": 0.8719328472532479,
+      "posts_created": 0
+    },
+    {
+      "user_id": 92,
+      "reputation": 0.7817949584612155,
+      "safety_score": 0.977402318885017,
+      "posts_created": 1
+    },
+    {
+      "user_id": 93,
+      "reputation": 0.23102969190193415,
+      "safety_score": 0.5512871594126236,
+      "posts_created": 1
+    },
+    {
+      "user_id": 94,
+      "reputation": 0.7070576536998221,
+      "safety_score": 0.7541852496453627,
+      "posts_created": 0
+    },
+    {
+      "user_id": 95,
+      "reputation": 0.5071322336742444,
+      "safety_score": 0.9513663413295208,
+      "posts_created": 1
+    },
+    {
+      "user_id": 96,
+      "reputation": 0.3269669546628996,
+      "safety_score": 0.9120055132329934,
+      "posts_created": 1
+    },
+    {
+      "user_id": 97,
+      "reputation": 0.11410844794068095,
+      "safety_score": 0.8993038872885222,
+      "posts_created": 0
+    },
+    {
+      "user_id": 98,
+      "reputation": 0.2662626907900534,
+      "safety_score": 0.6177526959035158,
+      "posts_created": 0
+    },
+    {
+      "user_id": 99,
+      "reputation": 0.17527263500378276,
+      "safety_score": 0.7152173274804573,
+      "posts_created": 1
+    },
+    {
+      "user_id": 100,
+      "reputation": 0.5170162184843461,
+      "safety_score": 0.7750188878916897,
+      "posts_created": 0
+    },
+    {
+      "user_id": 101,
+      "reputation": 0.7028711372756145,
+      "safety_score": 0.851148203622287,
+      "posts_created": 0
+    },
+    {
+      "user_id": 102,
+      "reputation": 0.5020051149336824,
+      "safety_score": 0.9213075078463091,
+      "posts_created": 0
+    },
+    {
+      "user_id": 103,
+      "reputation": 0.7584779438366744,
+      "safety_score": 0.6288760237284797,
+      "posts_created": 1
+    },
+    {
+      "user_id": 104,
+      "reputation": 0.5580412278694766,
+      "safety_score": 0.7772848386083324,
+      "posts_created": 0
+    },
+    {
+      "user_id": 105,
+      "reputation": 0.9528494304934476,
+      "safety_score": 0.9316360173087793,
+      "posts_created": 0
+    },
+    {
+      "user_id": 106,
+      "reputation": 0.7329054938558199,
+      "safety_score": 0.782815038185645,
+      "posts_created": 1
+    },
+    {
+      "user_id": 107,
+      "reputation": 0.8524663305211698,
+      "safety_score": 0.675209995775742,
+      "posts_created": 1
+    },
+    {
+      "user_id": 108,
+      "reputation": 0.7267942519184646,
+      "safety_score": 0.6819646058043017,
+      "posts_created": 0
+    },
+    {
+      "user_id": 109,
+      "reputation": 0.30154110104370613,
+      "safety_score": 0.8048929717934781,
+      "posts_created": 0
+    },
+    {
+      "user_id": 110,
+      "reputation": 0.49428291743260655,
+      "safety_score": 0.9734755979598801,
+      "posts_created": 0
+    },
+    {
+      "user_id": 111,
+      "reputation": 0.35430282352562004,
+      "safety_score": 0.7395482410888733,
+      "posts_created": 1
+    },
+    {
+      "user_id": 112,
+      "reputation": 0.7110070853802338,
+      "safety_score": 0.8249671760232877,
+      "posts_created": 0
+    },
+    {
+      "user_id": 113,
+      "reputation": 0.24423853541304968,
+      "safety_score": 0.5922288980731814,
+      "posts_created": 0
+    },
+    {
+      "user_id": 114,
+      "reputation": 0.11977163093840455,
+      "safety_score": 0.5976908846835316,
+      "posts_created": 0
+    },
+    {
+      "user_id": 115,
+      "reputation": 0.7824093704850897,
+      "safety_score": 0.7424114213638167,
+      "posts_created": 0
+    },
+    {
+      "user_id": 116,
+      "reputation": 0.45231353424293397,
+      "safety_score": 0.5015070101743382,
+      "posts_created": 0
+    },
+    {
+      "user_id": 117,
+      "reputation": 0.8156206846664488,
+      "safety_score": 0.9564220763135256,
+      "posts_created": 0
+    },
+    {
+      "user_id": 118,
+      "reputation": 0.8662550575351252,
+      "safety_score": 0.9411179476620515,
+      "posts_created": 1
+    },
+    {
+      "user_id": 119,
+      "reputation": 0.9398145092483595,
+      "safety_score": 0.8473418136513202,
+      "posts_created": 0
+    },
+    {
+      "user_id": 120,
+      "reputation": 0.6931426951173622,
+      "safety_score": 0.6417299132702808,
+      "posts_created": 0
+    },
+    {
+      "user_id": 121,
+      "reputation": 0.5360620014086347,
+      "safety_score": 0.9757869361944149,
+      "posts_created": 0
+    },
+    {
+      "user_id": 122,
+      "reputation": 0.6181080390962008,
+      "safety_score": 0.8879538120526138,
+      "posts_created": 0
+    },
+    {
+      "user_id": 123,
+      "reputation": 0.8690288140255961,
+      "safety_score": 0.7504640477208031,
+      "posts_created": 0
+    },
+    {
+      "user_id": 124,
+      "reputation": 0.433049105255348,
+      "safety_score": 0.7699870994648413,
+      "posts_created": 0
+    },
+    {
+      "user_id": 125,
+      "reputation": 0.9745734261235294,
+      "safety_score": 0.833851863758818,
+      "posts_created": 1
+    },
+    {
+      "user_id": 126,
+      "reputation": 0.8148162358088441,
+      "safety_score": 0.6097702669123835,
+      "posts_created": 0
+    },
+    {
+      "user_id": 127,
+      "reputation": 0.9945672930100653,
+      "safety_score": 0.9616259285605926,
+      "posts_created": 0
+    },
+    {
+      "user_id": 128,
+      "reputation": 0.1024837208388375,
+      "safety_score": 0.9965698207145851,
+      "posts_created": 0
+    },
+    {
+      "user_id": 129,
+      "reputation": 0.8179947093286414,
+      "safety_score": 0.630087252630273,
+      "posts_created": 0
+    },
+    {
+      "user_id": 130,
+      "reputation": 0.17553258878702854,
+      "safety_score": 0.5791939150155458,
+      "posts_created": 0
+    },
+    {
+      "user_id": 131,
+      "reputation": 0.14193227263057834,
+      "safety_score": 0.8827686415445989,
+      "posts_created": 0
+    },
+    {
+      "user_id": 132,
+      "reputation": 0.9590701356013178,
+      "safety_score": 0.5563667133077472,
+      "posts_created": 0
+    },
+    {
+      "user_id": 133,
+      "reputation": 0.7396931038462852,
+      "safety_score": 0.9582234442845379,
+      "posts_created": 0
+    },
+    {
+      "user_id": 134,
+      "reputation": 0.8211181255190332,
+      "safety_score": 0.9744511221425819,
+      "posts_created": 0
+    },
+    {
+      "user_id": 135,
+      "reputation": 0.9605727891742746,
+      "safety_score": 0.5647222921467037,
+      "posts_created": 0
+    },
+    {
+      "user_id": 136,
+      "reputation": 0.4090658519512066,
+      "safety_score": 0.7869871734718183,
+      "posts_created": 0
+    },
+    {
+      "user_id": 137,
+      "reputation": 0.8085836934563929,
+      "safety_score": 0.9791836338144129,
+      "posts_created": 0
+    },
+    {
+      "user_id": 138,
+      "reputation": 0.42001666887391687,
+      "safety_score": 0.7954863318922298,
+      "posts_created": 0
+    },
+    {
+      "user_id": 139,
+      "reputation": 0.7862722689669916,
+      "safety_score": 0.6053963532532461,
+      "posts_created": 0
+    },
+    {
+      "user_id": 140,
+      "reputation": 0.48173458910386147,
+      "safety_score": 0.6660764367858945,
+      "posts_created": 0
+    },
+    {
+      "user_id": 141,
+      "reputation": 0.9661244979145537,
+      "safety_score": 0.6955635880589789,
+      "posts_created": 1
+    },
+    {
+      "user_id": 142,
+      "reputation": 0.7979635027981647,
+      "safety_score": 0.528563940512383,
+      "posts_created": 1
+    },
+    {
+      "user_id": 143,
+      "reputation": 0.16830584737772852,
+      "safety_score": 0.9255022143841803,
+      "posts_created": 0
+    },
+    {
+      "user_id": 144,
+      "reputation": 0.1574693418986191,
+      "safety_score": 0.721655502694931,
+      "posts_created": 0
+    },
+    {
+      "user_id": 145,
+      "reputation": 0.4768741081028953,
+      "safety_score": 0.5581784518402806,
+      "posts_created": 0
+    },
+    {
+      "user_id": 146,
+      "reputation": 0.23207707174235354,
+      "safety_score": 0.6826173994905016,
+      "posts_created": 0
+    },
+    {
+      "user_id": 147,
+      "reputation": 0.6624819659147982,
+      "safety_score": 0.5142805900697274,
+      "posts_created": 0
+    },
+    {
+      "user_id": 148,
+      "reputation": 0.41730654418890534,
+      "safety_score": 0.793186987314058,
+      "posts_created": 0
+    },
+    {
+      "user_id": 149,
+      "reputation": 0.8361466876661605,
+      "safety_score": 0.9614044053511687,
+      "posts_created": 1
+    },
+    {
+      "user_id": 150,
+      "reputation": 0.3039910446682359,
+      "safety_score": 0.7583376053628457,
+      "posts_created": 0
+    },
+    {
+      "user_id": 151,
+      "reputation": 0.6123138086858245,
+      "safety_score": 0.985064397003117,
+      "posts_created": 0
+    },
+    {
+      "user_id": 152,
+      "reputation": 0.3707807574781107,
+      "safety_score": 0.9851774039091084,
+      "posts_created": 0
+    },
+    {
+      "user_id": 153,
+      "reputation": 0.4547092863359976,
+      "safety_score": 0.5415543586272846,
+      "posts_created": 0
+    },
+    {
+      "user_id": 154,
+      "reputation": 0.5919779836159832,
+      "safety_score": 0.6473221209995248,
+      "posts_created": 0
+    },
+    {
+      "user_id": 155,
+      "reputation": 0.492560626995024,
+      "safety_score": 0.9536636008231061,
+      "posts_created": 0
+    },
+    {
+      "user_id": 156,
+      "reputation": 0.9897822499857801,
+      "safety_score": 0.9971674429719393,
+      "posts_created": 0
+    },
+    {
+      "user_id": 157,
+      "reputation": 0.7992077013365804,
+      "safety_score": 0.7468538030595875,
+      "posts_created": 0
+    },
+    {
+      "user_id": 158,
+      "reputation": 0.6501713936129433,
+      "safety_score": 0.9228683455193296,
+      "posts_created": 0
+    },
+    {
+      "user_id": 159,
+      "reputation": 0.8652073847245845,
+      "safety_score": 0.9127561482977402,
+      "posts_created": 0
+    },
+    {
+      "user_id": 160,
+      "reputation": 0.5454576929893051,
+      "safety_score": 0.839357583460173,
+      "posts_created": 1
+    },
+    {
+      "user_id": 161,
+      "reputation": 0.16312095309787716,
+      "safety_score": 0.9367787883766987,
+      "posts_created": 0
+    },
+    {
+      "user_id": 162,
+      "reputation": 0.8762621956285063,
+      "safety_score": 0.53527833115546,
+      "posts_created": 1
+    },
+    {
+      "user_id": 163,
+      "reputation": 0.7359888922166284,
+      "safety_score": 0.9517660595992223,
+      "posts_created": 0
+    },
+    {
+      "user_id": 164,
+      "reputation": 0.4734641920713544,
+      "safety_score": 0.6287862242274125,
+      "posts_created": 0
+    },
+    {
+      "user_id": 165,
+      "reputation": 0.6809820527066455,
+      "safety_score": 0.8507208177791765,
+      "posts_created": 0
+    },
+    {
+      "user_id": 166,
+      "reputation": 0.6049796396311867,
+      "safety_score": 0.6526102972513101,
+      "posts_created": 0
+    },
+    {
+      "user_id": 167,
+      "reputation": 0.7684593933502613,
+      "safety_score": 0.6037261036042214,
+      "posts_created": 0
+    },
+    {
+      "user_id": 168,
+      "reputation": 0.4689315168941982,
+      "safety_score": 0.8109113554906953,
+      "posts_created": 0
+    },
+    {
+      "user_id": 169,
+      "reputation": 0.8824073365167512,
+      "safety_score": 0.6856141718308855,
+      "posts_created": 0
+    },
+    {
+      "user_id": 170,
+      "reputation": 0.21030266441472034,
+      "safety_score": 0.7829584603440811,
+      "posts_created": 0
+    },
+    {
+      "user_id": 171,
+      "reputation": 0.29517638043351635,
+      "safety_score": 0.8202145506792928,
+      "posts_created": 0
+    },
+    {
+      "user_id": 172,
+      "reputation": 0.5985778853854236,
+      "safety_score": 0.669829024003749,
+      "posts_created": 0
+    },
+    {
+      "user_id": 173,
+      "reputation": 0.783660509452362,
+      "safety_score": 0.7839289431105476,
+      "posts_created": 0
+    },
+    {
+      "user_id": 174,
+      "reputation": 0.4159712616165573,
+      "safety_score": 0.5906218477890137,
+      "posts_created": 0
+    },
+    {
+      "user_id": 175,
+      "reputation": 0.8256888861754156,
+      "safety_score": 0.5520722177643239,
+      "posts_created": 0
+    },
+    {
+      "user_id": 176,
+      "reputation": 0.3788680182148353,
+      "safety_score": 0.6581643378271891,
+      "posts_created": 0
+    },
+    {
+      "user_id": 177,
+      "reputation": 0.29703724774531093,
+      "safety_score": 0.6095798234948491,
+      "posts_created": 0
+    },
+    {
+      "user_id": 178,
+      "reputation": 0.5500721227759352,
+      "safety_score": 0.5537680339058411,
+      "posts_created": 0
+    },
+    {
+      "user_id": 179,
+      "reputation": 0.888185997850418,
+      "safety_score": 0.5950820774000096,
+      "posts_created": 0
+    },
+    {
+      "user_id": 180,
+      "reputation": 0.40397865849497683,
+      "safety_score": 0.81939737193902,
+      "posts_created": 0
+    },
+    {
+      "user_id": 181,
+      "reputation": 0.7055327591711433,
+      "safety_score": 0.79165949463715,
+      "posts_created": 1
+    },
+    {
+      "user_id": 182,
+      "reputation": 0.4022220699996105,
+      "safety_score": 0.9548359188572726,
+      "posts_created": 0
+    },
+    {
+      "user_id": 183,
+      "reputation": 0.15282545020271557,
+      "safety_score": 0.8188017946929058,
+      "posts_created": 0
+    },
+    {
+      "user_id": 184,
+      "reputation": 0.32822910245242465,
+      "safety_score": 0.7207531525633248,
+      "posts_created": 1
+    },
+    {
+      "user_id": 185,
+      "reputation": 0.3059224972929291,
+      "safety_score": 0.8120848401908516,
+      "posts_created": 1
+    },
+    {
+      "user_id": 186,
+      "reputation": 0.372308885502839,
+      "safety_score": 0.9342360588863464,
+      "posts_created": 0
+    },
+    {
+      "user_id": 187,
+      "reputation": 0.6683416607382425,
+      "safety_score": 0.9960284769443086,
+      "posts_created": 0
+    },
+    {
+      "user_id": 188,
+      "reputation": 0.5055717472190394,
+      "safety_score": 0.9683725676918751,
+      "posts_created": 0
+    },
+    {
+      "user_id": 189,
+      "reputation": 0.4515876501870696,
+      "safety_score": 0.9687971347059527,
+      "posts_created": 0
+    },
+    {
+      "user_id": 190,
+      "reputation": 0.3861918394523344,
+      "safety_score": 0.7368893965335788,
+      "posts_created": 0
+    },
+    {
+      "user_id": 191,
+      "reputation": 0.8494272288950138,
+      "safety_score": 0.6732218737614533,
+      "posts_created": 1
+    },
+    {
+      "user_id": 192,
+      "reputation": 0.5376595367887965,
+      "safety_score": 0.725958657826534,
+      "posts_created": 0
+    },
+    {
+      "user_id": 193,
+      "reputation": 0.5182734849782626,
+      "safety_score": 0.5913717108459358,
+      "posts_created": 0
+    },
+    {
+      "user_id": 194,
+      "reputation": 0.244831183633772,
+      "safety_score": 0.7084672860717638,
+      "posts_created": 0
+    },
+    {
+      "user_id": 195,
+      "reputation": 0.9448968910341945,
+      "safety_score": 0.8719667583132511,
+      "posts_created": 0
+    },
+    {
+      "user_id": 196,
+      "reputation": 0.2622019901847184,
+      "safety_score": 0.7231283392076133,
+      "posts_created": 0
+    },
+    {
+      "user_id": 197,
+      "reputation": 0.260562928547041,
+      "safety_score": 0.6082079943754574,
+      "posts_created": 0
+    },
+    {
+      "user_id": 198,
+      "reputation": 0.5495822258922882,
+      "safety_score": 0.7756863107501386,
+      "posts_created": 0
+    },
+    {
+      "user_id": 199,
+      "reputation": 0.9793895547633977,
+      "safety_score": 0.8137395290267562,
+      "posts_created": 0
+    },
+    {
+      "user_id": 200,
+      "reputation": 0.7839217222374689,
+      "safety_score": 0.8735778577747519,
+      "posts_created": 0
+    }
+  ]
+}
