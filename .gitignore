@@ -1,1 +1,40 @@
 .venv
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+jspm_packages/
+
+# Build output
+dist/
+build/
+.next/
+out/
+coverage/
+
+# Vite
+.vite/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+
+# IDEs and editors
+.idea/
+.vscode/
+.history/
+
+# Misc
+*.sublime-workspace
+*.sublime-project
