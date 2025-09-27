@@ -1,12 +1,13 @@
 
 
-export default function Navbar() {
+export default function Header() {
     return (
         <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <div className="flex items-center">
+
                         <div className="flex-shrink-0">
                             <h1 className="text-2xl font-bold text-red-500">Neighborly</h1>
                         </div>
@@ -26,6 +27,7 @@ export default function Navbar() {
                                 placeholder="Search events"
                                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-l-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-red-500 focus:border-red-500 text-sm"
                             />
+
                         </div>
                         
                         {/* Location Input */}
@@ -50,6 +52,7 @@ export default function Navbar() {
                         <div className="hidden md:flex items-center space-x-1">
                             <svg className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-3a5 5 0 00-10 0v3m11 1V9a4 4 0 00-8 0v8a4 4 0 008 0z" />
+
                             </svg>
                             <span className="text-sm text-gray-600">English</span>
                         </div>
@@ -64,6 +67,6 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
-        </nav>  
+        </nav>
     );
 }

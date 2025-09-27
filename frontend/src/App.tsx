@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Landing, UserProfile, Onboarding  } from "./pages"
 import PagesURL from "./router/routes"
 
+
 function App() {
 
   return (
