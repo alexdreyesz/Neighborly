@@ -1,4 +1,4 @@
-.venv
+<<<<<<< HEAD
 # Node modules
 node_modules/
 
@@ -38,3 +38,7 @@ Thumbs.db
 # Misc
 *.sublime-workspace
 *.sublime-project
+=======
+.venv
+.env
+>>>>>>> a7ca916 (added sim data and adk agents)
