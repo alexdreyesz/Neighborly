@@ -9,6 +9,7 @@ function Login() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
+  const navigate = useNavigate()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -25,6 +26,7 @@ function Login() {
         setMessage(error.message)
       } else {
         setMessage('Login successful!')
+        navigate('/')
         navigate(PagesURL.UserProfile)
       }
     } catch {

@@ -5,6 +5,7 @@ import TopNeeds from '../../components/TopNeeds/TopNeeds.tsx'
 import MapView from '../../components/MapView'
 import EventsFeed from '../../components/EventsFeed'
 import PagesURL from '../../router/routes'
+import { useAuth } from '../../contexts/AuthContext'
 
 import communityArt from '../../assets/art/community.png'
 import sustainability from '../../assets/art/sustainability.png'

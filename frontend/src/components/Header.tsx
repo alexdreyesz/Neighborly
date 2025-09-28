@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import PagesURL from '../router/routes'
 import { useState } from 'react'
+import { useAuth } from '../contexts/AuthContext'
 
 import logo from '../assets/icons/logo.png'
 import logoText from '../assets/icons/logo-text-black.png'
@@ -8,6 +9,7 @@ import logoText from '../assets/icons/logo-text-black.png'
 export default function Header() {
     const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false)
     const [selectedLanguage, setSelectedLanguage] = useState('English')
+    const { user, signOut } = useAuth()
 
     const languages = [
         { code: 'en', name: 'English', selected: true },
@@ -101,17 +103,36 @@ export default function Header() {
                             <span className="font-medium text-black">{selectedLanguage}</span>
                         </button>
                         
-                        <Link to={PagesURL.Login}>
-                            <button className=" text-black hover:bg-gray-200 px-6 py-2 rounded-lg text-sm font-medium">
-                                Log In
-                            </button>
-                        </Link>
+                        {user ? (
+                            <div className="flex items-center space-x-3">
+                                <Link to={PagesURL.UserProfile}>
+                                    <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-400 transition-colors">
+                                        <span className="text-sm font-medium text-gray-700">
+                                            {user.email?.charAt(0).toUpperCase()}
+                                        </span>
+                                    </div>
+                                </Link>
+                                <button 
+                                    onClick={signOut}
+                                    className="text-black hover:bg-gray-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                <Link to={PagesURL.Login}>
+                                    <button className=" text-black hover:bg-gray-200 px-6 py-2 rounded-lg text-sm font-medium">
+                                        Log In
+                                    </button>
+                                </Link>
 
                         <Link to={PagesURL.Onboarding}>
                             <button className="primary-bg text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
                                 Sign Up
                             </button>
                         </Link>
+
                     </div>
 
                     {/* Language Selection Modal */}
