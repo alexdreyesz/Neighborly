@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Landing, UserProfile, Onboarding, Login, SignUp, GeminiNeeds } from "./pages"
+import { Landing, UserProfile, Onboarding, Login, SignUp, GeminiNeeds, GetHelp, HelpCommunity } from "./pages"
 import PagesURL from "./router/routes"
 
 function App() {
@@ -13,6 +13,8 @@ function App() {
         <Route path={PagesURL.GeminiNeeds} element={<GeminiNeeds />} />
         <Route path={PagesURL.Login} element={<Login />} />
         <Route path={PagesURL.SignUp} element={<SignUp />} />
+        <Route path={PagesURL.GetHelp} element={<GetHelp />} />
+        <Route path={PagesURL.HelpCommunity} element={<HelpCommunity />} />
       </Routes>
     </BrowserRouter>
   )

@@ -36,7 +36,7 @@ function SignUp() {
       } else {
         setMessage('Check your email for the confirmation link!')
       }
-    } catch (error) {
+    } catch {
       setMessage('An unexpected error occurred')
     } finally {
       setLoading(false)
