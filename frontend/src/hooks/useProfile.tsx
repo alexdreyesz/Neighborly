@@ -54,39 +54,45 @@ export function useProfile() {
         throw new Error('No authenticated user found')
       }
 
-      // Check if user has an organization profile
-      const { data: orgData, error: orgError } = await supabase
-        .from('organization')
-        .select('*')
-        .eq('id', user.id)
-        .single()
-
-      // Check if user has a profile
+      // Check if user has a regular profile first
       const { data: profileData, error: profileError } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', user.id)
         .single()
 
-
-      if (profileError && orgError) {
-        // No profile found in either table
-        if (profileError.code === 'PGRST116' && orgError.code === 'PGRST116') {
-          throw new Error('No profile found. Please complete your profile setup.')
-        }
-        throw new Error(`Database error: ${profileError.message || orgError.message}`)
+      // If user has a regular profile, use that and ignore organization
+      if (!profileError && profileData) {
+        setProfile({
+          profile: profileData,
+          organization: null,
+          isOrganization: false
+        })
+        return
       }
 
-      // Determine if user is an organization
-      const isOrganization = !profileError && orgData
-      const profileResult = !profileError ? profileData : null
-      const orgResult = !orgError ? orgData : null
+      // Only check organization if no regular profile exists
+      const { data: orgData, error: orgError } = await supabase
+        .from('organization')
+        .select('*')
+        .eq('id', user.id)
+        .single()
 
-      setProfile({
-        profile: profileResult,
-        organization: orgResult,
-        isOrganization
-      })
+      if (!orgError && orgData) {
+        setProfile({
+          profile: null,
+          organization: orgData,
+          isOrganization: true
+        })
+        return
+      }
+
+      // No profile found in either table
+      if (profileError?.code === 'PGRST116' && orgError?.code === 'PGRST116') {
+        throw new Error('No profile found. Please complete your profile setup.')
+      }
+      
+      throw new Error(`Database error: ${profileError?.message || orgError?.message}`)
 
     } catch (err) {
       console.error('Error fetching profile:', err)
@@ -191,37 +197,43 @@ export async function getProfile(): Promise<UserProfile | null> {
       throw new Error('No authenticated user found')
     }
 
-    // Check if user has a profile
+    // Check if user has a regular profile first
     const { data: profileData, error: profileError } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', user.id)
       .single()
 
-    // Check if user has an organization profile
+    // If user has a regular profile, use that and ignore organization
+    if (!profileError && profileData) {
+      return {
+        profile: profileData,
+        organization: null,
+        isOrganization: false
+      }
+    }
+
+    // Only check organization if no regular profile exists
     const { data: orgData, error: orgError } = await supabase
       .from('organization')
       .select('*')
       .eq('id', user.id)
       .single()
 
-    if (profileError && orgError) {
-      if (profileError.code === 'PGRST116' && orgError.code === 'PGRST116') {
-        throw new Error('No profile found. Please complete your profile setup.')
+    if (!orgError && orgData) {
+      return {
+        profile: null,
+        organization: orgData,
+        isOrganization: true
       }
-      throw new Error(`Database error: ${profileError.message || orgError.message}`)
     }
 
-    // Determine if user is an organization
-    const isOrganization = !profileError && orgData
-    const profileResult = !profileError ? profileData : null
-    const orgResult = !orgError ? orgData : null
-
-    return {
-      profile: profileResult,
-      organization: orgResult,
-      isOrganization
+    // No profile found in either table
+    if (profileError?.code === 'PGRST116' && orgError?.code === 'PGRST116') {
+      throw new Error('No profile found. Please complete your profile setup.')
     }
+    
+    throw new Error(`Database error: ${profileError?.message || orgError?.message}`)
 
   } catch (err) {
     console.error('Error fetching profile:', err)

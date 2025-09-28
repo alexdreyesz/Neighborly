@@ -4,6 +4,22 @@ import { useNavigate } from 'react-router-dom'
 import PagesURL from '../../router/routes.tsx'
 import { useProfile } from '../../hooks/useProfile'
 
+type UserProfileData = {
+  display_name?: string | null;
+  phone?: string | null;
+  roles?: string[];
+  skills?: string[];
+  languages?: string[];
+};
+
+type OrganizationProfileData = {
+  display_name?: string | null;
+  phone?: string | null;
+  types?: string[];
+  skills?: string[];
+  languages?: string[];
+};
+
 function UserProfile() {
   const navigate = useNavigate()
   const { profile, loading, error } = useProfile()
@@ -38,7 +54,7 @@ function UserProfile() {
     }
 
     // Use organization data if user is an organization, otherwise use profile data
-    const userData = profile.isOrganization ? profile.organization : profile.profile
+    const userData: UserProfileData | OrganizationProfileData | undefined = (profile.isOrganization ? profile.organization : profile.profile) || undefined
     
     if (!userData) {
       return {
@@ -50,7 +66,7 @@ function UserProfile() {
     }
 
     // Generate avatar initials from display name
-    const getInitials = (name: string | null) => {
+    const getInitials = (name: string | null | undefined) => {
       if (!name) return "U"
       return name.split(' ').map(word => word[0]).join('').toUpperCase().slice(0, 2)
     }
@@ -60,7 +76,9 @@ function UserProfile() {
       phoneNumber: userData.phone || "Not provided",
       avatar: getInitials(userData.display_name),
       isOrganization: profile.isOrganization,
-      roles: profile.isOrganization ? (userData as any).types : (userData as any).roles,
+      roles: profile.isOrganization
+        ? (userData as OrganizationProfileData).types || []
+        : (userData as UserProfileData).roles || [],
       skills: userData.skills || [],
       languages: userData.languages || []
     }
