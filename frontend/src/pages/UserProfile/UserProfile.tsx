@@ -10,6 +10,7 @@ type UserProfileData = {
   roles?: string[];
   skills?: string[];
   languages?: string[];
+  zip_code?: number | null;
 };
 
 type OrganizationProfileData = {
@@ -18,6 +19,7 @@ type OrganizationProfileData = {
   types?: string[];
   skills?: string[];
   languages?: string[];
+  zip_code?: number | null;
 };
 
 function UserProfile() {
@@ -76,6 +78,7 @@ function UserProfile() {
       phoneNumber: userData.phone || "Not provided",
       avatar: getInitials(userData.display_name),
       isOrganization: profile.isOrganization,
+      zip_code: userData.zip_code || null,
       roles: profile.isOrganization
         ? (userData as OrganizationProfileData).types || []
         : (userData as UserProfileData).roles || [],
@@ -110,6 +113,9 @@ function UserProfile() {
                   {user.isOrganization ? 'Organization' : 'Community Member'}
                 </p>
                 <p className="text-lg text-gray-700">📞{user.phoneNumber}</p>
+                {user.zip_code && (
+                  <p className="text-lg text-gray-700">📍 {user.zip_code}</p>
+                )}
                 {user.roles && user.roles.length > 0 && (
                   <div className="mt-2">
                     <span className="text-sm text-gray-500">Role: </span>
