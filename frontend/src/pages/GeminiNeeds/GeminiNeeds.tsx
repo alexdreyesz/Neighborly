@@ -6,6 +6,18 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { GoogleGenAI } from '@google/genai';
 
+function formatAiText(text: string): string {
+  if (!text) return '';
+  
+  return text
+    // Convert **text** to bold
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    // Convert lines starting with * to bullet points with dots
+    .replace(/^\* (.+)$/gm, '• $1')
+    // Convert newlines to <br> tags for proper HTML rendering
+    .replace(/\n/g, '<br>');
+}
+
 function buildPrompt(title: string, challenges: string[]) {
   const bullets = (challenges || [])
     .filter(Boolean)
@@ -60,7 +72,7 @@ function GeminiNeeds() {
 
   const prompt = useMemo(() => buildPrompt(title, challenges), [title, challenges]);
 
-  // Call Gemini directly from the browser (demo only)
+ 
   useEffect(() => {
     let cancelled = false;
 
@@ -79,16 +91,27 @@ function GeminiNeeds() {
         const ai = new GoogleGenAI({ apiKey });
         const response = await ai.models.generateContent({
           model: 'gemini-2.5-flash',
-          // config is optional for text-only; including to be explicit:
+          
           config: { responseModalities: ['TEXT'] as const },
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
         });
 
-        const text = (response as any).text ?? '';
+       
+        type GeminiContentResponse = {
+          text?: string;
+        };
+        const typedResponse = response as GeminiContentResponse;
+        const text = typedResponse.text ?? '';
         if (!cancelled) setAiText(text);
-      } catch (err: any) {
-        // If you see "Failed to fetch", it's usually CORS or network issues.
-        if (!cancelled) setErrorMsg(err?.message || 'Request failed');
+      } catch (err: unknown) {
+       
+        if (!cancelled) {
+          if (err instanceof Error) {
+            setErrorMsg(err.message);
+          } else {
+            setErrorMsg('Request failed');
+          }
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -115,7 +138,11 @@ function GeminiNeeds() {
               {errorMsg && <p className="text-red-600">Error: {errorMsg}</p>}
               {!loading && !errorMsg && (
                 <div className="prose max-w-none">
-                  <p className="text-gray-800 whitespace-pre-line">{aiText}</p>
+                  <div className="text-gray-800 whitespace-pre-line" 
+                       dangerouslySetInnerHTML={{
+                         __html: formatAiText(aiText)
+                       }}
+                  />
                 </div>
               )}
             </div>
