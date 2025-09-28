@@ -10,6 +10,7 @@ interface OnboardingData {
   email: string
   password: string
   confirmPassword: string
+  roles: string
   
   // Step 2: Personal Information
   name: string
@@ -29,6 +30,7 @@ function Onboarding() {
     email: '',
     password: '',
     confirmPassword: '',
+    roles: '',
     name: '',
     skills: '',
     languages: '',
@@ -51,6 +53,10 @@ function Onboarding() {
       }
       if (formData.password.length < 6) {
         setMessage('Password must be at least 6 characters')
+        return
+      }
+      if (!formData.roles) {
+        setMessage('Please select your user type')
         return
       }
       
@@ -159,6 +165,78 @@ function Onboarding() {
                   value={formData.confirmPassword}
                   onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
                 />
+              </div>
+              
+              {/* User Type Selection */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-4">
+                  How would you like to use Neighborly?
+                </label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => handleInputChange('roles', 'provider')}
+                    className={`p-4 rounded-lg border-2 transition-all duration-200 text-center ${
+                      formData.roles === 'provider'
+                        ? 'border-green-500 bg-green-50 text-green-700'
+                        : 'border-gray-300 bg-white text-gray-700 hover:border-green-300 hover:bg-green-25'
+                    }`}
+                  >
+                    <div className="font-semibold text-lg mb-1">Provider</div>
+                    <div className="text-sm">Volunteer or donate</div>
+                  </button>
+                  
+                  <button
+                    type="button"
+                    onClick={() => handleInputChange('roles', 'seeker')}
+                    className={`p-4 rounded-lg border-2 transition-all duration-200 text-center ${
+                      formData.roles === 'seeker'
+                        ? 'border-blue-500 bg-blue-50 text-blue-700'
+                        : 'border-gray-300 bg-white text-gray-700 hover:border-blue-300 hover:bg-blue-25'
+                    }`}
+                  >
+                    <div className="font-semibold text-lg mb-1">Seeker</div>
+                    <div className="text-sm">Looking for aid</div>
+                  </button>
+                  
+                  <button
+                    type="button"
+                    onClick={() => handleInputChange('roles', 'organization')}
+                    className={`p-4 rounded-lg border-2 transition-all duration-200 text-center ${
+                      formData.roles === 'organization'
+                        ? 'border-purple-500 bg-purple-50 text-purple-700'
+                        : 'border-gray-300 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-25'
+                    }`}
+                  >
+                    <div className="font-semibold text-lg mb-1">Organization</div>
+                    <div className="text-sm">Host events & programs</div>
+                  </button>
+                </div>
+                
+                {/* Explanatory Text */}
+                {formData.roles && (
+                  
+                  <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                    {formData.roles === 'provider' && (
+                      <div className="text-sm text-gray-700">
+                         <div className='text-xs text-gray-700'> *Neighbors can be anything at any time, you can update preferenecs in the profile!</div>
+                        <strong>Provider:</strong> You're someone who wants to volunteer your time, skills, or donate resources to help your community. You can offer assistance, share your expertise, and make a positive impact in your neighborhood.
+                      </div>
+                    )}
+                    {formData.roles === 'seeker' && (
+                      <div className="text-sm text-gray-700">
+                         <div className='text-xs text-gray-700'> *Neighbors can be anything at any time, you can update preferenecs in the profile!</div>
+                        <strong>Seeker:</strong> You're looking for assistance, resources, or support from your community. Whether you need help with daily tasks, access to resources, or support during difficult times, we're here to connect you with neighbors who can help.
+                      </div>
+                    )}
+                    {formData.roles === 'organization' && (
+                      <div className="text-sm text-gray-700">
+                         <div className='text-xs text-gray-700'> *Neighbors can be anything at any time, you can update preferenecs in the profile!</div>
+                        <strong>Organization:</strong> You represent a formal organization, non-profit, or community group that wants to host events, coordinate programs, and facilitate community initiatives. Organizations undergo additional review to ensure community safety and trust.
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -349,6 +427,7 @@ function Onboarding() {
     const { data, error } = await supabase.from('profiles').update({
       email: formData.email,
       display_name: formData.name,
+      user_type: formData.roles,
       skills: formData.skills,
       languages: formData.languages,
   }).eq('email', formData.email)
