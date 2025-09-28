@@ -1,4 +1,4 @@
-bsolufy-imports==0.3.1
+absolufy-imports==0.3.1
 alembic==1.16.5
 annotated-types==0.7.0
 anyio==4.11.0
