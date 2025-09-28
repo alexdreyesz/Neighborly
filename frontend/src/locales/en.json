@@ -1,0 +1,46 @@
+{
+  "header": {
+    "searchPlaceholder": "Search events",
+    "locationPlaceholder": "Miami, FL",
+    "logIn": "Log In",
+    "signUp": "Sign Up",
+    "changeLanguage": "Change your language",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "userProfile": {
+    "communityMember": "Community Member",
+    "readyToMakeDifference": "Ready to Make a Difference?",
+    "joinCommunity": "Join our community of neighbors helping neighbors. Whether you need assistance or want to help others, we're here to connect you.",
+    "helpNeighbors": "Help Neighbors",
+    "getHelp": "Get Help"
+  },
+  "onboarding": {
+    "welcome": "Welcome to Neighborly",
+    "getStarted": "Let's get you started",
+    "personalInfo": "Personal Information",
+    "contactInfo": "Contact Information",
+    "preferences": "Preferences",
+    "languagesSpoken": "Languages Spoken",
+    "selectLanguage": "Select your primary language",
+    "next": "Next",
+    "previous": "Previous",
+    "complete": "Complete"
+  },
+  "landing": {
+    "title": "Neighborly",
+    "subtitle": "Connecting neighbors, building community",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  }
+}

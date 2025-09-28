@@ -1,0 +1,46 @@
+{
+  "header": {
+    "searchPlaceholder": "Поиск событий",
+    "locationPlaceholder": "Майами, Флорида",
+    "logIn": "Войти",
+    "signUp": "Регистрация",
+    "changeLanguage": "Изменить язык",
+    "cancel": "Отмена",
+    "save": "Сохранить"
+  },
+  "userProfile": {
+    "communityMember": "Член Сообщества",
+    "readyToMakeDifference": "Готовы Сделать Разницу?",
+    "joinCommunity": "Присоединяйтесь к нашему сообществу соседей, помогающих соседям. Нужна ли вам помощь или вы хотите помочь другим, мы здесь, чтобы вас связать.",
+    "helpNeighbors": "Помочь Соседям",
+    "getHelp": "Получить Помощь"
+  },
+  "onboarding": {
+    "welcome": "Добро пожаловать в Neighborly",
+    "getStarted": "Давайте начнем",
+    "personalInfo": "Личная Информация",
+    "contactInfo": "Контактная Информация",
+    "preferences": "Предпочтения",
+    "languagesSpoken": "Разговорные Языки",
+    "selectLanguage": "Выберите ваш основной язык",
+    "next": "Далее",
+    "previous": "Назад",
+    "complete": "Завершить"
+  },
+  "landing": {
+    "title": "Neighborly",
+    "subtitle": "Соединяем соседей, строим сообщество",
+    "getStarted": "Начать",
+    "learnMore": "Узнать Больше"
+  },
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успех",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "close": "Закрыть"
+  }
+}

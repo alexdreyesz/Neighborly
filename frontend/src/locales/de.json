@@ -1,0 +1,46 @@
+{
+  "header": {
+    "searchPlaceholder": "Ereignisse suchen",
+    "locationPlaceholder": "Miami, FL",
+    "logIn": "Anmelden",
+    "signUp": "Registrieren",
+    "changeLanguage": "Sprache ändern",
+    "cancel": "Abbrechen",
+    "save": "Speichern"
+  },
+  "userProfile": {
+    "communityMember": "Gemeindemitglied",
+    "readyToMakeDifference": "Bereit, einen Unterschied zu machen?",
+    "joinCommunity": "Treten Sie unserer Gemeinschaft von Nachbarn bei, die sich gegenseitig helfen. Ob Sie Hilfe brauchen oder anderen helfen möchten, wir sind hier, um Sie zu verbinden.",
+    "helpNeighbors": "Nachbarn Helfen",
+    "getHelp": "Hilfe Bekommen"
+  },
+  "onboarding": {
+    "welcome": "Willkommen bei Neighborly",
+    "getStarted": "Lassen Sie uns beginnen",
+    "personalInfo": "Persönliche Informationen",
+    "contactInfo": "Kontaktinformationen",
+    "preferences": "Einstellungen",
+    "languagesSpoken": "Gesprochene Sprachen",
+    "selectLanguage": "Wählen Sie Ihre Hauptsprache",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "complete": "Abschließen"
+  },
+  "landing": {
+    "title": "Neighborly",
+    "subtitle": "Nachbarn verbinden, Gemeinschaft aufbauen",
+    "getStarted": "Loslegen",
+    "learnMore": "Mehr Erfahren"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen"
+  }
+}

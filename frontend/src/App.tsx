@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Landing, UserProfile, Onboarding, Login, SignUp, GeminiNeeds, GetHelp, HelpCommunity } from "./pages"
 import PagesURL from "./router/routes"
+import './i18n'
 
 function App() {
 

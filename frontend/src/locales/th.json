@@ -1,0 +1,46 @@
+{
+  "header": {
+    "searchPlaceholder": "ค้นหาเหตุการณ์",
+    "locationPlaceholder": "ไมอามี่, ฟลอริดา",
+    "logIn": "เข้าสู่ระบบ",
+    "signUp": "สมัครสมาชิก",
+    "changeLanguage": "เปลี่ยนภาษา",
+    "cancel": "ยกเลิก",
+    "save": "บันทึก"
+  },
+  "userProfile": {
+    "communityMember": "สมาชิกชุมชน",
+    "readyToMakeDifference": "พร้อมที่จะสร้างความแตกต่างหรือไม่?",
+    "joinCommunity": "เข้าร่วมชุมชนของเราที่เพื่อนบ้านช่วยเหลือกัน ไม่ว่าคุณต้องการความช่วยเหลือหรือต้องการช่วยเหลือผู้อื่น เราอยู่ที่นี่เพื่อเชื่อมต่อคุณ",
+    "helpNeighbors": "ช่วยเหลือเพื่อนบ้าน",
+    "getHelp": "ขอความช่วยเหลือ"
+  },
+  "onboarding": {
+    "welcome": "ยินดีต้อนรับสู่ Neighborly",
+    "getStarted": "มาเริ่มกันเถอะ",
+    "personalInfo": "ข้อมูลส่วนตัว",
+    "contactInfo": "ข้อมูลติดต่อ",
+    "preferences": "การตั้งค่า",
+    "languagesSpoken": "ภาษาที่พูดได้",
+    "selectLanguage": "เลือกภาษาหลักของคุณ",
+    "next": "ถัดไป",
+    "previous": "ก่อนหน้า",
+    "complete": "เสร็จสิ้น"
+  },
+  "landing": {
+    "title": "Neighborly",
+    "subtitle": "เชื่อมต่อเพื่อนบ้าน สร้างชุมชน",
+    "getStarted": "เริ่มต้น",
+    "learnMore": "เรียนรู้เพิ่มเติม"
+  },
+  "common": {
+    "loading": "กำลังโหลด...",
+    "error": "ข้อผิดพลาด",
+    "success": "สำเร็จ",
+    "cancel": "ยกเลิก",
+    "save": "บันทึก",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "close": "ปิด"
+  }
+}

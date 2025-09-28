@@ -1,0 +1,46 @@
+{
+  "header": {
+    "searchPlaceholder": "Etkinlik ara",
+    "locationPlaceholder": "Miami, FL",
+    "logIn": "Giriş Yap",
+    "signUp": "Kayıt Ol",
+    "changeLanguage": "Dilini değiştir",
+    "cancel": "İptal",
+    "save": "Kaydet"
+  },
+  "userProfile": {
+    "communityMember": "Topluluk Üyesi",
+    "readyToMakeDifference": "Fark Yaratmaya Hazır mısınız?",
+    "joinCommunity": "Komşuların birbirine yardım ettiği topluluğumuza katılın. Yardıma ihtiyacınız olsun veya başkalarına yardım etmek isteyin, sizi bağlamak için buradayız.",
+    "helpNeighbors": "Komşulara Yardım Et",
+    "getHelp": "Yardım Al"
+  },
+  "onboarding": {
+    "welcome": "Neighborly'ye Hoş Geldiniz",
+    "getStarted": "Başlayalım",
+    "personalInfo": "Kişisel Bilgiler",
+    "contactInfo": "İletişim Bilgileri",
+    "preferences": "Tercihler",
+    "languagesSpoken": "Konuşulan Diller",
+    "selectLanguage": "Ana dilinizi seçin",
+    "next": "İleri",
+    "previous": "Geri",
+    "complete": "Tamamla"
+  },
+  "landing": {
+    "title": "Neighborly",
+    "subtitle": "Komşuları bağlayın, topluluk oluşturun",
+    "getStarted": "Başla",
+    "learnMore": "Daha Fazla Bilgi"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "close": "Kapat"
+  }
+}

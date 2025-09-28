@@ -1,0 +1,46 @@
+{
+  "header": {
+    "searchPlaceholder": "Pesquisar eventos",
+    "locationPlaceholder": "Miami, FL",
+    "logIn": "Entrar",
+    "signUp": "Cadastrar",
+    "changeLanguage": "Alterar seu idioma",
+    "cancel": "Cancelar",
+    "save": "Salvar"
+  },
+  "userProfile": {
+    "communityMember": "Membro da Comunidade",
+    "readyToMakeDifference": "Pronto para Fazer a Diferença?",
+    "joinCommunity": "Junte-se à nossa comunidade de vizinhos ajudando vizinhos. Se você precisa de ajuda ou quer ajudar outros, estamos aqui para conectá-lo.",
+    "helpNeighbors": "Ajudar Vizinhos",
+    "getHelp": "Obter Ajuda"
+  },
+  "onboarding": {
+    "welcome": "Bem-vindo ao Neighborly",
+    "getStarted": "Vamos começar",
+    "personalInfo": "Informações Pessoais",
+    "contactInfo": "Informações de Contato",
+    "preferences": "Preferências",
+    "languagesSpoken": "Idiomas Falados",
+    "selectLanguage": "Selecione seu idioma principal",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "complete": "Completar"
+  },
+  "landing": {
+    "title": "Neighborly",
+    "subtitle": "Conectando vizinhos, construindo comunidade",
+    "getStarted": "Começar",
+    "learnMore": "Saiba Mais"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "close": "Fechar"
+  }
+}

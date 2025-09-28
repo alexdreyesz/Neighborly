@@ -4,12 +4,14 @@ import Footer from '../../components/Footer.tsx'
 import TopNeeds from '../../components/TopNeeds/TopNeeds.tsx'
 import MapView from '../../components/MapView'
 import EventsFeed from '../../components/EventsFeed'
+import { useTranslation } from 'react-i18next'
 import PagesURL from '../../router/routes'
 
 import communityArt from '../../assets/art/community.png'
 import sustainability from '../../assets/art/sustainability.png'
 
 function Landing() {
+  const { t } = useTranslation()
 
   return (
     <div className="min-h-screen bg-gray-100">

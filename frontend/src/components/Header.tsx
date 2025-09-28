@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 import PagesURL from '../router/routes'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import logo from '../assets/icons/logo.png'
 import logoText from '../assets/icons/logo-text-black.png'
 
 export default function Header() {
+    const { t, i18n } = useTranslation()
     const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false)
     const [selectedLanguage, setSelectedLanguage] = useState('English')
 
@@ -35,6 +37,7 @@ export default function Header() {
 
     const handleLanguageSelect = (language: Language) => {
         setSelectedLanguage(language.name)
+        i18n.changeLanguage(language.code)
         setIsLanguageModalOpen(false)
     }
     
@@ -69,7 +72,7 @@ export default function Header() {
                             </div>
                             <input
                                 type="text"
-                                placeholder="Search events"
+                                placeholder={t('header.searchPlaceholder')}
                                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-l-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-green-800 focus:border-green-800 text-sm"
                             />
                         </div>
@@ -103,13 +106,13 @@ export default function Header() {
                         
                         <Link to={PagesURL.Login}>
                             <button className=" text-black hover:bg-gray-200 px-6 py-2 rounded-lg text-sm font-medium">
-                                Log In
+                                {t('header.logIn')}
                             </button>
                         </Link>
 
                         <Link to={PagesURL.Onboarding}>
                             <button className="primary-bg text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                                Sign Up
+                                {t('header.signUp')}
                             </button>
                         </Link>
                     </div>
@@ -119,7 +122,7 @@ export default function Header() {
                         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
                             <div className="bg-white rounded-lg shadow-xl p-6 w-96 max-h-96 overflow-y-auto">
                                 <div className="flex justify-between items-center mb-6">
-                                    <h2 className="text-xl font-semibold text-gray-900">Change your language</h2>
+                                    <h2 className="text-xl font-semibold text-gray-900">{t('header.changeLanguage')}</h2>
                                     <button 
                                         onClick={() => setIsLanguageModalOpen(false)}
                                         className="text-gray-400 hover:text-gray-600"
@@ -151,7 +154,7 @@ export default function Header() {
                                         onClick={() => setIsLanguageModalOpen(false)}
                                         className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
                                     >
-                                        Cancel
+                                        {t('header.cancel')}
                                     </button>
 
               
@@ -159,7 +162,7 @@ export default function Header() {
                                         onClick={() => setIsLanguageModalOpen(false)}
                                         className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600"
                                         >
-                                        Save
+                                        {t('header.save')}
                                     </button>
                                 </div>
                             </div>

@@ -1,0 +1,46 @@
+{
+  "header": {
+    "searchPlaceholder": "Zoek evenementen",
+    "locationPlaceholder": "Miami, FL",
+    "logIn": "Inloggen",
+    "signUp": "Registreren",
+    "changeLanguage": "Verander je taal",
+    "cancel": "Annuleren",
+    "save": "Opslaan"
+  },
+  "userProfile": {
+    "communityMember": "Gemeenschapslid",
+    "readyToMakeDifference": "Klaar om een Verschil te Maken?",
+    "joinCommunity": "Sluit je aan bij onze gemeenschap van buren die elkaar helpen. Of je nu hulp nodig hebt of anderen wilt helpen, wij zijn er om je te verbinden.",
+    "helpNeighbors": "Buren Helpen",
+    "getHelp": "Hulp Krijgen"
+  },
+  "onboarding": {
+    "welcome": "Welkom bij Neighborly",
+    "getStarted": "Laten we beginnen",
+    "personalInfo": "Persoonlijke Informatie",
+    "contactInfo": "Contactinformatie",
+    "preferences": "Voorkeuren",
+    "languagesSpoken": "Gesproken Talen",
+    "selectLanguage": "Selecteer je primaire taal",
+    "next": "Volgende",
+    "previous": "Vorige",
+    "complete": "Voltooien"
+  },
+  "landing": {
+    "title": "Neighborly",
+    "subtitle": "Buren verbinden, gemeenschap opbouwen",
+    "getStarted": "Aan de Slag",
+    "learnMore": "Meer Weten"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Fout",
+    "success": "Succes",
+    "cancel": "Annuleren",
+    "save": "Opslaan",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "close": "Sluiten"
+  }
+}
