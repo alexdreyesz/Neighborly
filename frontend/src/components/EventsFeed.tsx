@@ -6,10 +6,10 @@ import Filters from "./Filters"; // assumes you have this
 function NewEvent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    area: '',
-    when: '',
-    kind: 'REQUEST' as EventType,
-    title: ''
+    title: '',
+    details: '',
+    starts_at: '',
+    category: ''
   });
 
   const handleNewEvent = () => {
@@ -18,7 +18,7 @@ function NewEvent() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setFormData({ area: '', when: '', kind: 'REQUEST', title: '' });
+    setFormData({ title: '', details: '', starts_at: '', category: '' });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -77,66 +77,83 @@ function NewEvent() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Area
-                </label>
-                <input
-                  type="text"
-                  value={formData.area}
-                  onChange={(e) => handleInputChange('area', e.target.value)}
-                  placeholder="e.g., Downtown Miami, Brickell"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  When
-                </label>
-                <select
-                  value={formData.when}
-                  onChange={(e) => handleInputChange('when', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                >
-                  <option value="">Select timeframe</option>
-                  <option value="today">Today</option>
-                  <option value="tomorrow">Tomorrow</option>
-                  <option value="this week">This week</option>
-                  <option value="next week">Next week</option>
-                  <option value="this month">This month</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Event Type
-                </label>
-                <select
-                  value={formData.kind}
-                  onChange={(e) => handleInputChange('kind', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                >
-                  <option value="REQUEST">Request (I need help)</option>
-                  <option value="OFFER">Offer (I can help)</option>
-                  <option value="VOLUNTEER">Volunteer (Join a cause)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Title
+                  Title *
                 </label>
                 <input
                   type="text"
                   value={formData.title}
                   onChange={(e) => handleInputChange('title', e.target.value)}
-                  placeholder="Brief description of your event"
+                  placeholder="Event title"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Category
+                </label>
+                <select
+                  value={formData.category}
+                  onChange={(e) => handleInputChange('category', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Select a category</option>
+                  <option value="Addiction Recovery">Addiction Recovery 🌱</option>
+                  <option value="Childcare & Caregiving">Childcare & Caregiving 👶</option>
+                  <option value="Civic & Participation">Civic & Participation 🗺️</option>
+                  <option value="Community & Social Connection">Community & Social Connection 🤝</option>
+                  <option value="Digital Access">Digital Access 💻</option>
+                  <option value="Disaster & Climate">Disaster & Climate 🌪️</option>
+                  <option value="Education & Tutoring">Education & Tutoring 📚</option>
+                  <option value="Environment & Neighborhood">Environment & Neighborhood 🌳</option>
+                  <option value="Faith & Cultural">Faith & Cultural ⛪</option>
+                  <option value="Financial Assistance">Financial Assistance 💰</option>
+                  <option value="Food & Essentials">Food & Essentials 🍎</option>
+                  <option value="Health & Mental Health">Health & Mental Health 🏥</option>
+                  <option value="Homelessness Services">Homelessness Services 🏠</option>
+                  <option value="Household & Personal Goods">Household & Personal Goods 🏘️</option>
+                  <option value="Income & Employment">Income & Employment 💼</option>
+                  <option value="Legal & Immigration">Legal & Immigration ⚖️</option>
+                  <option value="Mobility & Accessibility">Mobility & Accessibility ♿</option>
+                  <option value="Pets & Animal Care">Pets & Animal Care 🐶</option>
+                  <option value="Public Benefits & Navigation">Public Benefits & Navigation 📄</option>
+                  <option value="Refugees & Newcomers">Refugees & Newcomers 🌍</option>
+                  <option value="Reentry & Justice-Impacted">Reentry & Justice-Impacted 🎅</option>
+                  <option value="Safety & Crisis">Safety & Crisis 🚨</option>
+                  <option value="Seniors">Seniors 👴</option>
+                  <option value="Shelter & Housing">Shelter & Housing 🏠</option>
+                  <option value="Transportation">Transportation 🚗</option>
+                  <option value="Veterans">Veterans 🇺🇸</option>
+                  <option value="Youth & Families">Youth & Families 👨‍👩‍👧‍👦</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Details
+                </label>
+                <textarea
+                  value={formData.details}
+                  onChange={(e) => handleInputChange('details', e.target.value)}
+                  placeholder="Event description, notes, or additional information"
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Start Date & Time
+                </label>
+                <input
+                  type="datetime-local"
+                  value={formData.starts_at}
+                  onChange={(e) => handleInputChange('starts_at', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
 
               <div className="flex gap-3 pt-4">
                 <button
