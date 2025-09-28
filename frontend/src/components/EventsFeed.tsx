@@ -5,13 +5,7 @@ export default function EventsFeed() {
     <div className="w-96 flex-shrink-0 overflow-y-auto custom-scrollbar-hidden mt-5 mb-5">
       <Filters />
       
-      {/* Feed Title */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-white">Events</h2>
-        <button className="bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors text-sm">
-          + Create
-        </button>
-      </div>
+
 
       {/* Post Cards */}
       <div className="space-y-3">

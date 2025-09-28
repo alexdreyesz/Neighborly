@@ -9,7 +9,7 @@ export default function TopNeeds() {
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold primary-text relative left-120">Top Community Needs</h2>
           <span className="primary-bg text-white bg-opacity-20 px-2 py-1 rounded-full text-xs font-medium">
-            Updated 2 min ago
+            Updated 7 days ago
           </span>
         </div>
 
