@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import supabase from '../../config/supabaseClient.ts'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -23,8 +25,8 @@ function Login() {
         setMessage(error.message)
       } else {
         setMessage('Login successful!')
-        // Redirect will be handled by the router
-      }
+          navigate('/user-profile')
+        }
     } catch (error) {
       setMessage('An unexpected error occurred')
     } finally {
@@ -99,7 +101,6 @@ function Login() {
               type="submit"
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white primary-bg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              onClick={handleLogin}
             >
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
