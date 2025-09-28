@@ -53,35 +53,38 @@ class DatabaseManager:
             logger.exception("Error selecting with join from %s: %s", table_name, e)
             return []
 
-    def insert(self, table_name: str, record: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    def insert(self, table_name: str, record: Dict[str, Any]) -> Optional[List[Dict[str, Any]]]:
         try:
             res = self.client.table(table_name).insert(record).execute()
-            return getattr(res, "data", None)
+            data = getattr(res, "data", None)
+            return data if data else []
         except Exception as e:
             logger.exception("Error inserting into %s: %s", table_name, e)
-            return None
+            return []
 
-    def update(self, table_name: str, updates: Dict[str, Any], match: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    def update(self, table_name: str, updates: Dict[str, Any], match: Dict[str, Any]) -> Optional[List[Dict[str, Any]]]:
         try:
             query = self.client.table(table_name).update(updates)
             for k, v in match.items():
                 query = query.eq(k, v)
             res = query.execute()
-            return getattr(res, "data", None)
+            data = getattr(res, "data", None)
+            return data if data else []
         except Exception as e:
             logger.exception("Error updating %s: %s", table_name, e)
-            return None
+            return []
 
-    def upsert(self, table_name: str, record: Dict[str, Any], on_conflict: Optional[List[str]] = None):
+    def upsert(self, table_name: str, record: Dict[str, Any], on_conflict: Optional[List[str]] = None) -> Optional[List[Dict[str, Any]]]:
         try:
             if on_conflict:
                 res = self.client.table(table_name).upsert(record, on_conflict=on_conflict).execute()
             else:
                 res = self.client.table(table_name).upsert(record).execute()
-            return getattr(res, "data", None)
+            data = getattr(res, "data", None)
+            return data if data else []
         except Exception as e:
             logger.exception("Error upserting into %s: %s", table_name, e)
-            return None
+            return []
 
     def get_posts_by_category(self, category: str, status: str = 'open') -> List[Dict[str, Any]]:
         return self.select_all('posts', {'categories': category, 'status': status})
@@ -130,7 +133,8 @@ class DatabaseManager:
             'details': details,
             'created_at': now.isoformat()
         }
-        return self.insert('top_needs', record)
+        result = self.insert('top_needs', record)
+        return result[0] if result else None
 
 
 class BaseAgent(ABC):

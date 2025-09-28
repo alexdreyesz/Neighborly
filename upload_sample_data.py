@@ -37,7 +37,6 @@ def setup_categories(client: Client):
             print(f"✗ Error adding category {category['title']}: {e}")
 
 def create_auth_users(client: Client, user_profiles):
-    """Create users in auth.users table using admin functions"""
     created_user_ids = []
     
     print("Creating auth users...")
@@ -114,6 +113,35 @@ def setup_users_and_profiles(client: Client):
             'email': 'david.kim@example.com'
         }
     ]
+
+    extra_profiles = [
+        {
+            'id': str(uuid.uuid4()),
+            'display_name': 'Emily Davis',
+            'avatar_url': None,
+            'phone': None,
+            'roles': ['seeker'],
+            'languages': ['English', 'Spanish'],
+            'skills': ['childcare', 'nursing'],
+            'radius_meters': 7000,
+            'email': 'emily.davis@example.com'
+        },
+        {
+            'id': str(uuid.uuid4()),
+            'display_name': 'Carlos Rivera',
+            'avatar_url': None,
+            'phone': None,
+            'roles': ['provider'],
+            'languages': ['Spanish', 'English'],
+            'skills': ['mechanic', 'repairs'],
+            'radius_meters': 12000,
+            'email': 'carlos.rivera@example.com'
+        }
+    ]
+
+    user_profiles.extend(extra_profiles)
+    create_auth_users(client, extra_profiles)
+
     
     create_auth_users(client, user_profiles)
     
@@ -165,7 +193,7 @@ def setup_posts(client: Client, profiles):
     posts = [
         {
             'id': str(uuid.uuid4()),
-            'author_id': seeker_profiles[0]['id'],
+            'author_id': None,
             'categories': 'food',
             'title': 'Need groceries for family of 4',
             'description': 'Looking for fresh vegetables, bread, and milk. Family struggling financially.',
@@ -176,7 +204,7 @@ def setup_posts(client: Client, profiles):
         },
         {
             'id': str(uuid.uuid4()),
-            'author_id': seeker_profiles[1]['id'] if len(seeker_profiles) > 1 else seeker_profiles[0]['id'],
+            'author_id': None,
             'categories': 'education',
             'title': 'Need math tutoring for high school student',
             'description': 'My son needs help with algebra and geometry. Available evenings.',
@@ -187,7 +215,7 @@ def setup_posts(client: Client, profiles):
         },
         {
             'id': str(uuid.uuid4()),
-            'author_id': provider_profiles[0]['id'],
+            'author_id': None,
             'categories': 'education',
             'title': 'Free math tutoring available',
             'description': 'Experienced tutor offering free math help for students.',
@@ -198,7 +226,7 @@ def setup_posts(client: Client, profiles):
         },
         {
             'id': str(uuid.uuid4()),
-            'author_id': provider_profiles[1]['id'] if len(provider_profiles) > 1 else provider_profiles[0]['id'],
+            'author_id': None,
             'categories': 'transportation',
             'title': 'Free rides to medical appointments',
             'description': 'Volunteer driver available for medical appointments and grocery shopping.',
@@ -212,7 +240,6 @@ def setup_posts(client: Client, profiles):
     print("Setting up posts...")
     for post in posts:
         try:
-            # Try with created_at first, then without if it fails
             try:
                 post_with_timestamp = post.copy()
                 post_with_timestamp['created_at'] = datetime.now(timezone.utc).isoformat()
@@ -293,7 +320,7 @@ def main():
     
     is_service_role = check_environment(client)
     
-    setup_categories(client)
+    # setup_categories(client)
     profiles = setup_users_and_profiles(client)
     setup_posts(client, profiles)
     setup_organizations(client)
@@ -302,24 +329,6 @@ def main():
     print("Sample data setup completed!")
     print("=" * 60)
     
-    if not profiles:
-        print("\n⚠️  WARNING: No profiles were created successfully.")
-        print("   This will prevent the agents from running properly.")
-        print("\n📋 TROUBLESHOOTING STEPS:")
-        if not is_service_role:
-            print("1. Use service role key instead of anon key for full functionality")
-            print("2. OR temporarily disable RLS on these tables:")
-            print("   - profiles")
-            print("   - posts") 
-            print("   - organization")
-            print("3. Ensure 'created_at' columns exist or are set to auto-populate")
-        else:
-            print("1. Check if profiles table exists and has correct schema")
-            print("2. Verify foreign key constraints on profiles.id -> auth.users.id")
-    else:
-        print(f"\n✅ Successfully created {len(profiles)} profiles")
-        print("\nYou can now run the agents with real data:")
-        print("python -c \"from models import AgentRunner; import asyncio; runner = AgentRunner(); result = asyncio.run(runner.run_full_cycle()); print('Agents completed successfully!')\"")
-
+ 
 if __name__ == "__main__":
     main()

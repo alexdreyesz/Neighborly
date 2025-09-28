@@ -1,0 +1,48 @@
+{
+  "agents": {
+    "supply_demand_balancer": {
+      "name": "Supply-Demand Balancer",
+      "description": "Analyzes supply and demand patterns, identifies shortages, and notifies providers",
+      "enabled": true,
+      "priority": 1,
+      "timeout_seconds": 300
+    },
+    "org_sync_agent": {
+      "name": "Organization Sync Agent", 
+      "description": "Syncs organization data and creates urgent needs based on capacity and shortages",
+      "enabled": true,
+      "priority": 2,
+      "timeout_seconds": 300
+    },
+    "volunteer_match_agent": {
+      "name": "Volunteer Match Agent",
+      "description": "Matches volunteers to seekers based on skills and proximity",
+      "enabled": true,
+      "priority": 3,
+      "timeout_seconds": 300
+    },
+    "event_analysis_agent": {
+      "name": "Event Analysis Agent",
+      "description": "Analyzes events and generates posts for volunteer opportunities",
+      "enabled": true,
+      "priority": 4,
+      "timeout_seconds": 300
+    }
+  },
+  "database": {
+    "connection_timeout": 30,
+    "retry_attempts": 3,
+    "retry_delay": 5
+  },
+  "logging": {
+    "level": "INFO",
+    "log_to_file": true,
+    "log_file_prefix": "agent_run",
+    "max_log_files": 10
+  },
+  "execution": {
+    "max_concurrent_agents": 2,
+    "default_timeout": 600,
+    "enable_parallel_execution": false
+  }
+}
