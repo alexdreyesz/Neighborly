@@ -1,8 +1,8 @@
 import Header from '../../components/Header.tsx'
 import Footer from '../../components/Footer.tsx'
-import TopNeeds from '../../components/TopNeeds/TopNeeds.tsx'
+import TopNeeds from '../../components/TopNeedsHelping/TopNeedsHelping.tsx'
 import MapView from '../../components/MapView'
-import EventsFeed from '../../components/EventsFeed'
+import EventsFeed from '../../components/EventsFeedHelping.tsx'
 
 function HelpCommunity() {
 
