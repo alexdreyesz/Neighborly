@@ -95,8 +95,13 @@ function Onboarding() {
         setMessage('Please fill in your phone number')
         return
       }
+      
+      setLoading(true)
+      setMessage('')
+      
       // Save profile data to database
       await createProfile()
+        // Testing Note: make if statement to check if the profile is created successfully. leave as is for mvp
       setCurrentStep(4)
     } else if (currentStep === 4) {
       // Complete onboarding
@@ -201,9 +206,9 @@ function Onboarding() {
                   
                   <button
                     type="button"
-                    onClick={() => handleInputChange('roles', 'organization')}
+                    onClick={() => handleInputChange('roles', 'org')}
                     className={`p-4 rounded-lg border-2 transition-all duration-200 text-center ${
-                      formData.roles === 'organization'
+                      formData.roles === 'org'
                         ? 'border-purple-500 bg-purple-50 text-purple-700'
                         : 'border-gray-300 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-25'
                     }`}
@@ -229,7 +234,7 @@ function Onboarding() {
                         <strong>Seeker:</strong> You're looking for assistance, resources, or support from your community. Whether you need help with daily tasks, access to resources, or support during difficult times, we're here to connect you with neighbors who can help.
                       </div>
                     )}
-                    {formData.roles === 'organization' && (
+                    {formData.roles === 'org' && (
                       <div className="text-sm text-gray-700">
                          <div className='text-xs text-gray-700'> *Neighbors can be anything at any time, you can update preferenecs in the profile!</div>
                         <strong>Organization:</strong> You represent a formal organization, non-profit, or community group that wants to host events, coordinate programs, and facilitate community initiatives. Organizations undergo additional review to ensure community safety and trust.
@@ -309,7 +314,7 @@ function Onboarding() {
                   <option value="">Select your primary language</option>
                   <option value="English">English</option>
                   <option value="Spanish">Spanish</option>
-                  <option value="French">French</option>
+                  <option value="Haitian Creole">Haitian Creole</option>
                   <option value="German">German</option>
                   <option value="Italian">Italian</option>
                   <option value="Portuguese">Portuguese</option>
@@ -317,35 +322,6 @@ function Onboarding() {
                   <option value="Chinese (Cantonese)">Chinese (Cantonese)</option>
                   <option value="Japanese">Japanese</option>
                   <option value="Korean">Korean</option>
-                  <option value="Arabic">Arabic</option>
-                  <option value="Hindi">Hindi</option>
-                  <option value="Russian">Russian</option>
-                  <option value="Dutch">Dutch</option>
-                  <option value="Swedish">Swedish</option>
-                  <option value="Norwegian">Norwegian</option>
-                  <option value="Danish">Danish</option>
-                  <option value="Finnish">Finnish</option>
-                  <option value="Polish">Polish</option>
-                  <option value="Czech">Czech</option>
-                  <option value="Hungarian">Hungarian</option>
-                  <option value="Romanian">Romanian</option>
-                  <option value="Bulgarian">Bulgarian</option>
-                  <option value="Croatian">Croatian</option>
-                  <option value="Serbian">Serbian</option>
-                  <option value="Greek">Greek</option>
-                  <option value="Turkish">Turkish</option>
-                  <option value="Hebrew">Hebrew</option>
-                  <option value="Thai">Thai</option>
-                  <option value="Vietnamese">Vietnamese</option>
-                  <option value="Indonesian">Indonesian</option>
-                  <option value="Malay">Malay</option>
-                  <option value="Tagalog">Tagalog</option>
-                  <option value="Swahili">Swahili</option>
-                  <option value="Amharic">Amharic</option>
-                  <option value="Yoruba">Yoruba</option>
-                  <option value="Igbo">Igbo</option>
-                  <option value="Hausa">Hausa</option>
-                  <option value="Zulu">Zulu</option>
                   <option value="Afrikaans">Afrikaans</option>
                   <option value="Other">Other</option>
                 </select>
@@ -424,14 +400,23 @@ function Onboarding() {
 
   
   const createProfile = async () => {
+    // Get the current user
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+    
+    if (userError || !user) {
+      console.error("Error getting user:", userError)
+      return
+    }
+
     const { data, error } = await supabase.from('profiles').update({
-      email: formData.email,
       display_name: formData.name,
-      user_type: formData.roles,
-      skills: formData.skills,
-      languages: formData.languages,
-  }).eq('email', formData.email)
-  if (error) console.error("Error updating profile:", error);
+      roles: [formData.roles], // Convert to array as per schema
+      skills: [formData.skills], // Convert to array as per schema
+      languages: [formData.languages], // Convert to array as per schema
+      phone: formData.phoneNumber,
+    }).eq('id', user.id) // Use user ID instead of email
+      
+    if (error) console.error("Error updating profile:", error);
     else console.log("Profile updated:", data);
   }
 
