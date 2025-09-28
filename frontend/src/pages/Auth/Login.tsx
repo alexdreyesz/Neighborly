@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import supabase from '../../config/supabaseClient.ts'
 
 function Login() {
@@ -7,6 +7,7 @@ function Login() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
+  const navigate = useNavigate()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,7 +24,7 @@ function Login() {
         setMessage(error.message)
       } else {
         setMessage('Login successful!')
-        // Redirect will be handled by the router
+        navigate('/')
       }
     } catch (error) {
       setMessage('An unexpected error occurred')
