@@ -1,8 +1,12 @@
 import Header from '../../components/Header.tsx'
 import Footer from '../../components/Footer.tsx'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import PagesURL from '../../router/routes.tsx'
 
 function UserProfile() {
+  const navigate = useNavigate()
+  
   // Mock user data - in real app, this would come from your auth/user context
   const [user] = useState({
     name: "Sarah Martinez",
@@ -54,7 +58,11 @@ function UserProfile() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="group text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl" style={{backgroundColor: '#19513b'}}>
+            <button 
+              onClick={() => navigate(PagesURL.Landing)}
+              className="group text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl" 
+              style={{backgroundColor: '#19513b'}}
+            >
               <span className="flex items-center justify-center">
                 <svg className="mr-3 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -66,7 +74,10 @@ function UserProfile() {
               </span>
             </button>
 
-            <button className="group border-2 border-gray-300 hover:border-blue-500 text-gray-700 hover:text-blue-700 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 bg-white/80 backdrop-blur-sm">
+            <button 
+              onClick={() => navigate(PagesURL.Landing)}
+              className="group border-2 border-gray-300 hover:border-blue-500 text-gray-700 hover:text-blue-700 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 bg-white/80 backdrop-blur-sm"
+            >
               <span className="flex items-center justify-center">
                 <svg className="mr-3 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
