@@ -303,6 +303,8 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
 
   const [items, setItems] = useState<EventItem[]>([]);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+  const [showInterestModal, setShowInterestModal] = useState(false);
   const limit = Math.min(Math.max((context?.limit ?? 3), 1), 8);
 
   // Function to refresh events from database
@@ -395,6 +397,42 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
     return { bg: "bg-green-100", text: "text-green-800" };
   };
 
+  const handleEventClick = (event: EventItem) => {
+    setSelectedEvent(event);
+    setShowInterestModal(true);
+  };
+
+  const handleInterestConfirm = async () => {
+    if (selectedEvent) {
+      try {
+        // Here you can add logic to save user interest to database
+        console.log('User is interested in event:', selectedEvent.title);
+        
+        // Update the interested count locally
+        setItems(prevItems => 
+          prevItems.map(item => 
+            item === selectedEvent 
+              ? { ...item, interestedCount: item.interestedCount + 1 }
+              : item
+          )
+        );
+        
+        // You could also make an API call here to save the interest
+        // await saveUserInterest(selectedEvent);
+        
+      } catch (error) {
+        console.error('Error saving interest:', error);
+      }
+    }
+    setShowInterestModal(false);
+    setSelectedEvent(null);
+  };
+
+  const handleInterestCancel = () => {
+    setShowInterestModal(false);
+    setSelectedEvent(null);
+  };
+
   return (
     <div className="w-96 flex-shrink-0 overflow-y-auto custom-scrollbar-hidden mt-5 mb-5">
       <Filters />
@@ -404,12 +442,13 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
       <div className="space-y-3">
         {items.map((p, idx) => {
           const b = badge(p.type);
-          const isAIGenerated = idx < 3; // First 3 are AI-generated
+          const isAIGenerated = idx < 3;
           
           return (
             <div
               key={idx}
               className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow cursor-pointer"
+              onClick={() => handleEventClick(p)}
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
@@ -442,6 +481,74 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
         })}
         {items.length === 0 && <p className="text-xs text-gray-500">No events generated.</p>}
       </div>
+
+      {/* Interest Modal */}
+      {showInterestModal && selectedEvent && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/50"
+            onClick={handleInterestCancel}
+          ></div>
+          
+          {/* Modal */}
+          <div className="relative bg-white rounded-lg p-6 w-full max-w-md mx-4 z-10 shadow-xl">
+            <div className="text-center">
+              <div className="mb-4">
+                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 mb-4">
+                  <svg 
+                    className="h-6 w-6 text-blue-600" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" 
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  Interested in this event?
+                </h3>
+                <div className="text-left bg-gray-50 rounded-lg p-3 mb-4">
+                  <h4 className="font-semibold text-gray-900 text-sm mb-1">
+                    {selectedEvent.title}
+                  </h4>
+                  <p className="text-xs text-gray-600 mb-1">
+                    {selectedEvent.organizer} • {selectedEvent.dateLabel}
+                  </p>
+                  <p className="text-xs text-gray-700">
+                    {selectedEvent.description}
+                  </p>
+                </div>
+                <p className="text-sm text-gray-600">
+                  Would you like to show your interest in this community event?
+                </p>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={handleInterestCancel}
+                  className="flex-1 px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors text-sm font-medium"
+                >
+                  Go Back
+                </button>
+                <button
+                  type="button"
+                  onClick={handleInterestConfirm}
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
+                >
+                  Yes, I'm Interested
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
