@@ -39,7 +39,7 @@ function Landing() {
                             </Link>
 
                             <Link 
-                                to={PagesURL.SignUp}
+                                to={PagesURL.Onboarding}
                                 className="primary-bg text-white px-6 py-3 rounded-md text-lg font-medium transition-colors cursor-pointer"
                             >
                                 Need Help?

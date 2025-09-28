@@ -25,7 +25,6 @@ function SignUp() {
       setLoading(false)
       return
     }
-    console.log('Past Password Check') //TODO: remove this
     try {
       const { error } = await supabase.auth.signUp({
         email,

@@ -42,7 +42,7 @@ function Login() {
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{' '}
             <Link
-              to="/signup"
+              to="/onboarding"
               className="primary-text font-medium hover:text-green-700 transition-colors"
             >
               create a new account
