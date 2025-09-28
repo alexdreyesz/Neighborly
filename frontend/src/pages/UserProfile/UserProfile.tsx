@@ -163,7 +163,7 @@ function UserProfile() {
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button 
-              onClick={() => navigate(PagesURL.Landing)}
+              onClick={() => navigate(PagesURL.HelpCommunity)}
               className="group text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl" 
               style={{backgroundColor: '#19513b'}}
             >
@@ -179,7 +179,7 @@ function UserProfile() {
             </button>
 
             <button 
-              onClick={() => navigate(PagesURL.Landing)}
+              onClick={() => navigate(PagesURL.GetHelp)}
               className="group border-2 border-gray-300 hover:border-blue-500 text-gray-700 hover:text-blue-700 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 bg-white/80 backdrop-blur-sm"
             >
               <span className="flex items-center justify-center">

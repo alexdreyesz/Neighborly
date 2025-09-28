@@ -1,66 +1,34 @@
 import { useEffect, useMemo, useState } from "react";
-import Filters from "./Filters";
+import { GoogleGenAI } from "@google/genai";
+import Filters from "./Filters"; // assumes you have this
 
-type FeedItem = {
-  dateLabel: string;                     // "TODAY • 2:30 PM"
-  type: "REQUEST" | "OFFER" | "VOLUNTEER";
+// --- types ---
+type EventType = "REQUEST" | "OFFER" | "VOLUNTEER";
+
+interface EventItem {
+  dateLabel: string;
+  type: EventType;
   title: string;
-  organizer: string;                     // AI-ish name/org
-  distanceMiles: number;                 // e.g., 0.8
-  description: string;                   // short summary
-  interestedCount: number;               // e.g., 7
-};
-
-type EventsFeedProps = {
-  prompt?: string; 
-  context?: { topic?: string; area?: string; when?: string; limit?: number };
-};
-
-const badgeStyles: Record<FeedItem["type"], { bg: string; text: string }> = {
-  REQUEST: { bg: "bg-red-100", text: "text-red-800" },
-  OFFER: { bg: "bg-green-100", text: "text-green-800" },
-  VOLUNTEER: { bg: "bg-purple-100", text: "text-purple-800" },
-};
-
-function xmur3(str: string) {
-  let h = 1779033703 ^ str.length;
-  for (let i = 0; i < str.length; i++) {
-    h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
-    h = (h << 13) | (h >>> 19);
-  }
-  return function () {
-    h = Math.imul(h ^ (h >>> 16), 2246822507);
-    h = Math.imul(h ^ (h >>> 13), 3266489909);
-    h ^= h >>> 16;
-    return h >>> 0;
-  };
+  organizer: string;
+  distanceMiles: number;
+  description: string;
+  interestedCount: number;
 }
 
-function mulberry32(seed: number) {
-  let t = seed >>> 0;
-  return function () {
-    t |= 0;
-    t = (t + 0x6d2b79f5) | 0;
-    let r = Math.imul(t ^ (t >>> 15), 1 | t);
-    r = (r + Math.imul(r ^ (r >>> 7), 61 | r)) ^ r;
-    return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
-  };
+interface EventsContext {
+  topic?: string;
+  area?: string;
+  when?: string;
+  limit?: number;
 }
 
-function pick<T>(r: () => number, list: T[]): T { 
-  return list[Math.floor(r() * list.length)]; 
+interface EventsFeedProps {
+  prompt?: string;
+  context: EventsContext;
 }
 
-function randFloat(r: () => number, min: number, max: number, d = 1): number {
-  const v = min + r() * (max - min);
-  const f = 10 ** d;
-  return Math.round(v * f) / f;
-}
-
-function randInt(r: () => number, min: number, max: number): number {
-  return Math.floor(r() * (max - min + 1)) + min;
-}
-function formatDateLabel(date: Date) {
+// --- tiny helpers ---
+function formatDateLabel(date: Date): string {
   const now = new Date();
   const same =
     date.getFullYear() === now.getFullYear() &&
@@ -72,133 +40,218 @@ function formatDateLabel(date: Date) {
   return `${dayStr.toUpperCase()} • ${time}`;
 }
 
-function generateItem(r: () => number, prompt: string, ctx?: EventsFeedProps["context"]): FeedItem {
-  const type = pick(r, ["REQUEST", "OFFER", "VOLUNTEER"] as const);
-  const area = ctx?.area || "nearby";
-  const when = ctx?.when || "this week";
-  const topic = (ctx?.topic || prompt || "community support").toLowerCase();
+function parseJsonLoose(text: string): any[] | null {
+  try {
+    const j = JSON.parse(text);
+    return Array.isArray(j) ? j : null;
+  } catch {
+    // ignore
+  }
+  const noFences = String(text || "").replace(/```json|```/g, "").trim();
+  const start = noFences.indexOf("[");
+  const end = noFences.lastIndexOf("]");
+  if (start >= 0 && end > start) {
+    try {
+      const j = JSON.parse(noFences.slice(start, end + 1));
+      return Array.isArray(j) ? j : null;
+    } catch {
+      // ignore
+    }
+  }
+  return null;
+}
 
-  const orgs = ["Community Center", "Neighborhood Assoc.", "Food Bank", "Youth Club", "Mutual Aid Network"];
-  const first = ["Sarah","Mike","Ana","Luis","Jasmine","Carlos","Elena","David","Rosa","Marco"];
-  const lastI = ["M.","R.","G.","S.","L.","P.","K.","D.","C.","H."];
+async function getGenAIText(resp: any): Promise<string> {
+  const r1 = resp?.response?.text;
+  if (typeof r1 === "function") {
+    const v = r1.call(resp.response);
+    return typeof v?.then === "function" ? await v : String(v ?? "");
+  }
+  const r2 = resp?.text;
+  if (typeof r2 === "function") {
+    const v = r2.call(resp);
+    return typeof v?.then === "function" ? await v : String(v ?? "");
+  }
+  const parts = resp?.response?.candidates?.[0]?.content?.parts;
+  if (Array.isArray(parts)) {
+    return parts.map((p: any) => (typeof p?.text === "string" ? p.text : "")).join("");
+  }
+  try { return JSON.stringify(resp); } catch { return ""; }
+}
 
-  const titles: Record<FeedItem["type"], string[]> = {
+// --- local fallback list (simple/random) ---
+function localEvents(limit = 5, ctx: EventsContext = {}): EventItem[] {
+  const area = ctx.area || "nearby";
+  const when = ctx.when || "this week";
+  const kinds: EventType[] = ["REQUEST", "OFFER", "VOLUNTEER"];
+  const titles: Record<EventType, string[]> = {
     REQUEST: [
       "Need groceries for family of 4",
-      "Looking for school supplies assistance",
-      "Urgent request: baby essentials",
-      "Help with short-term rent gap",
-      `Requesting warm meals ${when}`,
+      "Looking for school supplies",
+      "Urgent: baby essentials",
+      `Warm meals needed ${when}`,
     ],
     OFFER: [
       "Free rides to medical appointments",
       "Donating gently used clothes",
-      "Offering tutoring after school",
+      "After-school tutoring",
       `Hot meals available ${when}`,
-      "Can help with basic home repairs",
     ],
     VOLUNTEER: [
       `Community cleanup in ${area}`,
       `Pantry restock shift ${when}`,
       "Park beautification day",
-      `Sort donations at ${pick(r, orgs)}`,
-      "Neighborhood outreach walk",
     ],
   };
-
-  if ((topic.includes("food") || topic.includes("groc")) && type === "REQUEST") {
-    titles.REQUEST.unshift(`Need groceries ${when}`);
-  }
-  if ((topic.includes("ride") || topic.includes("transport")) && type !== "VOLUNTEER") {
-    titles.OFFER.unshift("Free rides for appointments");
-    titles.REQUEST.unshift("Need ride to clinic");
-  }
-  if (topic.includes("tutor") || topic.includes("school")) {
-    titles.OFFER.unshift("After-school tutoring available");
-    titles.REQUEST.unshift("Looking for math tutoring");
-  }
-
-  const title = pick(r, titles[type]);
-  const useOrg = r() < 0.35;
-  const organizer = useOrg ? `${area.split(",")[0]} ${pick(r, orgs)}` : `${pick(r, first)} ${pick(r, lastI)}`;
-  const distanceMiles = randFloat(r, 0.2, 12.0, 1);
-  const interestedCount = type === "VOLUNTEER" ? randInt(r, 5, 25) : randInt(r, 0, 20);
-
-  const now = new Date();
-  const date = new Date(now.getTime() + randInt(r, -4, 120) * 3600 * 1000);
-  const dateLabel = formatDateLabel(date);
-
-  const descs: Record<FeedItem["type"], string[]> = {
+  const descs: Record<EventType, string[]> = {
     REQUEST: [
-      "Lost hours at work; need basics for the week.",
       "Short on funds; focused on essentials.",
-      "Temporary setback—any help appreciated.",
-      `Prefer pickup near ${area.split(",")[0]}.`,
+      `Prefer pickup near ${area.split(",")[0] || "you"}.`,
     ],
     OFFER: [
-      `Available on weekdays, flexible within ${Math.max(3, Math.round(distanceMiles))} miles.`,
-      "Items are clean and ready for pickup.",
-      `Can coordinate times ${when}.`,
-      `Happy to help neighbors in ${area.split(",")[0]}.`,
+      `Flexible within 5 miles.`,
+      `Happy to help neighbors in ${area.split(",")[0] || "the area"}.`,
     ],
     VOLUNTEER: [
       "Supplies provided; all ages welcome.",
-      "Great for small groups—bring water & hat.",
-      "Check-in table on site; simple tasks.",
-      `Helps address urgent needs in ${area.split(",")[0]}.`,
+      `Helps address urgent needs in ${area.split(",")[0] || "the area"}.`,
     ],
   };
-
-  return { 
-    dateLabel, 
-    type, 
-    title, 
-    organizer, 
-    distanceMiles, 
-    description: pick(r, descs[type]), 
-    interestedCount 
-  };
+  const out: EventItem[] = [];
+  for (let i = 0; i < Math.min(Math.max(limit,1),8); i++) {
+    const type: EventType = kinds[Math.floor(Math.random() * kinds.length)];
+    const titleList = titles[type];
+    const descList = descs[type];
+    const hours = Math.floor(Math.random() * 24) - 4; // -4..19
+    const date = new Date(Date.now() + hours * 3600 * 1000);
+    out.push({
+      dateLabel: formatDateLabel(date),
+      type,
+      title: titleList[Math.floor(Math.random() * titleList.length)],
+      organizer: Math.random() < 0.5 ? "Neighborhood Assoc." : "Local Group",
+      distanceMiles: Math.round((0.5 + Math.random() * 8) * 10) / 10,
+      description: descList[Math.floor(Math.random() * descList.length)],
+      interestedCount: type === "VOLUNTEER" ? Math.floor(Math.random() * 20) : Math.floor(Math.random() * 10),
+    });
+  }
+  return out;
 }
 
-function generateItems(seedKey: string, ctx?: EventsFeedProps["context"]): FeedItem[] {
-  const rand = mulberry32(xmur3(seedKey)());
-  const limit = Math.min(Math.max(ctx?.limit ?? 3, 1), 8);
-  const items: FeedItem[] = [];
-  for (let i = 0; i < limit; i++) items.push(generateItem(rand, seedKey, ctx));
-  return items;
+
+async function aiEvents(apiKey: string, limit = 5, ctx: EventsContext = {}): Promise<EventItem[]> {
+  const ai = new GoogleGenAI({ apiKey });
+  const count = Math.min(Math.max(limit, 1), 8);
+
+  const prompt = `Respond ONLY with a JSON array of ${count} objects (no prose, no code fences).
+
+Each object:
+{
+  "title": string,
+  "organizer": string,
+  "type": "REQUEST" | "OFFER" | "VOLUNTEER",
+  "description": string,
+  "distanceMiles": number,
+  "hoursFromNow": number
 }
 
-function resolvePrompt(propPrompt?: string): string {
- 
-  const winPrompt = typeof window !== "undefined" ? (window as Window & { __NEIGHBORLY_PROMPT__?: string }).__NEIGHBORLY_PROMPT__ : undefined;
+City: Miami, FL (land locations only; avoid marinas/piers/boats).
+Topic: ${ctx.topic || "community support"}
+Area: ${ctx.area || "nearby"}
+When: ${ctx.when || "this week"}`;
 
-  const envPrompt = (import.meta as ImportMeta & { env: { VITE_EVENTS_PROMPT?: string } })?.env?.VITE_EVENTS_PROMPT;
-  return propPrompt || winPrompt || envPrompt || "Generate realistic mutual-aid events near Miami focusing on practical, specific needs and offers.";
+  const resp = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    generationConfig: { temperature: 0.2, responseMimeType: "application/json" },
+    contents: [{ role: "user", parts: [{ text: prompt }] }],
+  });
+
+  const text = await getGenAIText(resp);
+  const arr = parseJsonLoose(text);
+  if (!arr) throw new Error("Gemini JSON was not parseable.");
+
+  const now = new Date();
+  const clamp = (n: number, a: number, b: number) => Math.max(a, Math.min(b, n));
+
+  return arr.slice(0, count).map((o: any) => {
+    const t = o?.type;
+    const type: EventType = t === "REQUEST" || t === "OFFER" || t === "VOLUNTEER" ? t : "OFFER";
+    const hours = Number.isFinite(+o?.hoursFromNow) ? Math.round(+o.hoursFromNow) : 4;
+    const date = new Date(now.getTime() + clamp(hours, -4, 120) * 3600 * 1000);
+    const dist = Number.isFinite(+o?.distanceMiles) ? clamp(+o.distanceMiles, 0.2, 12) : 1.2;
+
+    return {
+      dateLabel: formatDateLabel(date),
+      type,
+      title: String(o?.title || "Community activity"),
+      organizer: String(o?.organizer || "Local Group"),
+      distanceMiles: dist,
+      description: String(o?.description || "Neighborhood effort to support local needs."),
+      interestedCount: type === "VOLUNTEER" ? 10 : 4,
+    };
+  });
+}
+
+// --- Component ---
+declare global {
+  interface Window {
+    __NEIGHBORLY_PROMPT__?: string;
+  }
 }
 
 export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedProps) {
-  const prompt = useMemo(() => resolvePrompt(propPrompt), [propPrompt]);
-  const [items, setItems] = useState<FeedItem[]>([]);
+  const prompt = useMemo(() => {
+    const winPrompt =
+      typeof window !== "undefined" ? (window as Window).__NEIGHBORLY_PROMPT__ : undefined;
+    const envPrompt = import.meta?.env?.VITE_EVENTS_PROMPT;
+    return propPrompt || winPrompt || envPrompt || "Generate realistic mutual-aid events near Miami.";
+  }, [propPrompt]);
 
-  // Auto-generate on mount AND whenever prompt/context change
+  const [items, setItems] = useState<EventItem[]>([]);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const limit = Math.min(Math.max((context?.limit ?? 3), 1), 8);
+
   useEffect(() => {
-    const seedKey = JSON.stringify({
-      prompt,
-      topic: context?.topic || "",
-      area: context?.area || "",
-      when: context?.when || "",
-      limit: context?.limit ?? 5,
-    });
-    setItems(generateItems(seedKey, context));
-  }, [prompt, context?.topic, context?.area, context?.when, context?.limit]);
+    let cancelled = false;
+
+    (async () => {
+      setErrorMsg(null);
+      const apiKey = import.meta?.env?.VITE_GEMINI_API_KEY;
+      try {
+        if (apiKey) {
+          const ai = await aiEvents(apiKey, limit, {
+            topic: context?.topic,
+            area: context?.area,
+            when: context?.when,
+          });
+          if (!cancelled) setItems(ai);
+        } else {
+          if (!cancelled) setItems(localEvents(limit, context));
+        }
+      } catch {
+        if (!cancelled) {
+          setErrorMsg("Showing local suggestions (AI output wasn't clean JSON).");
+          setItems(localEvents(limit, context));
+        }
+      }
+    })();
+
+    return () => { cancelled = true; };
+  }, [prompt, context, limit]);
+
+  const badge = (type: EventType) => {
+    if (type === "REQUEST") return { bg: "bg-red-100", text: "text-red-800" };
+    if (type === "VOLUNTEER") return { bg: "bg-purple-100", text: "text-purple-800" };
+    return { bg: "bg-green-100", text: "text-green-800" };
+  };
 
   return (
     <div className="w-96 flex-shrink-0 overflow-y-auto custom-scrollbar-hidden mt-5 mb-5">
       <Filters />
+      {errorMsg && <div className="text-xs text-red-600 mb-2">{errorMsg}</div>}
 
       <div className="space-y-3">
         {items.map((p, idx) => {
-          const badge = badgeStyles[p.type] ?? { bg: "bg-gray-100", text: "text-gray-800" };
+          const b = badge(p.type);
           return (
             <div
               key={idx}
@@ -207,7 +260,7 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs text-gray-500">{p.dateLabel}</span>
-                  <span className={`${badge.bg} ${badge.text} px-2 py-0.5 rounded-full text-xs font-medium`}>
+                  <span className={`${b.bg} ${b.text} px-2 py-0.5 rounded-full text-xs font-medium`}>
                     {p.type}
                   </span>
                 </div>
@@ -226,10 +279,7 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
             </div>
           );
         })}
-
-        {items.length === 0 && (
-          <p className="text-xs text-gray-500">No events generated.</p>
-        )}
+        {items.length === 0 && <p className="text-xs text-gray-500">No events generated.</p>}
       </div>
     </div>
   );
