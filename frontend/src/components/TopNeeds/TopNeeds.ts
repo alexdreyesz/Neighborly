@@ -1,13 +1,42 @@
+import foodAndEssentials from '../../assets/art/food&Essentials.jpg';
+import shelterAndHousing from '../../assets/art/housing.jpeg';
+import healthAndMentalHealth from '../../assets/art/health.jpeg';
+import safetyAndCrisis from '../../assets/art/safety.jpeg';
+import incomeAndEmployment from '../../assets/art/income.jpeg';
+import educationAndTutoring from '../../assets/art/Education & Tutoring.jpg';
+import childcareAndCaregiving from '../../assets/art/Youth & Families.jpg';
+import transportation from '../../assets/art/recovery.jpg';
+import digitalAccess from '../../assets/art/Community & Social Connection.jpg';
+import legalAndImmigration from '../../assets/art/Legal & Immigration.jpg';
+import financialAssistance from '../../assets/art/income.jpeg';
+import householdAndPersonalGoods from '../../assets/art/food&Essentials.jpg';
+import mobilityAndAccessibility from '../../assets/art/safety.jpeg';
+import communityAndSocialConnection from '../../assets/art/community.png';
+import youthAndFamilies from '../../assets/art/Youth & Families.jpg';
+import seniors from '../../assets/art/muliticultural Seniors.jpg';
+import reentryAndJusticeImpacted from '../../assets/art/recovery.jpg';
+import homelessnessServices from '../../assets/art/Homelessness Services _.jpg';
+import veterans from '../../assets/art/Veterans __.jpg';
+import refugeesAndNewcomers from '../../assets/art/refugess coming off plane.jpg';
+import addictionRecovery from '../../assets/art/recovery.jpg';
+import publicBenefitsAndNavigation from '../../assets/art/income.jpeg';
+import disasterAndClimate from '../../assets/art/flooding.jpg';
+import environmentAndNeighborhood from '../../assets/art/Community & Social Connection.jpg';
+import petsAndAnimalCare from '../../assets/art/Pets & Animal Care.jpg';
+import civicAndParticipation from '../../assets/art/Civic & Participation.jpg';
+import faithAndCultural from '../../assets/art/Faith & Cultural.jpg';
+
 type TopNeed = {
-  title: string;
-  challenges: string[];
-  emoji?: string;
+    title: string;
+    emoji?: string;
+    image?: string;
+    challenges: string[];
 };
 
 const topNeeds: TopNeed[] = [
   {
     title: "Food & Essentials",
-    emoji: "🍎",
+    image: foodAndEssentials,
     challenges: [
       "insufficient groceries",
       "no cooking equipment",
@@ -20,7 +49,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Shelter & Housing",
-    emoji: "🏠",
+    image: shelterAndHousing,
     challenges: [
       "eviction risk",
       "rent/utility arrears",
@@ -33,7 +62,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Health & Mental Health",
-    emoji: "🏥",
+    image: healthAndMentalHealth,
     challenges: [
       "primary care access",
       "medication cost/refill",
@@ -46,7 +75,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Safety & Crisis",
-    emoji: "🚨",
+    image: safetyAndCrisis,
     challenges: [
       "domestic violence safety plan",
       "protective order support",
@@ -58,7 +87,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Income & Employment",
-    emoji: "💼",
+    image: incomeAndEmployment,
     challenges: [
       "job search coaching",
       "resume/interview prep",
@@ -71,7 +100,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Education & Tutoring",
-    emoji: "📚",
+    image: educationAndTutoring,
     challenges: [
       "K-12 tutoring",
       "ESL/ELL support",
@@ -84,7 +113,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Childcare & Caregiving",
-    emoji: "👶",
+    image: childcareAndCaregiving,
     challenges: [
       "affordable childcare",
       "after-school programs",
@@ -96,7 +125,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Transportation",
-    emoji: "🚗",
+    image: transportation,
     challenges: [
       "rides to appointments",
       "transit passes",
@@ -108,7 +137,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Digital Access",
-    emoji: "💻",
+    image: digitalAccess,
     challenges: [
       "device (laptop/phone)",
       "home internet/Wi-Fi",
@@ -120,7 +149,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Legal & Immigration",
-    emoji: "⚖️",
+    image: legalAndImmigration,
     challenges: [
       "immigration consultation",
       "forms/document prep",
@@ -132,7 +161,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Financial Assistance",
-    emoji: "💰",
+    image: financialAssistance,
     challenges: [
       "micro-grants",
       "bill pay (utilities/rent)",
@@ -144,7 +173,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Household & Personal Goods",
-    emoji: "🏘️",
+    image: householdAndPersonalGoods,
     challenges: [
       "clothing/shoes",
       "appliances/cookware",
@@ -156,7 +185,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Mobility & Accessibility",
-    emoji: "♿",
+    image: mobilityAndAccessibility,
     challenges: [
       "wheelchair/walker",
       "home ramp/handrails",
@@ -168,7 +197,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Community & Social Connection",
-    emoji: "🤝",
+    image: communityAndSocialConnection,
     challenges: [
       "companionship visits",
       "phone/wellness check-ins",
@@ -180,7 +209,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Youth & Families",
-    emoji: "👨‍👩‍👧‍👦",
+    image: youthAndFamilies,
     challenges: [
       "parenting supplies",
       "childcare swaps",
@@ -192,7 +221,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Seniors",
-    emoji: "👴",
+    image: seniors,
     challenges: [
       "meals delivery",
       "medication pickup",
@@ -204,7 +233,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Reentry & Justice-Impacted",
-    emoji: "🎅",
+    image: reentryAndJusticeImpacted,
     challenges: [
       "IDs/documents",
       "transitional housing",
@@ -216,7 +245,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Homelessness Services",
-    emoji: "🏠",
+    image: homelessnessServices,
     challenges: [
       "outreach kits",
       "blankets/tents",
@@ -228,7 +257,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Veterans",
-    emoji: "🇺🇸",
+    image: veterans,
     challenges: [
       "VA benefits assistance",
       "peer support",
@@ -240,7 +269,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Refugees & Newcomers",
-    emoji: "🌍",
+    image: refugeesAndNewcomers,
     challenges: [
       "translation/interpretation",
       "cultural orientation",
@@ -252,7 +281,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Addiction Recovery",
-    emoji: "🌱",
+    image: addictionRecovery,
     challenges: [
       "detox referrals",
       "recovery meetings",
@@ -264,7 +293,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Public Benefits & Navigation",
-    emoji: "📄",
+    image: publicBenefitsAndNavigation,
     challenges: [
       "SNAP/WIC enrollment",
       "Medicaid/SSI/SSDI",
@@ -276,7 +305,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Disaster & Climate",
-    emoji: "🌪️",
+    image: disasterAndClimate,
     challenges: [
       "cooling/heating centers",
       "air purifiers/masks",
@@ -288,7 +317,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Environment & Neighborhood",
-    emoji: "🌳",
+    image: environmentAndNeighborhood,
     challenges: [
       "community cleanups",
       "tree planting",
@@ -300,7 +329,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Pets & Animal Care",
-    emoji: "🐶",
+    image: petsAndAnimalCare,
     challenges: [
       "pet food",
       "low-cost vet care",
@@ -312,7 +341,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Civic & Participation",
-    emoji: "🗺️",
+    image: civicAndParticipation,
     challenges: [
       "voter registration",
       "ballot info/transport",
@@ -324,7 +353,7 @@ const topNeeds: TopNeed[] = [
   },
   {
     title: "Faith & Cultural",
-    emoji: "⛪",
+    image: faithAndCultural,
     challenges: [
       "holiday/ritual items",
       "grief support",

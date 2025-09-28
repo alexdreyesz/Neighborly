@@ -19,10 +19,15 @@ export default function TopNeeds() {
               key={idx} 
               to={`${PagesURL.GeminiNeeds}?title=${encodeURIComponent(need.title)}&challenges=${encodeURIComponent(JSON.stringify(need.challenges))}`}
             >
-              <div className="w-[40vh] h-[40vh] primary-bg bg-opacity-20 rounded-lg p-3 flex justify-center items-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                <div className="flex flex-col items-center relative top-5">
-                  <span className="font-semibold text-sm text-black mb-5">{need.title}</span>
-                  <span className="text-lg mr-2">{need.emoji}</span>
+              <div className="w-[40vh] h-[40vh] relative rounded-lg overflow-hidden hover:scale-105 transition-transform duration-200 cursor-pointer">
+                <img
+                  src={need.image}
+                  alt={need.title}
+                  className="w-full h-full object-cover"
+                />
+
+                <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center">
+                  <span className="font-bold text-white text-lg text-center px-2">{need.title}</span>
                 </div>
               </div>
             </Link>
