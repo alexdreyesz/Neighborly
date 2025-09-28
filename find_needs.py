@@ -7,4 +7,3 @@ def find_top_needs(input_json='data/supply_demand_data.json'):
     return set([cat for level, cat in short_level_arr if level != 0])
 
 top_needs = find_top_needs()
-print(top_needs)
