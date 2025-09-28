@@ -13,11 +13,10 @@ interface OnboardingData {
   
   // Step 2: Personal Information
   name: string
-  gender: string
-  condition: string
+  skills: string
+  languages: string
   
   // Step 3: Contact Information
-  address: string
   phoneNumber: string
 }
 
@@ -31,9 +30,8 @@ function Onboarding() {
     password: '',
     confirmPassword: '',
     name: '',
-    gender: '',
-    condition: '',
-    address: '',
+    skills: '',
+    languages: '',
     phoneNumber: ''
   })
 
@@ -80,17 +78,19 @@ function Onboarding() {
       }
     } else if (currentStep === 2) {
       // Validate personal information
-      if (!formData.name || !formData.gender || !formData.condition) {
+      if (!formData.name || !formData.skills || !formData.languages) {
         setMessage('Please fill in all personal information fields')
         return
       }
       setCurrentStep(3)
     } else if (currentStep === 3) {
       // Validate contact information
-      if (!formData.address || !formData.phoneNumber) {
-        setMessage('Please fill in all contact information fields')
+      if (!formData.phoneNumber) {
+        setMessage('Please fill in your phone number')
         return
       }
+      // Save profile data to database
+      await createProfile()
       setCurrentStep(4)
     } else if (currentStep === 4) {
       // Complete onboarding
@@ -189,42 +189,86 @@ function Onboarding() {
               </div>
               
               <div>
-                <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-2">
-                  Gender
+                <label htmlFor="skills" className="block text-sm font-medium text-gray-700 mb-2">
+                  Skills & Abilities
                 </label>
                 <select
-                  id="gender"
+                  id="skills"
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
-                  value={formData.gender}
-                  onChange={(e) => handleInputChange('gender', e.target.value)}
+                  value={formData.skills}
+                  onChange={(e) => handleInputChange('skills', e.target.value)}
                 >
-                  <option value="">Select your gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Non-binary">Non-binary</option>
-                  <option value="Prefer not to say">Prefer not to say</option>
+                  <option value="">Select your primary skill</option>
+                  <option value="tutoring">Tutoring</option>
+                  <option value="driving">Driving</option>
+                  <option value="cooking">Cooking</option>
+                  <option value="childcare">Childcare</option>
+                  <option value="elder_care">Elder Care</option>
+                  <option value="medical">Medical</option>
+                  <option value="counseling">Counseling</option>
+                  <option value="translation">Translation</option>
+                  <option value="tech_support">Tech Support</option>
+                  <option value="home_repair">Home Repair</option>
+                  <option value="job_coaching">Job Coaching</option>
+                  <option value="financial_planning">Financial Planning</option>
+                  <option value="legal_aid">Legal Aid</option>
+                  <option value="pet_sitting">Pet Sitting</option>
                 </select>
               </div>
               
               <div>
-                <label htmlFor="condition" className="block text-sm font-medium text-gray-700 mb-2">
-                  Life Situation
+                <label htmlFor="languages" className="block text-sm font-medium text-gray-700 mb-2">
+                  Languages Spoken
                 </label>
                 <select
-                  id="condition"
+                  id="languages"
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
-                  value={formData.condition}
-                  onChange={(e) => handleInputChange('condition', e.target.value)}
+                  value={formData.languages}
+                  onChange={(e) => handleInputChange('languages', e.target.value)}
                 >
-                  <option value="">Select your situation</option>
-                  <option value="Single Parent">Single Parent</option>
-                  <option value="Senior">Senior</option>
-                  <option value="Student">Student</option>
-                  <option value="Caregiver">Caregiver</option>
-                  <option value="Working Professional">Working Professional</option>
-                  <option value="Unemployed">Unemployed</option>
+                  <option value="">Select your primary language</option>
+                  <option value="English">English</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="French">French</option>
+                  <option value="German">German</option>
+                  <option value="Italian">Italian</option>
+                  <option value="Portuguese">Portuguese</option>
+                  <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+                  <option value="Chinese (Cantonese)">Chinese (Cantonese)</option>
+                  <option value="Japanese">Japanese</option>
+                  <option value="Korean">Korean</option>
+                  <option value="Arabic">Arabic</option>
+                  <option value="Hindi">Hindi</option>
+                  <option value="Russian">Russian</option>
+                  <option value="Dutch">Dutch</option>
+                  <option value="Swedish">Swedish</option>
+                  <option value="Norwegian">Norwegian</option>
+                  <option value="Danish">Danish</option>
+                  <option value="Finnish">Finnish</option>
+                  <option value="Polish">Polish</option>
+                  <option value="Czech">Czech</option>
+                  <option value="Hungarian">Hungarian</option>
+                  <option value="Romanian">Romanian</option>
+                  <option value="Bulgarian">Bulgarian</option>
+                  <option value="Croatian">Croatian</option>
+                  <option value="Serbian">Serbian</option>
+                  <option value="Greek">Greek</option>
+                  <option value="Turkish">Turkish</option>
+                  <option value="Hebrew">Hebrew</option>
+                  <option value="Thai">Thai</option>
+                  <option value="Vietnamese">Vietnamese</option>
+                  <option value="Indonesian">Indonesian</option>
+                  <option value="Malay">Malay</option>
+                  <option value="Tagalog">Tagalog</option>
+                  <option value="Swahili">Swahili</option>
+                  <option value="Amharic">Amharic</option>
+                  <option value="Yoruba">Yoruba</option>
+                  <option value="Igbo">Igbo</option>
+                  <option value="Hausa">Hausa</option>
+                  <option value="Zulu">Zulu</option>
+                  <option value="Afrikaans">Afrikaans</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
@@ -237,25 +281,10 @@ function Onboarding() {
           <div className="space-y-6">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Contact Information</h2>
-              <p className="text-lg text-gray-600">Help us connect you with neighbors in your area</p>
+              <p className="text-lg text-gray-600">Help us connect you with your community</p>
             </div>
             
             <div className="space-y-4">
-              <div>
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
-                  Address
-                </label>
-                <textarea
-                  id="address"
-                  required
-                  rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors resize-none"
-                  placeholder="Enter your full address (street, city, state, zip)"
-                  value={formData.address}
-                  onChange={(e) => handleInputChange('address', e.target.value)}
-                />
-              </div>
-              
               <div>
                 <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
                   Phone Number
@@ -313,6 +342,18 @@ function Onboarding() {
       default:
         return null
     }
+  }
+
+  
+  const createProfile = async () => {
+    const { data, error } = await supabase.from('profiles').update({
+      email: formData.email,
+      display_name: formData.name,
+      skills: formData.skills,
+      languages: formData.languages,
+  }).eq('email', formData.email)
+  if (error) console.error("Error updating profile:", error);
+    else console.log("Profile updated:", data);
   }
 
   return (
