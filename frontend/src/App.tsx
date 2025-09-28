@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Landing, UserProfile, Onboarding, Login, SignUp, GeminiNeeds, GetHelp, HelpCommunity } from "./pages"
+import { Landing, UserProfile, Onboarding, Login, SignUp, GeminiNeeds, GeminiNeedsHelp, GetHelp, HelpCommunity } from "./pages"
 import PagesURL from "./router/routes"
 import { AuthProvider } from "./contexts/AuthContext"
 
@@ -13,6 +13,7 @@ function App() {
           <Route path={PagesURL.Onboarding} element={<Onboarding />} />
           <Route path={PagesURL.UserProfile} element={<UserProfile />} />
           <Route path={PagesURL.GeminiNeeds} element={<GeminiNeeds />} />
+          <Route path={PagesURL.GeminiNeedsHelp} element={<GeminiNeedsHelp />} />
           <Route path={PagesURL.Login} element={<Login />} />
           <Route path={PagesURL.SignUp} element={<SignUp />} />
           <Route path={PagesURL.GetHelp} element={<GetHelp />} />

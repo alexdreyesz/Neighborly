@@ -2,9 +2,16 @@ import Header from '../../components/Header.tsx'
 import Footer from '../../components/Footer.tsx'
 import TopNeeds from '../../components/TopNeedsHelping/TopNeedsHelping.tsx'
 import MapView from '../../components/MapView'
-import EventsFeed from '../../components/EventsFeedHelping.tsx'
+import EventsFeedHelping from '../../components/EventsFeedHelping.tsx'
+
+import { useEffect } from 'react'
 
 function HelpCommunity() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [ ]);
+
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -22,7 +29,7 @@ function HelpCommunity() {
                 <MapView />
 
                 {/* Right Sidebar - Events Feed */}
-                 <EventsFeed prompt="" context={{}} />
+                <EventsFeedHelping prompt="" context={{}} />
             </div>
         </div>
 
