@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
 import PagesURL from '../../router/routes'
 import { Link, useNavigate } from 'react-router-dom'
 import supabase from '../../config/supabaseClient.ts'
-import { useNavigate } from 'react-router-dom'
 
 function Login() {
   const navigate = useNavigate()
@@ -11,7 +9,6 @@ function Login() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
-  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
