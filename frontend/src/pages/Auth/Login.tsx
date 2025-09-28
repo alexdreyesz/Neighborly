@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import PagesURL from '../../router/routes'
 import { Link, useNavigate } from 'react-router-dom'
 import supabase from '../../config/supabaseClient.ts'
 
 function Login() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -25,8 +27,9 @@ function Login() {
       } else {
         setMessage('Login successful!')
         navigate('/')
+        navigate(PagesURL.UserProfile)
       }
-    } catch (error) {
+    } catch {
       setMessage('An unexpected error occurred')
     } finally {
       setLoading(false)
@@ -43,7 +46,7 @@ function Login() {
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{' '}
             <Link
-              to="/signup"
+              to="/onboarding"
               className="primary-text font-medium hover:text-green-700 transition-colors"
             >
               create a new account
