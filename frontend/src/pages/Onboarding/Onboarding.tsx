@@ -26,6 +26,8 @@ function Onboarding() {
   const [currentStep, setCurrentStep] = useState(1)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
+  const [emailValidated, setEmailValidated] = useState(false)
+  const [checkingValidation, setCheckingValidation] = useState(false)
   const [formData, setFormData] = useState<OnboardingData>({
     email: '',
     password: '',
@@ -37,7 +39,7 @@ function Onboarding() {
     phoneNumber: ''
   })
 
-  const totalSteps = 4
+  const totalSteps = 5
 
   const handleInputChange = (field: keyof OnboardingData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -66,7 +68,7 @@ function Onboarding() {
       try {
         const { error } = await supabase.auth.signUp({
           email: formData.email,
-          password: formData.password,
+          password: formData.password
         })
 
         if (error) {
@@ -75,7 +77,7 @@ function Onboarding() {
           return
         } else {
           setMessage('Account created! Please check your email for confirmation.')
-          setCurrentStep(2)
+          setCurrentStep(2) // Move to email validation step
         }
       } catch (error) {
         setMessage('An unexpected error occurred')
@@ -83,13 +85,16 @@ function Onboarding() {
         setLoading(false)
       }
     } else if (currentStep === 2) {
+      // Email validation step - check if user has confirmed their email
+      await checkEmailValidation()
+    } else if (currentStep === 3) {
       // Validate personal information
       if (!formData.name || !formData.skills || !formData.languages) {
         setMessage('Please fill in all personal information fields')
         return
       }
-      setCurrentStep(3)
-    } else if (currentStep === 3) {
+      setCurrentStep(4)
+    } else if (currentStep === 4) {
       // Validate contact information
       if (!formData.phoneNumber) {
         setMessage('Please fill in your phone number')
@@ -100,10 +105,15 @@ function Onboarding() {
       setMessage('')
       
       // Save profile data to database
-      await createProfile()
-        // Testing Note: make if statement to check if the profile is created successfully. leave as is for mvp
-      setCurrentStep(4)
-    } else if (currentStep === 4) {
+      const profileSuccess = await createProfile()
+      
+      if (profileSuccess) {
+        setCurrentStep(5)
+      }
+      // If profile creation fails, error message is already set in createProfile
+      
+      setLoading(false)
+    } else if (currentStep === 5) {
       // Complete onboarding
       navigate(PagesURL.UserProfile)
     }
@@ -113,6 +123,55 @@ function Onboarding() {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
       setMessage('')
+    }
+  }
+
+  const checkEmailValidation = async () => {
+    setCheckingValidation(true)
+    setMessage('')
+    
+    try {
+      const { data: { user }, error } = await supabase.auth.getUser()
+      
+      if (error || !user) {
+        setMessage('Error: Unable to verify email status')
+        setCheckingValidation(false)
+        return
+      }
+
+      if (user.email_confirmed_at) {
+        setEmailValidated(true)
+        setMessage('Email confirmed! You can now continue.')
+        setCurrentStep(3) // Move to personal information step
+      } else {
+        setMessage('Please check your email and click the confirmation link to continue.')
+      }
+    } catch (error) {
+      setMessage('An error occurred while checking email status')
+    } finally {
+      setCheckingValidation(false)
+    }
+  }
+
+  const resendConfirmationEmail = async () => {
+    setLoading(true)
+    setMessage('')
+    
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: formData.email
+      })
+
+      if (error) {
+        setMessage(`Error: ${error.message}`)
+      } else {
+        setMessage('Confirmation email sent! Please check your inbox.')
+      }
+    } catch (error) {
+      setMessage('An error occurred while resending the email')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -249,6 +308,60 @@ function Onboarding() {
 
       case 2:
         return (
+          <div className="text-center space-y-6">
+            <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-4xl font-bold mx-auto">
+              📧
+            </div>
+            
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Check Your Email</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                We've sent a confirmation link to <strong>{formData.email}</strong>
+              </p>
+            </div>
+            
+            <div className="bg-blue-50 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-blue-900 mb-3">What to do next:</h3>
+              <ol className="text-left text-blue-800 space-y-2">
+                <li className="flex items-start">
+                  <span className="bg-blue-200 text-blue-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">1</span>
+                  Check your email inbox (and spam folder)
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-blue-200 text-blue-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">2</span>
+                  Click the confirmation link in the email
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-blue-200 text-blue-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">3</span>
+                  Return here and click "Continue" to proceed
+                </li>
+              </ol>
+            </div>
+            
+            <div className="space-y-4">
+              <button
+                onClick={checkEmailValidation}
+                disabled={checkingValidation}
+                className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+              >
+                {checkingValidation ? 'Checking...' : 'I\'ve Confirmed My Email'}
+              </button>
+              
+              <div className="text-center">
+                <button
+                  onClick={resendConfirmationEmail}
+                  disabled={loading}
+                  className="text-sm text-blue-600 hover:text-blue-800 underline disabled:opacity-50"
+                >
+                  {loading ? 'Sending...' : 'Resend Confirmation Email'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )
+
+      case 3:
+        return (
           <div className="space-y-6">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Tell Us About Yourself</h2>
@@ -330,7 +443,7 @@ function Onboarding() {
           </div>
         )
 
-      case 3:
+      case 4:
         return (
           <div className="space-y-6">
             <div>
@@ -357,7 +470,7 @@ function Onboarding() {
           </div>
         )
 
-      case 4:
+      case 5:
         return (
           <div className="text-center space-y-6">
             <div className="w-24 h-24 bg-gradient-to-r from-green-500 to-blue-600 rounded-full flex items-center justify-center text-white text-4xl font-bold mx-auto">
@@ -400,24 +513,68 @@ function Onboarding() {
 
   
   const createProfile = async () => {
-    // Get the current user
-    const { data: { user }, error: userError } = await supabase.auth.getUser()
-    
-    if (userError || !user) {
-      console.error("Error getting user:", userError)
-      return
-    }
-
-    const { data, error } = await supabase.from('profiles').update({
-      display_name: formData.name,
-      roles: [formData.roles], // Convert to array as per schema
-      skills: [formData.skills], // Convert to array as per schema
-      languages: [formData.languages], // Convert to array as per schema
-      phone: formData.phoneNumber,
-    }).eq('id', user.id) // Use user ID instead of email
+    try {
+      // Get the current user
+      const { data: { user }, error: userError } = await supabase.auth.getUser()
       
-    if (error) console.error("Error updating profile:", error);
-    else console.log("Profile updated:", data);
+      if (userError || !user) {
+        console.error("Error getting user:", userError)
+        setMessage('Error: Unable to get user information')
+        return false
+      }
+
+      console.log("User ID:", user.id)
+      console.log("Form data:", formData)
+
+      // First, check if profile exists (should exist due to trigger, but let's verify)
+      const { data: existingProfile, error: checkError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('id', user.id)
+        .single()
+
+      console.log("Profile exists check:", { existingProfile, checkError })
+
+      let result
+      if (checkError && checkError.code === 'PGRST116') {
+        // Profile doesn't exist, create it (shouldn't happen with trigger, but safety net)
+        console.log("Creating new profile...")
+        result = await supabase.from('profiles').insert({
+          id: user.id,
+          display_name: formData.name,
+          roles: [formData.roles],
+          skills: [formData.skills],
+          languages: [formData.languages],
+          phone: formData.phoneNumber,
+        })
+      } else {
+        // Profile exists, update it
+        console.log("Updating existing profile...")
+        result = await supabase.from('profiles').update({
+          display_name: formData.name,
+          roles: [formData.roles],
+          skills: [formData.skills],
+          languages: [formData.languages],
+          phone: formData.phoneNumber,
+        }).eq('id', user.id)
+      }
+
+      console.log("Database result:", result)
+
+      if (result.error) {
+        console.error("Error with profile operation:", result.error)
+        setMessage(`Error: ${result.error.message}`)
+        return false
+      } else {
+        console.log("Profile operation successful:", result.data)
+        setMessage('Profile created successfully!')
+        return true
+      }
+    } catch (error) {
+      console.error("Unexpected error in createProfile:", error)
+      setMessage('An unexpected error occurred while creating your profile')
+      return false
+    }
   }
 
   return (
@@ -455,7 +612,7 @@ function Onboarding() {
           )}
 
           {/* Navigation Buttons */}
-          {currentStep < 4 && (
+          {currentStep < 5 && currentStep !== 2 && (
             <div className="flex justify-between mt-8">
               <button
                 onClick={handleBack}
@@ -470,12 +627,12 @@ function Onboarding() {
                   disabled={loading}
                   className="px-8 py-3 primary-bg text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
                 >
-                  {loading ? 'Creating Account...' : currentStep === 3 ? 'Complete Setup' : 'Next'}
+                  {loading ? 'Creating Account...' : currentStep === 4 ? 'Complete Setup' : 'Next'}
                 </button>
             </div>
           )}
 
-          {currentStep === 4 && (
+          {currentStep === 5 && (
             <div className="text-center mt-8">
               <button
                 onClick={handleNext}
