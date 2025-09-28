@@ -25,6 +25,7 @@ async function createEvent(eventData: {
       details: eventData.details || null,
       starts_at: eventData.starts_at ? new Date(eventData.starts_at).toISOString() : null,
       org_id: user.id, // Link to the user who created the event
+      category: eventData.category || null,
       // Note: display_location was removed from the form, so we don't include it
     };
 
@@ -48,8 +49,70 @@ async function createEvent(eventData: {
   }
 }
 
+// --- API Function for Fetching Events by Category ---
+async function fetchEventsByCategory(category?: string, limit = 3): Promise<EventItem[]> {
+  try {
+    let query = supabase
+      .from('events')
+      .select('*')
+      .order('starts_at', { ascending: false })
+      .limit(limit);
+
+    // Filter by category if provided
+    if (category && category.trim() !== '') {
+      query = query.eq('category', category);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      throw new Error(`Failed to fetch events: ${error.message}`);
+    }
+
+    // Transform database events to EventItem format
+    const events: EventItem[] = (data || []).map((event: any) => {
+      // Determine event type based on category or use a default
+      let type: EventType = "OFFER"; // Default type
+      
+      // You can customize this logic based on your business rules
+      if (event.category?.includes("REQUEST") || event.title?.toLowerCase().includes("need")) {
+        type = "REQUEST";
+      } else if (event.category?.includes("VOLUNTEER") || event.title?.toLowerCase().includes("volunteer")) {
+        type = "VOLUNTEER";
+      }
+
+      // Calculate distance (you might want to implement real distance calculation)
+      const distanceMiles = Math.round((0.5 + Math.random() * 8) * 10) / 10;
+
+      // Format date
+      const eventDate = event.starts_at ? new Date(event.starts_at) : new Date();
+      const dateLabel = formatDateLabel(eventDate);
+
+      // Get organizer name (you might want to join with profiles table)
+      const organizer = event.org_id ? "Community Member" : "Local Group";
+
+      return {
+        dateLabel,
+        type,
+        title: event.title || "Community Event",
+        organizer,
+        distanceMiles,
+        description: event.details || "Community event to support local needs.",
+        interestedCount: type === "VOLUNTEER" ? Math.floor(Math.random() * 20) : Math.floor(Math.random() * 10),
+      };
+    });
+
+    console.log(`Fetched ${events.length} events from database`);
+    return events;
+
+  } catch (err) {
+    console.error('Error fetching events by category:', err);
+    throw err;
+  }
+}
+
 // --- NewEvent Component ---
-function NewEvent() {
+function NewEvent({ onEventCreated }: { onEventCreated?: () => void }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
@@ -87,6 +150,11 @@ function NewEvent() {
     try {
       await createEvent(formData);
       setSubmitMessage('Event created successfully!');
+      
+      // Refresh the events feed
+      if (onEventCreated) {
+        onEventCreated();
+      }
       
       // Close modal after a short delay to show success message
       setTimeout(() => {
@@ -423,7 +491,6 @@ When: ${ctx.when || "this week"}`;
 
   const resp = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    generationConfig: { temperature: 0.2, responseMimeType: "application/json" },
     contents: [{ role: "user", parts: [{ text: prompt }] }],
   });
 
@@ -472,13 +539,35 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const limit = Math.min(Math.max((context?.limit ?? 3), 1), 8);
 
+  // Function to refresh events from database
+  const refreshEvents = async () => {
+    try {
+      const dbEvents = await fetchEventsByCategory(context?.topic, limit);
+      setItems(dbEvents);
+      setErrorMsg(null);
+    } catch (error) {
+      console.error('Error refreshing events:', error);
+      // Keep existing items if refresh fails
+    }
+  };
+
   useEffect(() => {
     let cancelled = false;
 
     (async () => {
       setErrorMsg(null);
-      const apiKey = import.meta?.env?.VITE_GEMINI_API_KEY;
+      
       try {
+        // First, try to fetch events from database
+        const dbEvents = await fetchEventsByCategory(context?.topic, limit);
+        
+        if (!cancelled && dbEvents.length > 0) {
+          setItems(dbEvents);
+          return;
+        }
+
+        // If no database events, fall back to AI or local events
+        const apiKey = import.meta?.env?.VITE_GEMINI_API_KEY;
         if (apiKey) {
           const ai = await aiEvents(apiKey, limit, {
             topic: context?.topic,
@@ -489,10 +578,27 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
         } else {
           if (!cancelled) setItems(localEvents(limit, context));
         }
-      } catch {
-        if (!cancelled) {
-          setErrorMsg("Showing local suggestions (AI output wasn't clean JSON).");
-          setItems(localEvents(limit, context));
+      } catch (dbError) {
+        console.log('Database fetch failed, falling back to AI/local events:', dbError);
+        
+        // Fall back to AI or local events if database fails
+        const apiKey = import.meta?.env?.VITE_GEMINI_API_KEY;
+        try {
+          if (apiKey) {
+            const ai = await aiEvents(apiKey, limit, {
+              topic: context?.topic,
+              area: context?.area,
+              when: context?.when,
+            });
+            if (!cancelled) setItems(ai);
+          } else {
+            if (!cancelled) setItems(localEvents(limit, context));
+          }
+        } catch {
+          if (!cancelled) {
+            setErrorMsg("Showing local suggestions (AI output wasn't clean JSON).");
+            setItems(localEvents(limit, context));
+          }
         }
       }
     })();
@@ -509,7 +615,7 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
   return (
     <div className="w-96 flex-shrink-0 overflow-y-auto custom-scrollbar-hidden mt-5 mb-5">
       <Filters />
-      <NewEvent />
+      <NewEvent onEventCreated={refreshEvents} />
       {errorMsg && <div className="text-xs text-red-600 mb-2">{errorMsg}</div>}
 
       <div className="space-y-3">
