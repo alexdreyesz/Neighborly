@@ -1,10 +1,59 @@
 import { useEffect, useMemo, useState } from "react";
 import { GoogleGenAI } from "@google/genai";
 import Filters from "./Filters"; // assumes you have this
+import supabase from "../config/supabaseClient";
+import { useProfile } from "../hooks/useProfile";
+
+// --- API Function for Creating Events ---
+async function createEvent(eventData: {
+  title: string;
+  details?: string;
+  starts_at?: string;
+  category?: string;
+}) {
+  try {
+    // Get current user
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    
+    if (userError || !user) {
+      throw new Error('No authenticated user found');
+    }
+
+    // Prepare event data for database
+    const eventPayload = {
+      title: eventData.title,
+      details: eventData.details || null,
+      starts_at: eventData.starts_at ? new Date(eventData.starts_at).toISOString() : null,
+      org_id: user.id, // Link to the user who created the event
+      // Note: display_location was removed from the form, so we don't include it
+    };
+
+    // Insert event into database
+    const { data, error } = await supabase
+      .from('events')
+      .insert([eventPayload])
+      .select()
+      .single();
+
+    if (error) {
+      throw new Error(`Failed to create event: ${error.message}`);
+    }
+
+    console.log('Event created successfully:', data);
+    return data;
+
+  } catch (err) {
+    console.error('Error creating event:', err);
+    throw err;
+  }
+}
 
 // --- NewEvent Component ---
 function NewEvent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const { profile, loading: profileLoading } = useProfile();
   const [formData, setFormData] = useState({
     title: '',
     details: '',
@@ -19,13 +68,37 @@ function NewEvent() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setFormData({ title: '', details: '', starts_at: '', category: '' });
+    setSubmitMessage('');
+    setIsSubmitting(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('New event form submitted:', formData);
-    // Here you would typically send the data to your backend
-    handleCloseModal();
+    
+    // Check if user is authenticated
+    if (!profile) {
+      setSubmitMessage('Please log in to create an event');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      await createEvent(formData);
+      setSubmitMessage('Event created successfully!');
+      
+      // Close modal after a short delay to show success message
+      setTimeout(() => {
+        handleCloseModal();
+      }, 1500);
+      
+    } catch (error) {
+      console.error('Error creating event:', error);
+      setSubmitMessage(error instanceof Error ? error.message : 'Failed to create event');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -155,19 +228,32 @@ function NewEvent() {
               </div>
 
 
+              {/* Submit Message */}
+              {submitMessage && (
+                <div className={`p-3 rounded-md text-sm ${
+                  submitMessage.includes('successfully') 
+                    ? 'bg-green-50 text-green-700 border border-green-200' 
+                    : 'bg-red-50 text-red-700 border border-red-200'
+                }`}>
+                  {submitMessage}
+                </div>
+              )}
+
               <div className="flex gap-3 pt-4">
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="flex-1 px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors"
+                  disabled={isSubmitting}
+                  className="flex-1 px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                  disabled={isSubmitting || profileLoading}
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Create Event
+                  {isSubmitting ? 'Creating...' : 'Create Event'}
                 </button>
               </div>
             </form>
