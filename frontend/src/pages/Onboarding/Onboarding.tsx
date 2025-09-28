@@ -5,6 +5,8 @@ import Footer from '../../components/Footer.tsx'
 import supabase from '../../config/supabaseClient.ts'
 import PagesURL from '../../router/routes'
 
+import { useEffect } from 'react'
+
 interface OnboardingData {
   // Step 1: Account Creation
   email: string
@@ -45,6 +47,10 @@ function Onboarding() {
     setFormData(prev => ({ ...prev, [field]: value }))
     setMessage('')
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [ ]);
 
   const handleNext = async () => {
     if (currentStep === 1) {

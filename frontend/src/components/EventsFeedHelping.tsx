@@ -1,15 +1,135 @@
 import { useEffect, useMemo, useState } from "react";
 import { GoogleGenAI } from "@google/genai";
-import Filters from "./Filters"; // assumes you have this
+import Filters from "./Filters"; 
+import supabase from "../config/supabaseClient";
+import { useProfile } from "../hooks/useProfile";
+
+// --- API Function for Creating Events ---
+async function createEvent(eventData: {
+  title: string;
+  details?: string;
+  starts_at?: string;
+  category?: string;
+}) {
+  try {
+    // Get current user
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    
+    if (userError || !user) {
+      throw new Error('No authenticated user found');
+    }
+
+    // Prepare event data for database
+    const eventPayload = {
+      title: eventData.title,
+      details: eventData.details || null,
+      starts_at: eventData.starts_at ? new Date(eventData.starts_at).toISOString() : null,
+      org_id: user.id, 
+      category: eventData.category || null,
+    };
+
+    // Insert event into database
+    const { data, error } = await supabase
+      .from('events')
+      .insert([eventPayload])
+      .select()
+      .single();
+
+    if (error) {
+      throw new Error(`Failed to create event: ${error.message}`);
+    }
+
+    console.log('Event created successfully:', data);
+    return data;
+
+  } catch (err) {
+    console.error('Error creating event:', err);
+    throw err;
+  }
+}
+
+// --- API Function for Fetching Events by Category ---
+async function fetchEventsByCategory(category?: string, limit = 3): Promise<EventItem[]> {
+  try {
+    let query = supabase
+      .from('events')
+      .select('*')
+      .order('starts_at', { ascending: false })
+      .limit(limit);
+
+   
+    if (category && category.trim() !== '') {
+      query = query.eq('category', category);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      throw new Error(`Failed to fetch events: ${error.message}`);
+    }
+
+
+    interface DBEvent {
+      id: string;
+      title?: string;
+      details?: string;
+      starts_at?: string;
+      org_id?: string;
+      category?: string;
+    }
+
+    const events: EventItem[] = (data || []).map((event: DBEvent) => {
+    
+      let type: EventType = "OFFER"; // Default type
+      
+     
+      if (event.category?.includes("REQUEST") || event.title?.toLowerCase().includes("need")) {
+        type = "REQUEST";
+      } else if (event.category?.includes("VOLUNTEER") || event.title?.toLowerCase().includes("volunteer")) {
+        type = "VOLUNTEER";
+      }
+
+
+      const distanceMiles = Math.round((0.5 + Math.random() * 8) * 10) / 10;
+
+      // Format date
+      const eventDate = event.starts_at ? new Date(event.starts_at) : new Date();
+      const dateLabel = formatDateLabel(eventDate);
+
+      // Get organizer name (you might want to join with profiles table)
+      const organizer = event.org_id ? "Community Member" : "Local Group";
+
+      return {
+        dateLabel,
+        type,
+        title: event.title || "Community Event",
+        organizer,
+        distanceMiles,
+        description: event.details || "Community event to support local needs.",
+        interestedCount: type === "VOLUNTEER" ? Math.floor(Math.random() * 20) : Math.floor(Math.random() * 10),
+      };
+    });
+
+    console.log(`Fetched ${events.length} events from database`);
+    return events;
+
+  } catch (err) {
+    console.error('Error fetching events by category:', err);
+    throw err;
+  }
+}
 
 // --- NewEvent Component ---
-function NewEvent() {
+function NewEvent({ onEventCreated }: { onEventCreated?: () => void }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const { profile, loading: profileLoading } = useProfile();
   const [formData, setFormData] = useState({
-    area: '',
-    when: '',
-    kind: 'REQUEST' as EventType,
-    title: ''
+    title: '',
+    details: '',
+    starts_at: '',
+    category: ''
   });
 
   const handleNewEvent = () => {
@@ -18,14 +138,42 @@ function NewEvent() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setFormData({ area: '', when: '', kind: 'REQUEST', title: '' });
+    setFormData({ title: '', details: '', starts_at: '', category: '' });
+    setSubmitMessage('');
+    setIsSubmitting(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('New event form submitted:', formData);
-    // Here you would typically send the data to your backend
-    handleCloseModal();
+    
+    // Check if user is authenticated
+    if (!profile) {
+      setSubmitMessage('Please log in to create an event');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      await createEvent(formData);
+      setSubmitMessage('Event created successfully!');
+      
+
+      if (onEventCreated) {
+        onEventCreated();
+      }
+ 
+      setTimeout(() => {
+        handleCloseModal();
+      }, 1500);
+      
+    } catch (error) {
+      console.error('Error creating event:', error);
+      setSubmitMessage(error instanceof Error ? error.message : 'Failed to create event');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -77,80 +225,110 @@ function NewEvent() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Area
-                </label>
-                <input
-                  type="text"
-                  value={formData.area}
-                  onChange={(e) => handleInputChange('area', e.target.value)}
-                  placeholder="e.g., Downtown Miami, Brickell"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  When
-                </label>
-                <select
-                  value={formData.when}
-                  onChange={(e) => handleInputChange('when', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                >
-                  <option value="">Select timeframe</option>
-                  <option value="today">Today</option>
-                  <option value="tomorrow">Tomorrow</option>
-                  <option value="this week">This week</option>
-                  <option value="next week">Next week</option>
-                  <option value="this month">This month</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Event Type
-                </label>
-                <select
-                  value={formData.kind}
-                  onChange={(e) => handleInputChange('kind', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                >
-                  <option value="REQUEST">Request (I need help)</option>
-                  <option value="OFFER">Offer (I can help)</option>
-                  <option value="VOLUNTEER">Volunteer (Join a cause)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Title
+                  Title *
                 </label>
                 <input
                   type="text"
                   value={formData.title}
                   onChange={(e) => handleInputChange('title', e.target.value)}
-                  placeholder="Brief description of your event"
+                  placeholder="Event title"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
 
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Category
+                </label>
+                <select
+                  value={formData.category}
+                  onChange={(e) => handleInputChange('category', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Select a category</option>
+                  <option value="Addiction Recovery">Addiction Recovery 🌱</option>
+                  <option value="Childcare & Caregiving">Childcare & Caregiving 👶</option>
+                  <option value="Civic & Participation">Civic & Participation 🗺️</option>
+                  <option value="Community & Social Connection">Community & Social Connection 🤝</option>
+                  <option value="Digital Access">Digital Access 💻</option>
+                  <option value="Disaster & Climate">Disaster & Climate 🌪️</option>
+                  <option value="Education & Tutoring">Education & Tutoring 📚</option>
+                  <option value="Environment & Neighborhood">Environment & Neighborhood 🌳</option>
+                  <option value="Faith & Cultural">Faith & Cultural ⛪</option>
+                  <option value="Financial Assistance">Financial Assistance 💰</option>
+                  <option value="Food & Essentials">Food & Essentials 🍎</option>
+                  <option value="Health & Mental Health">Health & Mental Health 🏥</option>
+                  <option value="Homelessness Services">Homelessness Services 🏠</option>
+                  <option value="Household & Personal Goods">Household & Personal Goods 🏘️</option>
+                  <option value="Income & Employment">Income & Employment 💼</option>
+                  <option value="Legal & Immigration">Legal & Immigration ⚖️</option>
+                  <option value="Mobility & Accessibility">Mobility & Accessibility ♿</option>
+                  <option value="Pets & Animal Care">Pets & Animal Care 🐶</option>
+                  <option value="Public Benefits & Navigation">Public Benefits & Navigation 📄</option>
+                  <option value="Refugees & Newcomers">Refugees & Newcomers 🌍</option>
+                  <option value="Reentry & Justice-Impacted">Reentry & Justice-Impacted 🎅</option>
+                  <option value="Safety & Crisis">Safety & Crisis 🚨</option>
+                  <option value="Seniors">Seniors 👴</option>
+                  <option value="Shelter & Housing">Shelter & Housing 🏠</option>
+                  <option value="Transportation">Transportation 🚗</option>
+                  <option value="Veterans">Veterans 🇺🇸</option>
+                  <option value="Youth & Families">Youth & Families 👨‍👩‍👧‍👦</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Details
+                </label>
+                <textarea
+                  value={formData.details}
+                  onChange={(e) => handleInputChange('details', e.target.value)}
+                  placeholder="Event description, notes, or additional information"
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Start Date & Time
+                </label>
+                <input
+                  type="datetime-local"
+                  value={formData.starts_at}
+                  onChange={(e) => handleInputChange('starts_at', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+
+              {/* Submit Message */}
+              {submitMessage && (
+                <div className={`p-3 rounded-md text-sm ${
+                  submitMessage.includes('successfully') 
+                    ? 'bg-green-50 text-green-700 border border-green-200' 
+                    : 'bg-red-50 text-red-700 border border-red-200'
+                }`}>
+                  {submitMessage}
+                </div>
+              )}
+
               <div className="flex gap-3 pt-4">
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="flex-1 px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors"
+                  disabled={isSubmitting}
+                  className="flex-1 px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                  disabled={isSubmitting || profileLoading}
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Create Event
+                  {isSubmitting ? 'Creating...' : 'Create Event'}
                 </button>
               </div>
             </form>
@@ -375,7 +553,7 @@ declare global {
   }
 }
 
-export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedProps) {
+export default function EventsFeedHelping({ prompt: propPrompt, context }: EventsFeedProps) {
   const prompt = useMemo(() => {
     const winPrompt =
       typeof window !== "undefined" ? (window as Window).__NEIGHBORLY_PROMPT__ : undefined;
@@ -385,28 +563,86 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
 
   const [items, setItems] = useState<EventItem[]>([]);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+  const [showInterestModal, setShowInterestModal] = useState(false);
   const limit = Math.min(Math.max((context?.limit ?? 3), 1), 8);
+
+  // Function to refresh events from database
+  const refreshEvents = async () => {
+    try {
+      const dbEvents = await fetchEventsByCategory(context?.topic, 20); // Fetch more from DB
+      const apiKey = import.meta?.env?.VITE_GEMINI_API_KEY;
+      
+      let aiEvents: EventItem[] = [];
+      try {
+        if (apiKey) {
+          aiEvents = await aiEvents(apiKey, 3, {
+            topic: context?.topic,
+            area: context?.area,
+            when: context?.when,
+          });
+        } else {
+          aiEvents = localEvents(3, context);
+        }
+      } catch (aiError) {
+        console.log('AI generation failed, using local events:', aiError);
+        aiEvents = localEvents(3, context);
+      }
+
+      // Combine AI events first, then database events
+      const combinedEvents = [...aiEvents, ...dbEvents];
+      setItems(combinedEvents);
+      setErrorMsg(null);
+    } catch (error) {
+      console.error('Error refreshing events:', error);
+      // Fallback to local events if everything fails
+      setItems(localEvents(limit, context));
+    }
+  };
 
   useEffect(() => {
     let cancelled = false;
 
     (async () => {
       setErrorMsg(null);
-      const apiKey = import.meta?.env?.VITE_GEMINI_API_KEY;
+      
       try {
-        if (apiKey) {
-          const ai = await aiEvents(apiKey, limit, {
-            topic: context?.topic,
-            area: context?.area,
-            when: context?.when,
-          });
-          if (!cancelled) setItems(ai);
-        } else {
-          if (!cancelled) setItems(localEvents(limit, context));
-        }
-      } catch {
+        // Fetch both AI-generated events and database events
+        const [dbEventsResult, aiEventsResult] = await Promise.allSettled([
+          fetchEventsByCategory(context?.topic, 20), // Fetch more from database
+          (async () => {
+            const apiKey = import.meta?.env?.VITE_GEMINI_API_KEY;
+            if (apiKey) {
+              return await aiEvents(apiKey, 3, { // Generate 3 AI events
+                topic: context?.topic,
+                area: context?.area,
+                when: context?.when,
+              });
+            } else {
+              return localEvents(3, context); // Generate 3 local events
+            }
+          })()
+        ]);
+
         if (!cancelled) {
-          setErrorMsg("Showing local suggestions (AI output wasn't clean JSON).");
+          const dbEvents = dbEventsResult.status === 'fulfilled' ? dbEventsResult.value : [];
+          const generatedEvents = aiEventsResult.status === 'fulfilled' ? aiEventsResult.value : localEvents(3, context);
+
+          // Combine generated events first (top 3), then database events
+          const combinedEvents = [...generatedEvents, ...dbEvents];
+          setItems(combinedEvents);
+
+          // Set appropriate error message if needed
+          if (dbEventsResult.status === 'rejected' && aiEventsResult.status === 'rejected') {
+            setErrorMsg("Showing local suggestions (both database and AI failed).");
+          } else if (aiEventsResult.status === 'rejected') {
+            setErrorMsg("AI generation failed, showing local suggestions + database events.");
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching events:', error);
+        if (!cancelled) {
+          setErrorMsg("Error loading events, showing local suggestions.");
           setItems(localEvents(limit, context));
         }
       }
@@ -414,6 +650,42 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
 
     return () => { cancelled = true; };
   }, [prompt, context, limit]);
+
+  const handleEventClick = (event: EventItem) => {
+    setSelectedEvent(event);
+    setShowInterestModal(true);
+  };
+
+  const handleInterestConfirm = async () => {
+    if (selectedEvent) {
+      try {
+        // Here you can add logic to save user interest to database
+        console.log('User is interested in event:', selectedEvent.title);
+        
+        // Update the interested count locally
+        setItems(prevItems => 
+          prevItems.map(item => 
+            item === selectedEvent 
+              ? { ...item, interestedCount: item.interestedCount + 1 }
+              : item
+          )
+        );
+        
+        // You could also make an API call here to save the interest
+        // await saveUserInterest(selectedEvent);
+        
+      } catch (error) {
+        console.error('Error saving interest:', error);
+      }
+    }
+    setShowInterestModal(false);
+    setSelectedEvent(null);
+  };
+
+  const handleInterestCancel = () => {
+    setShowInterestModal(false);
+    setSelectedEvent(null);
+  };
 
   const badge = (type: EventType) => {
     if (type === "REQUEST") return { bg: "bg-red-100", text: "text-red-800" };
@@ -424,20 +696,32 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
   return (
     <div className="w-96 flex-shrink-0 overflow-y-auto custom-scrollbar-hidden mt-5 mb-5">
       <Filters />
-      <NewEvent />
+      
+      <NewEvent onEventCreated={refreshEvents} />
+
       {errorMsg && <div className="text-xs text-red-600 mb-2">{errorMsg}</div>}
 
       <div className="space-y-3">
         {items.map((p, idx) => {
           const b = badge(p.type);
+          const isAIGenerated = idx < 3;
+          
           return (
             <div
               key={idx}
               className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow cursor-pointer"
+              onClick={() => handleEventClick(p)}
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-gray-500">{p.dateLabel}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-gray-500">{p.dateLabel}</span>
+                    {isAIGenerated && (
+                      <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
+                        AI
+                      </span>
+                    )}
+                  </div>
                   <span className={`${b.bg} ${b.text} px-2 py-0.5 rounded-full text-xs font-medium`}>
                     {p.type}
                   </span>
@@ -459,6 +743,74 @@ export default function EventsFeed({ prompt: propPrompt, context }: EventsFeedPr
         })}
         {items.length === 0 && <p className="text-xs text-gray-500">No events generated.</p>}
       </div>
+
+      {/* Interest Modal */}
+      {showInterestModal && selectedEvent && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/50"
+            onClick={handleInterestCancel}
+          ></div>
+          
+          {/* Modal */}
+          <div className="relative bg-white rounded-lg p-6 w-full max-w-md mx-4 z-10 shadow-xl">
+            <div className="text-center">
+              <div className="mb-4">
+                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 mb-4">
+                  <svg 
+                    className="h-6 w-6 text-blue-600" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" 
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  Interested in this event?
+                </h3>
+                <div className="text-left bg-gray-50 rounded-lg p-3 mb-4">
+                  <h4 className="font-semibold text-gray-900 text-sm mb-1">
+                    {selectedEvent.title}
+                  </h4>
+                  <p className="text-xs text-gray-600 mb-1">
+                    {selectedEvent.organizer} • {selectedEvent.dateLabel}
+                  </p>
+                  <p className="text-xs text-gray-700">
+                    {selectedEvent.description}
+                  </p>
+                </div>
+                <p className="text-sm text-gray-600">
+                  Would you like to show your interest in this community event?
+                </p>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={handleInterestCancel}
+                  className="flex-1 px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors text-sm font-medium"
+                >
+                  Go Back
+                </button>
+                <button
+                  type="button"
+                  onClick={handleInterestConfirm}
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
+                >
+                  Yes, I'm Interested
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -17,7 +17,7 @@ export default function TopNeedsHelping() {
     <div className="h-[90vh] w-full">
       <div className="bg-white rounded-lg p-6 shadow-lg text-white flex flex-col">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold primary-text relative left-120">Top Community Needs</h2>
+          <h2 className="text-xl font-bold primary-text relative left-100">Top Community Needs In Your Neighbourhood</h2>
           <span className="primary-bg text-white bg-opacity-20 px-2 py-1 rounded-full text-xs font-medium">
             Updated 7 days ago
           </span>
