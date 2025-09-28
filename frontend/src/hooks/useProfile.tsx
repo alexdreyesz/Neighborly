@@ -11,6 +11,7 @@ interface ProfileData {
   languages: string[]
   radius_meters: number
   org_verified: boolean
+  zip_code: number | null
   created_at: string
 }
 
@@ -24,6 +25,7 @@ interface OrganizationData {
   languages: string[]
   radius_meters: number
   org_verified: boolean
+  zip_code: number | null
   created_at: string
 }
 
